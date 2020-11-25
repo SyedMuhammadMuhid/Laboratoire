@@ -9,3 +9,4 @@ const input_text_decoration_variable_for_focus= OutlineInputBorder(
     borderSide: BorderSide(
         color: Color(0xff5fc9ed), width: 2.0
     ));
+bool tapped=false;

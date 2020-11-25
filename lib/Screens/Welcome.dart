@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Screens/Signup_Screen.dart';
+import 'package:sample_screen/Screens/Subscribe.dart';
 class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,10 @@ class Welcome extends StatelessWidget {
                                   (BuildContext context) => RegisterPage()));
                     },child: Image(image: AssetImage('assets/signup_btn.png'),)),
                     GestureDetector(onTap: (){
-
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder:
+                                  (BuildContext context) => Subscribe()));
                     },child: Image(image: AssetImage('assets/login_btn.png'),))
 
                   ],)

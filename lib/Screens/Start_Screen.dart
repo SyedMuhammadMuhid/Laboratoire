@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Loading/Loading_Screen.dart';
+import 'package:sample_screen/Loading/loading.dart';
 
 class StartScreen extends StatelessWidget {
   @override
@@ -52,7 +54,13 @@ class StartScreen extends StatelessWidget {
                      Row(
                        mainAxisAlignment: MainAxisAlignment.center,
                        children: [
-                         CircleAvatar(child: Icon(Icons.arrow_forward, size: 40,),backgroundColor: Colors.blue, radius: 40,)
+                         GestureDetector(onTap: (){
+                           Navigator.of(context).pushReplacement(
+                               MaterialPageRoute(
+                                   builder:
+                                       (BuildContext context) => LoadingScreen()));
+
+                         },child: CircleAvatar(child: Icon(Icons.arrow_forward, size: 40,),backgroundColor: Colors.blue, radius: 40,))
                        ],
                      )
                    ],

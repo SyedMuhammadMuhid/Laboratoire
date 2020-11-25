@@ -23,7 +23,7 @@ class FaireCard extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: [
-                  Icon(Icons.cloud_queue, color: Colors.black45,),
+                  Stack(children: [Icon(Icons.cloud_queue, color: Colors.black45,), Image(image: AssetImage('assets/congradulations.png'),)]),
                   Center(child:Container(height: 60, width: 7, child: VerticalDivider(color: Colors.black)),)
                 ],
               ),
