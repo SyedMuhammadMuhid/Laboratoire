@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sample_screen/Screens/Start_Screen.dart';
+import 'package:sample_screen/Screens/Welcome.dart';
 
 import 'Screens/Home.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( home: Home()
+    return MaterialApp( home:Welcome()//Home()
     );
   }
 }
