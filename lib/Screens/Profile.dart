@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff5fc9ed) ,),
                         )
                       ],),
-                      CircleAvatar(radius: 50, child: Image(image: AssetImage('assets/propic.png'),),),
+                      Stack(children: [CircleAvatar(radius: 50, child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Colors.pink[200],),]),
                       Text('Mon Profil', style: GoogleFonts.heebo(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),)
                     ],
                   ),

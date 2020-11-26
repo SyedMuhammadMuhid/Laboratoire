@@ -10,3 +10,5 @@ const input_text_decoration_variable_for_focus= OutlineInputBorder(
         color: Color(0xff5fc9ed), width: 2.0
     ));
 bool tapped=false;
+
+int index_nav=0;
