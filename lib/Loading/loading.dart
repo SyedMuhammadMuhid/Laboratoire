@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_screen/widgets/HomeScreen.dart';
+import 'package:sample_screen/Screens/Home.dart';
 
 class LoadingScreen extends StatefulWidget {
 
@@ -34,7 +34,7 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               builder:
-                  (BuildContext context) => HomeScreen()));
+                  (BuildContext context) => Home()));
     });
     return MaterialApp(
         home: Container(
