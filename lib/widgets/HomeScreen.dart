@@ -51,7 +51,7 @@ double TWO_PI=3.14*2;
                                        (BuildContext context) =>ProfileScreen()));
                          },child: Icon(Icons.menu, color: Colors.lightBlue[50],size: 55,)),
                        ),
-                         Text('Actions', style: GoogleFonts.heebo(color: Colors.lightBlue[50], fontSize: 20),),
+                         Text('Actions', style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 30),),
                          Padding(
                            padding: const EdgeInsets.all(10.0),
                            child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
