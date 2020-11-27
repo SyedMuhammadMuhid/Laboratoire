@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Screens/Signup_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 class Subscribe extends StatelessWidget {
   @override
@@ -56,21 +57,28 @@ class Subscribe extends StatelessWidget {
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
               )),
               SizedBox(height: height*3,),
-              Container(
-                decoration: BoxDecoration(
-                  color:Color(0xff5fc9ed),
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
+              GestureDetector(onTap: (){
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder:
+                            (BuildContext context) => RegisterPage()));
+              },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color:Color(0xff5fc9ed),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
+                ),
+                  height:60, width: MediaQuery.of(context).size.width,child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Email Registration',style: GoogleFonts.heebo(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                    ],
+                  ) ,
+                ),),
               ),
-                height:60, width: MediaQuery.of(context).size.width,child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Email Registration',style: GoogleFonts.heebo(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                  ],
-                ) ,
-              ),),
               SizedBox(height: height,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

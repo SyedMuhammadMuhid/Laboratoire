@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Screens/Home.dart';
 import 'package:sample_screen/widgets/ProfileCard.dart';
@@ -26,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(onTap:(){
+                    index_nav=0;
                     Navigator.of(context).push(
                         MaterialPageRoute(
                             builder:

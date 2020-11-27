@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Screens/Login_Screen.dart';
 import 'package:sample_screen/Screens/Signup_Screen.dart';
 import 'package:sample_screen/Screens/Subscribe.dart';
 class Welcome extends StatelessWidget {
@@ -15,41 +16,43 @@ class Welcome extends StatelessWidget {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Column(
-              children: [
-                SizedBox(height: height,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Column(children: [
-                    Text('Welcome', style: GoogleFonts.heebo(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.lightBlue[50]),),
-                  Text('Do you have an account?',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
-                  Text('Sign up or log in!',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
-                  ],)],),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: height,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Column(children: [
+                      Text('Welcome', style: GoogleFonts.heebo(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.lightBlue[50]),),
+                    Text('Do you have an account?',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
+                    Text('Sign up or log in!',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
+                    ],)],),
 
-                Image(image: AssetImage('assets/faces.png'),height: height*15,width: width*10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Column(children: [
-                    SizedBox(height: height,),
-                    GestureDetector(onTap: (){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder:
-                                  (BuildContext context) => RegisterPage()));
-                    },child: Image(image: AssetImage('assets/signup_btn.png'),)),
-                    GestureDetector(onTap: (){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder:
-                                  (BuildContext context) => Subscribe()));
-                    },child: Image(image: AssetImage('assets/login_btn.png'),))
+                  Image(image: AssetImage('assets/faces.png'),height: height*15,width: width*10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Column(children: [
+                      SizedBox(height: height,),
+                      GestureDetector(onTap: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder:
+                                    (BuildContext context) => Subscribe()));
+                      },child: Image(image: AssetImage('assets/signup_btn.png'),)),
+                      GestureDetector(onTap: (){
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder:
+                                    (BuildContext context) => LoginScreen()));
+                      },child: Image(image: AssetImage('assets/login_btn.png'),))
 
+                    ],)
                   ],)
-                ],)
 
-              ],
+                ],
+              ),
             ),
 
 

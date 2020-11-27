@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
 import 'package:sample_screen/widgets/EventCard.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -57,7 +58,12 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 Text('Calendar', style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                  child: GestureDetector(onTap: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder:
+                                (BuildContext context) => NotificationScreen()));
+                  },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
                 )
               ]),
           Row(
@@ -71,7 +77,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
               child: Container(
                 height: 380,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.lightBlue[50],
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0), bottomRight: Radius.circular(30.0), bottomLeft: Radius.circular(30.0) ),
                   boxShadow: [
@@ -105,7 +111,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   ),
                                   decoration: InputDecoration(
                                     labelText: 'Name of Event',
-                                    fillColor: Colors.white,
+                                    fillColor: Colors.lightBlue[50],
                                     filled: true,
                                     enabledBorder:
                                     input_text_decoration_variable_for_focus,
@@ -127,7 +133,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   ),
                                   decoration: InputDecoration(
                                     labelText: 'Place',
-                                    fillColor: Colors.white,
+                                    fillColor: Colors.lightBlue[50],
                                     filled: true,
                                     enabledBorder:
                                     input_text_decoration_variable_for_focus,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
 import 'package:sample_screen/widgets/Days.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
@@ -54,7 +55,12 @@ double TWO_PI=3.14*2;
                          Text('Actions', style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 30),),
                          Padding(
                            padding: const EdgeInsets.all(10.0),
-                           child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                           child: GestureDetector(onTap: (){
+                             Navigator.of(context).push(
+                                 MaterialPageRoute(
+                                     builder:
+                                         (BuildContext context) => NotificationScreen()));
+                           },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
                          )
                      ]),
                      Row(
