@@ -20,7 +20,7 @@ class _StatScreenState extends State<StatScreen> {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+        image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
     child: SafeArea(
     child: Scaffold(
       backgroundColor: Colors.transparent,
@@ -49,11 +49,11 @@ body: SingleChildScrollView(
   
                             (BuildContext context) =>ProfileScreen()));
   
-              },child: Icon(Icons.menu, color: Colors.lightBlue[50],size: 55,)),
+              },child: Icon(Icons.menu, color:Color(0xffF5FBFC),size: 55,)),
   
             ),
   
-            Text('Evoluion', style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),),
+            Text('Evoluion', style: GoogleFonts.heebo(fontSize: 30, color:Colors.white),),
   
             Padding(
   
@@ -64,7 +64,7 @@ body: SingleChildScrollView(
                     MaterialPageRoute(
                         builder:
                             (BuildContext context) => NotificationScreen()));
-              },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+              },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
   
             )
   
@@ -142,7 +142,7 @@ body: SingleChildScrollView(
   
                         decoration: BoxDecoration(
   
-                            color:  Color(0xffb8edff), shape: BoxShape.circle),
+                            color:  Color(0xffA3D5D9), shape: BoxShape.circle),
   
                       ),
   
@@ -154,13 +154,13 @@ body: SingleChildScrollView(
   
                       child: Column(mainAxisAlignment: MainAxisAlignment.center,
   
-                        children: [Text('   JOURS\n RESTANTS', style: GoogleFonts.heebo(fontSize: 18, color: Colors.lightBlue[50]),), Text('217',style: GoogleFonts.heebo(fontSize: 30,color: Colors.lightBlue[50]),),Center(
+                        children: [Text('   JOURS\n RESTANTS', style: GoogleFonts.heebo(fontSize: 18, color:Color(0xffF5FBFC)),), Text('217',style: GoogleFonts.heebo(fontSize: 30,color:Color(0xffF5FBFC)),),Center(
   
                           child: Text(
   
                               "$percentage"+" %",
   
-                              style: GoogleFonts.heebo(fontSize: 15, color: Colors.lightBlue[50])
+                              style: GoogleFonts.heebo(fontSize: 15, color: Color(0xffF5FBFC))
   
                           )),],),
   
@@ -214,7 +214,7 @@ body: SingleChildScrollView(
   
       children: [
   
-        Text("Ta Progression\n     en photos", style: GoogleFonts.heebo(fontSize: 40, color: Color(0xff5fc9ed)),),
+        Text("Ta Progression\n     en photos", style: GoogleFonts.heebo(fontSize: 40, color: Colors.white),),
   
       ],),
   
@@ -222,7 +222,7 @@ body: SingleChildScrollView(
   
       children: [
   
-        Text("Une fois par mois, prend une photo\nde ton sourier afin de voir l'evolution.",style: GoogleFonts.heebo(fontSize: 20, color: Color(0xff5fc9ed)))
+        Text("Une fois par mois, prend une photo\nde ton sourier afin de voir l'evolution.",style: GoogleFonts.heebo(fontSize: 20, color: Colors.white))
   
       ],),
 

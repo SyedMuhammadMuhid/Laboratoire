@@ -30,7 +30,7 @@ class ProfileCard extends StatelessWidget {
               ],),
               SizedBox(height: 5,),
               Container(
-                color: Color(0xff5fc9ed),
+                color: Color(0xff41B4C7),
                 height: 1,
                 width: 340,
               )

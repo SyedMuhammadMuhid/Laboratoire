@@ -15,7 +15,7 @@ class _ImageCardState extends State<ImageCard> {
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(image_path), fit: BoxFit.cover),
-          color:Colors.lightBlue[50],
+          color:Color(0xffF5FBFC),
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
       ),

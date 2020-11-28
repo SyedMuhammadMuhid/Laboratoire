@@ -12,9 +12,9 @@ class NotificationCard extends StatelessWidget {
       child: Column(children: [
         Row(
           children: [
-          CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+          CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
             SizedBox(width: 20,),
-            Text(data, style: GoogleFonts.heebo(color:Color(0xff5fc9ed),fontSize: 18),),
+            Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),),
 
           ],
           
@@ -23,7 +23,7 @@ class NotificationCard extends StatelessWidget {
           Image.asset('assets/oui.png'),
           Image.asset('assets/non.png')
         ],),
-        Container(height: 2,width: 300,color: Color(0xff5fc9ed),),
+        Container(height: 2,width: 300,color: Colors.white,),
       ],),
     );
   }

@@ -38,7 +38,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+                image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
         child: SafeArea(
             child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -55,7 +55,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                 MaterialPageRoute(
                                     builder:
                                         (BuildContext context) =>StartScreen()));
-                          },child: Icon(Icons.arrow_back, color: Colors.lightBlue[50],size: 55,)),
+                          },child: Icon(Icons.arrow_back, color: Color(0xffF5FBFC),size: 55,)),
                         ),
 
                       ]),
@@ -66,7 +66,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Color(0xffF5FBFC),
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0), bottomRight: Radius.circular(30.0), bottomLeft: Radius.circular(30.0) ),
                           boxShadow: [
@@ -89,12 +89,15 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Icon(Icons.check_circle_outline, size: 50,color:Color(0xff5fc9ed) ,),
+                                      child: Icon(Icons.check_circle_outline, size: 50,color:Color(0xff41B4C7) ,),
                                     )
                                   ],),
-                                Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Colors.pink[200],),]),
+                                Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),Positioned(top:60,left:60,child: CircleAvatar(child: Icon(Icons.add, color: Colors.white,),backgroundColor: Color(0xff41B4C7),)),]),
                                 Text('Mon Profil', style: GoogleFonts.heebo(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),),
                                 Image.asset('assets/first_pro_btn.png'),
+                                Row(children: [
+                                  Text('First and Last Name',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 1 ? 'Please Fill this Field' : null,
@@ -105,23 +108,21 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
-
-                                      labelText: 'First and Last Name',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text('Age',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2 ? 'Please Fill This Field' : null,
@@ -132,23 +133,21 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
-
-                                      labelText: 'Age',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text('Sex',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2? 'Please Fill the Field' : null,
@@ -159,28 +158,27 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
-
-                                      labelText: 'Sex',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
                                 Container(
+
                                   height: _isExpanded==false?60:332,
                                   width: 371,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff5fc9ed)),
+                                    border: Border.all(color: Color(0xff41B4C7)),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
+
 
                                   ),
                                   child: SingleChildScrollView(
@@ -193,7 +191,8 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                             Container(
-                                              child: Text(Device, style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),),
+
+                                              child: Text(Device, style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),),
                                             ),
                                             GestureDetector(onTap: (){
                                               setState(() {
@@ -205,35 +204,35 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                        Container(
                                          height: _isExpanded==false?0:332,
                                          child: Column(children: [
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                          Padding(
                                            padding: const EdgeInsets.all(8.0),
                                            child: Row(children: [Text('Sagittal', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
                                          ),
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                          Padding(
                                            padding: const EdgeInsets.all(8.0),
                                            child: Row(children: [Text('Schwartz', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
                                          ),
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                          Padding(
                                            padding: const EdgeInsets.all(8.0),
                                            child: Row(children: [Text('Split Plate', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
                                          ),
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                          Padding(
                                            padding: const EdgeInsets.all(8.0),
-                                           child: Row(children: [Text('Bionator', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                           child: Row(children: [Text('Bionator', style:GoogleFonts.heebo(color:Color(0xff41B4C7), fontSize: 25))],),
                                          ),
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                          Padding(
                                            padding: const EdgeInsets.all(8.0),
-                                           child: Row(children: [Text('Twin Block', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                           child: Row(children: [Text('Twin Block', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                          ),
-                                         Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                         Container(height: 2, width: 400,color:Color(0xff41B4C7),),
 
                                        ],),)
                                       ],
@@ -242,6 +241,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                 ),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text("Dentist's Address",style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2 ? 'Please Fill This Field' : null,
@@ -252,23 +254,22 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
 
-                                      labelText: "Dentist's Address",
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text("Doctor's Address",style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2 ? 'Please Fill This Field' : null,
@@ -279,23 +280,22 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
 
-                                      labelText: "Doctor's Address",
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text('Allergies',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2 ? 'Please Fill This Field' : null,
@@ -306,20 +306,16 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
 
-                                      labelText: 'Allergies',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
 
@@ -327,7 +323,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                   height: _isExpanded2==false?60:550,
                                   width: 371,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff5fc9ed)),
+                                    border: Border.all(color: Color(0xff41B4C7)),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
 
                                   ),
                                   child: SingleChildScrollView(
@@ -340,7 +338,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                child: Text(blood_type, style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),),
+                                                child: Text(blood_type, style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),),
                                               ),
                                               GestureDetector(onTap: (){
                                                 setState(() {
@@ -352,55 +350,55 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         Container(
                                           height: _isExpanded2==false?0:550,
                                           child: Column(children: [
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('O-', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
+                                            child: Row(children: [Text('O-', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),)],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('O+', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
+                                            child: Row(children: [Text('O+', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),)],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('A-', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('A-', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color:Color(0xff41B4C7),),
 
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('A+', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('A+', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('B-', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('B-', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('B+', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('B+', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color:Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('AB-', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('AB-', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('AB+', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('AB+', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [Text('UnKnown', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                            child: Row(children: [Text('UnKnown', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                           ),
-                                          Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                          Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                         ],),),
 
 
@@ -414,7 +412,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                   height: _isExpanded3==false?60:277,
                                   width: 371,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff5fc9ed)),
+                                    border: Border.all(color: Color(0xff41B4C7)),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
 
                                   ),
                                   child: SingleChildScrollView(
@@ -427,7 +427,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                child: Text(Frequency, style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),),
+                                                child: Text(Frequency, style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),),
                                               ),
                                               GestureDetector(onTap: (){
                                                 setState(() {
@@ -439,29 +439,29 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         Container(
                                           height: _isExpanded3==false?0:332,
                                           child: Column(children: [
-                                            Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                            Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                             Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: Row(children: [Text('1x /Day', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
+                                              child: Row(children: [Text('1x /Day', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),)],),
                                             ),
-                                            Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                            Container(height: 2, width: 400,color: Color(0xff41B4C7),),
                                             Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: Row(children: [Text('3x /Day', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25),)],),
+                                              child: Row(children: [Text('3x /Day', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25),)],),
                                             ),
-                                            Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                            Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                             Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: Row(children: [Text('1x /Week', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                              child: Row(children: [Text('1x /Week', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                             ),
-                                            Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                            Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
                                             Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: Row(children: [Text('2x /Week', style:GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 25))],),
+                                              child: Row(children: [Text('2x /Week', style:GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 25))],),
                                             ),
-                                            Container(height: 2, width: 400,color: Color(0xff5fc9ed),),
+                                            Container(height: 2, width: 400,color: Color(0xff41B4C7),),
 
 
                                           ],),)
@@ -471,6 +471,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                 ),
                                 SizedBox(height: 20,),
 
+                                Row(children: [
+                                  Text('Total Duration of Treatment',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 1 ? 'Please Fill This Field' : null,
@@ -481,22 +484,22 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
 
-                                      labelText: 'Total Duration of Treatment',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 20,),
+
+                                Row(children: [
+                                  Text('Instruction from Dentist',style: GoogleFonts.heebo(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.bold))
+                                ],),
                                 TextFormField(
                                     validator: (val) =>
                                     val.length < 2 ? 'Please Fill This Field' : null,
@@ -507,20 +510,16 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       });
                                     },
                                     style: TextStyle(
-                                      color: Color(0xff5fc9ed),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
 
-                                      labelText: 'Instruction from Dentist',
-                                      fillColor: Colors.white,
+                                      fillColor: Color(0xffF5FBFC),
                                       filled: true,
-                                      enabledBorder:
-                                      input_text_decoration_variable_for_focus,
-                                      focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff5fc9ed)),
+                                          fontSize: 25, color: Color(0xff41B4C7)),
                                     )),
                                 SizedBox(height: 30,),
                                 GestureDetector(onTap: (){

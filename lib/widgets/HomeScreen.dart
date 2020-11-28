@@ -26,12 +26,10 @@ double TWO_PI=3.14*2;
 
 
 
-     return MaterialApp(
-       title: 'Welcome to Flutter',
-       home: Container(
+     return Container(
          decoration: BoxDecoration(
              image: DecorationImage(
-                 image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+                 image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
          child: SafeArea(
            child: Scaffold(
              backgroundColor: Colors.transparent,
@@ -50,9 +48,9 @@ double TWO_PI=3.14*2;
                                MaterialPageRoute(
                                    builder:
                                        (BuildContext context) =>ProfileScreen()));
-                         },child: Icon(Icons.menu, color: Colors.lightBlue[50],size: 55,)),
+                         },child: Icon(Icons.menu, color: Colors.white,size: 55,)),
                        ),
-                         Text('Actions', style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 30),),
+                         Text('Actions', style: GoogleFonts.heebo(color: Colors.white, fontSize: 30),),
                          Padding(
                            padding: const EdgeInsets.all(10.0),
                            child: GestureDetector(onTap: (){
@@ -60,7 +58,7 @@ double TWO_PI=3.14*2;
                                  MaterialPageRoute(
                                      builder:
                                          (BuildContext context) => NotificationScreen()));
-                           },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+                           },child: CircleAvatar(child: Icon(Icons.notifications_none, color:Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
                          )
                      ]),
                      Row(
@@ -101,16 +99,16 @@ double TWO_PI=3.14*2;
                                          width: size - 18,
                                          height: size - 18,
                                          decoration: BoxDecoration(
-                                             color:  Color(0xffb8edff), shape: BoxShape.circle),
+                                             color:  Color(0xffA3D5D9), shape: BoxShape.circle),
 
                                        ),
                                      ),
                                              Center(child:  CircleAvatar(child: Padding(
                                                padding: const EdgeInsets.all(15.0),
-                                               child: Column(children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Colors.lightBlue[50]),), Text('52',style: GoogleFonts.heebo(fontSize: 30,color: Colors.lightBlue[50]),),Center(
+                                               child: Column(children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('52',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
                                                    child: Text(
                                                      "$percentage"+" %",
-                                                     style: GoogleFonts.heebo(fontSize: 11, color: Colors.lightBlue[50])
+                                                     style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
                                                    ))],),
                                              ),backgroundColor: Colors.pink[200],radius: 59,),)
                                    ],
@@ -152,15 +150,15 @@ double TWO_PI=3.14*2;
                                          width: size - 18,
                                          height: size - 18,
                                          decoration: BoxDecoration(
-                                             color:  Color(0xffb8edff), shape: BoxShape.circle),
+                                             color: Color(0xffA3D5D9), shape: BoxShape.circle),
                                        ),
                                      ),
                                      Center(child:  CircleAvatar(child: Padding(
                                        padding: const EdgeInsets.all(15.0),
-                                       child: Column(children: [Text('JOURS', style: GoogleFonts.heebo(fontSize: 18, color: Colors.lightBlue[50]),), Text('217',style: GoogleFonts.heebo(fontSize: 30,color: Colors.lightBlue[50]),),Center(
+                                       child: Column(children: [Text('JOURS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('217',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
                                            child: Text(
                                              "$percentage"+" %",
-                                             style: GoogleFonts.heebo(fontSize: 11, color: Colors.lightBlue[50])
+                                             style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
                                            )),],),
                                      ),backgroundColor: Colors.pink[200],radius: 59,),)
                                    ],
@@ -184,11 +182,11 @@ double TWO_PI=3.14*2;
                                    borderRadius: BorderRadius.all(Radius.circular(35)),
                                  ),
                                  elevation: 0,
-                                 color: Colors.lightBlue[50],
+                                 color: Color(0xffF5FBFC),
                            child: SingleChildScrollView(
                              child: Column(
                                  children: [
-                                   Center(child: Text('Comment ca Va?', style: GoogleFonts.heebo(fontSize: 20, color: Color(0xff5fc9ed)),)),
+                                   Center(child: Text('Comment ca Va?', style: GoogleFonts.heebo(fontSize: 20, color: Color(0xff41B4C7)),)),
                                    Row(
                                      mainAxisAlignment: MainAxisAlignment.center,
                                      children: [
@@ -318,7 +316,7 @@ double TWO_PI=3.14*2;
                        ),
                          Positioned(top: 55,left: 300,
                              child: CircleAvatar(
-                                 radius: 35,backgroundColor: Colors.lightBlue[50],
+                                 radius: 35,backgroundColor: Color(0xffF5FBFC),
                                  child: GestureDetector(onTap: (){
                                    tapped=!tapped;
                                    setState(() {
@@ -327,8 +325,8 @@ double TWO_PI=3.14*2;
                                    });
                                  },
                                    child: CircleAvatar(
-                                     child: Icon(tapped==false?Icons.add:Icons.remove,color: Colors.lightBlue[50],),
-                                     backgroundColor: Color(0xff5fc9ed),
+                                     child: Icon(tapped==false?Icons.add:Icons.remove,color: Color(0xffF5FBFC),),
+                                     backgroundColor: Color(0xff41B4C7),
                                    ),
                                  ))),
 
@@ -411,7 +409,7 @@ double TWO_PI=3.14*2;
              ),
            ),
          ),
-       ),
+
      );
 
    }

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
@@ -74,16 +75,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue[50],
+        backgroundColor: Color(0xffF5FBFC),
         elevation: 0,
         title: SafeArea(
             child: Text(
               'Create an account',
-              style: TextStyle(color: Color(0xff5fc9ed), fontSize: 25),
+              style: TextStyle(color: Color(0xff41B4C7), fontSize: 25),
             )),
         centerTitle: true,
       ),
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Color(0xffF5FBFC),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: Scrollbar(
@@ -103,167 +104,201 @@ class _RegisterPageState extends State<RegisterPage> {
                             SizedBox(
                               height: 5,
                             ),
-                            TextFormField(
-                                validator: (val) =>
-                                val.isEmpty ? 'Enter Email' : null,
-                                onChanged: (val) {
-                                  setState(() {
-                                    Email = val;
-                                  });
-                                },
-                                style: TextStyle(
-                                  color: Color(0xff5fc9ed),
-                                  fontSize: 25,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'Email',
-                                  fillColor: Colors.lightBlue[50],
-                                  filled: true,
-                                  enabledBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  focusedBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  labelStyle: TextStyle(
-                                      fontSize: 25, color: Color(0xff5fc9ed)),
-                                )),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            TextFormField(
-                                validator: (val) =>
-                                val.length < 6 ? 'Password Length' : null,
-                                obscureText: obscureText1,
-                                onChanged: (val) {
-                                  setState(() {
-                                    Pass = val;
-                                  });
-                                },
-                                style: TextStyle(
-                                  color: Color(0xff5fc9ed),
-                                  fontSize: 25,
-                                ),
-                                decoration: InputDecoration(
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        obscureText1 = !obscureText1;
-                                      });
-                                    },
-                                    child: Icon(obscureText1 == true
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
+                            Row(children: [
+                              Text('Email',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                            ],),
+                            Container(
+                              height: 60,
+                              child: TextFormField(
+                                  validator: (val) =>
+                                  val.isEmpty ? 'Enter Email' : null,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      Email = val;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                    color: Color(0xff41B4C7),
+                                    fontSize: 25,
                                   ),
-                                  labelText: 'Password',
-                                  fillColor: Colors.lightBlue[50],
-                                  filled: true,
-                                  enabledBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  focusedBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  labelStyle: TextStyle(
-                                      fontSize: 25, color: Color(0xff5fc9ed)),
-                                )),
+                                  decoration: InputDecoration(
+                                    fillColor: Color(0xffF5FBFC),
+                                    filled: true,
+                                    enabledBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    focusedBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    labelStyle: TextStyle(
+                                        fontSize: 25, color: Color(0xff41B4C7)),
+                                  )),
+                            ),
                             SizedBox(
                               height: 20,
                             ),
-                            TextFormField(
-                                validator: (val) =>
-                                val.length < 6 && Pass == Con_Pass
-                                    ? 'Password Dont Match'
-                                    : null,
-                                obscureText: obscureText2,
-                                onChanged: (val) {
-                                  setState(() {
-                                    Con_Pass = val;
-                                  });
-                                },
-                                style: TextStyle(
-                                  color:Color(0xff5fc9ed),
-                                  fontSize: 25,
-                                ),
-                                decoration: InputDecoration(
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        obscureText2 = !obscureText2;
-                                      });
-                                    },
-                                    child: Icon(obscureText2 == true
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
+                            Row(children: [
+                              Text('Password',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                            ],),
+                            Container(
+                              height: 60,
+                              child: TextFormField(
+                                  validator: (val) =>
+                                  val.length < 6 ? 'Password Length' : null,
+                                  obscureText: obscureText1,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      Pass = val;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                    color: Color(0xff41B4C7),
+                                    fontSize: 25,
                                   ),
-                                  labelText: 'Confirm Password',
-                                  fillColor: Colors.lightBlue[50],
-                                  filled: true,
-                                  enabledBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  focusedBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  labelStyle: TextStyle(
-                                      fontSize: 25, color:Color(0xff5fc9ed)),
-                                )),
+                                  decoration: InputDecoration(
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          obscureText1 = !obscureText1;
+                                        });
+                                      },
+                                      child: Icon(obscureText1 == true
+                                          ? Icons.visibility_off
+                                          : Icons.visibility),
+                                    ),
+
+                                    fillColor: Color(0xffF5FBFC),
+                                    filled: true,
+                                    enabledBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    focusedBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    labelStyle: TextStyle(
+                                        fontSize: 25, color: Color(0xff41B4C7)),
+                                  )),
+                            ),
                             SizedBox(
                               height: 20,
                             ),
-                            TextFormField(
-                                validator: (val) =>
-                                val.length <3 ? 'First Name Length' : null,
-                                obscureText: false,
-                                onChanged: (val) {
-                                  setState(() {
-                                    F_Name = val;
-                                  });
-                                },
-                                style: TextStyle(
-                                  color: Color(0xff5fc9ed),
-                                  fontSize: 25,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'First Name',
-                                  fillColor: Colors.lightBlue[50],
-                                  filled: true,
-                                  enabledBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  focusedBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  labelStyle: TextStyle(
-                                      fontSize: 25, color: Color(0xff5fc9ed)),
-                                )),
+                            Row(children: [
+                              Text('Confirm Password',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                            ],),
+                            Container(
+                              height: 60,
+                              child: TextFormField(
+                                  validator: (val) =>
+                                  val.length < 6 && Pass == Con_Pass
+                                      ? 'Password Dont Match'
+                                      : null,
+                                  obscureText: obscureText2,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      Con_Pass = val;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                    color:Color(0xff41B4C7),
+                                    fontSize: 25,
+                                  ),
+                                  decoration: InputDecoration(
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          obscureText2 = !obscureText2;
+                                        });
+                                      },
+                                      child: Icon(obscureText2 == true
+                                          ? Icons.visibility_off
+                                          : Icons.visibility),
+                                    ),
+
+                                    fillColor: Color(0xffF5FBFC),
+                                    filled: true,
+                                    enabledBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    focusedBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    labelStyle: TextStyle(
+                                        fontSize: 25, color:Color(0xff41B4C7)),
+                                  )),
+                            ),
                             SizedBox(
                               height: 20,
                             ),
-                            TextFormField(
-                                validator: (val) =>
-                                val.length < 3 ? 'Last Name Length' : null,
-                                obscureText: false,
-                                onChanged: (val) {
-                                  setState(() {
-                                    L_Name = val;
-                                  });
-                                },
-                                style: TextStyle(
-                                  color: Color(0xff5fc9ed),
-                                  fontSize: 25,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'Last Name',
-                                  fillColor: Colors.lightBlue[50],
-                                  filled: true,
-                                  enabledBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  focusedBorder:
-                                  input_text_decoration_variable_for_focus,
-                                  labelStyle: TextStyle(
-                                      fontSize: 25, color: Color(0xff5fc9ed)),
-                                )),
+                            Row(children: [
+                              Text('First Name',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                            ],),
+                            Container(
+                              height: 60,
+                              child: TextFormField(
+                                  validator: (val) =>
+                                  val.length <3 ? 'First Name Length' : null,
+                                  obscureText: false,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      F_Name = val;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                    color: Color(0xff41B4C7),
+                                    fontSize: 25,
+                                  ),
+                                  decoration: InputDecoration(
+
+                                    fillColor: Color(0xffF5FBFC),
+                                    filled: true,
+                                    enabledBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    focusedBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    labelStyle: TextStyle(
+                                        fontSize: 25, color: Color(0xff41B4C7)),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(children: [
+                              Text('Last Name',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                            ],),
+                            Container(
+                              height: 60,
+                              child: TextFormField(
+                                  validator: (val) =>
+                                  val.length < 3 ? 'Last Name Length' : null,
+                                  obscureText: false,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      L_Name = val;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                    color: Color(0xff41B4C7),
+                                    fontSize: 25,
+                                  ),
+                                  decoration: InputDecoration(
+
+                                    fillColor: Color(0xffF5FBFC),
+                                    filled: true,
+                                    enabledBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    focusedBorder:
+                                    input_text_decoration_variable_for_focus,
+                                    labelStyle: TextStyle(
+                                        fontSize: 25, color: Color(0xff41B4C7)),
+                                  )),
+                            ),
                             SizedBox(
                               height: 20,
                             ),
                             Container(
+                              decoration: BoxDecoration(
+                                  color:Color(0xff41B4C7),
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
+                              ),
                               height: 60,
                               width: MediaQuery.of(context).size.width,
                               child: FlatButton(
-                                  color: Color(0xff5fc9ed),
+
                                   child: Text(
                                     'Create',
                                     style: TextStyle(
@@ -297,7 +332,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       MaterialPageRoute(
                                           builder:
                                               (BuildContext context) => Welcome()));
-                                },child: CircleAvatar(child: Icon(Icons.arrow_back, size: 40, color: Colors.white,),backgroundColor:Color(0xff5fc9ed), radius: 40,))
+                                },child: CircleAvatar(child: Icon(Icons.arrow_back, size: 40, color: Colors.white,),backgroundColor:Color(0xff41B4C7), radius: 40,))
                               ],
                             )
                           ],

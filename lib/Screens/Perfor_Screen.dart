@@ -18,7 +18,7 @@ class _PerforScreenState extends State<PerforScreen> {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+        image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
     child: SafeArea(
     child: Scaffold(
     backgroundColor: Colors.transparent,
@@ -45,11 +45,11 @@ child: Column(children: [
 
                         (BuildContext context) =>ProfileScreen()));
 
-          },child: Icon(Icons.menu, color: Colors.lightBlue[50],size: 55,)),
+          },child: Icon(Icons.menu, color: Color(0xffF5FBFC),size: 55,)),
 
         ),
 
-        Text('Performances', style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),),
+        Text('Performances', style: GoogleFonts.heebo(fontSize: 30, color: Colors.white),),
 
         Padding(
 
@@ -60,7 +60,7 @@ child: Column(children: [
                 MaterialPageRoute(
                     builder:
                         (BuildContext context) => NotificationScreen()));
-          },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+          },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
 
         )
 
@@ -137,7 +137,7 @@ child: Column(children: [
 
                       decoration: BoxDecoration(
 
-                          color:  Color(0xffb8edff), shape: BoxShape.circle),
+                          color: Color(0xffA3D5D9), shape: BoxShape.circle),
 
                     ),
 
@@ -149,13 +149,12 @@ child: Column(children: [
 
                     child: Column(mainAxisAlignment: MainAxisAlignment.center,
 
-                      children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Colors.lightBlue[50]),), Text('53',style: GoogleFonts.heebo(fontSize: 30,color: Colors.lightBlue[50]),),Center(
-
+                      children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('53',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
                           child: Text(
 
                               "$percentage"+" %",
 
-                              style: GoogleFonts.heebo(fontSize: 15, color: Colors.lightBlue[50])
+                              style: GoogleFonts.heebo(fontSize: 15, color: Color(0xffF5FBFC))
 
                           )),],),
 

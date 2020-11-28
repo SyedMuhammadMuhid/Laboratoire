@@ -20,7 +20,7 @@ class _EventCardState extends State<EventCard> {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.lightBlue[50],
+          color: Color(0xffF5FBFC),
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0), bottomRight: Radius.circular(20.0), bottomLeft: Radius.circular(20.0) ),
           boxShadow: [

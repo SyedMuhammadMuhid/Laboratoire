@@ -19,12 +19,12 @@ class PerformancesCard extends StatelessWidget {
                 Image.asset(logo),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(data, style: GoogleFonts.heebo(color:Color(0xff5fc9ed),fontSize: 18),),
+                  child: Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),),
                 )
               ],
             ),
           ),
-          Container(height: 2,width: 300,color: Color(0xff5fc9ed),)
+          Container(height: 2,width: 300,color: Colors.white,)
         ],
       ),
     );

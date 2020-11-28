@@ -30,14 +30,14 @@ class _DayswidState extends State<Dayswid> {
                     borderRadius: BorderRadius.all(Radius.circular(35)),
                   ),
                   elevation: 0,
-                  color: Colors.lightBlue[50],
+                  color: Color(0xffF5FBFC),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20, top: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(Date+' octobre 2020', style: GoogleFonts.heebo(fontSize: 15, color: Color(0xff5fc9ed)),),
-                        Text(Jour, style: GoogleFonts.heebo(fontSize: 35, color: Color(0xff5fc9ed)),),
+                        Text(Date+' octobre 2020', style: GoogleFonts.heebo(fontSize: 15, color:Color(0xff41B4C7)),),
+                        Text(Jour, style: GoogleFonts.heebo(fontSize: 35, color: Color(0xff41B4C7)),),
 
                       ],
                     ),
@@ -56,7 +56,7 @@ class _DayswidState extends State<Dayswid> {
                         borderRadius: BorderRadius.all(Radius.circular(35)),
                       ),
                       elevation: 0,
-                      color: Colors.lightBlue[50],
+                      color: Color(0xffF5FBFC),
                       child:
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,21 +83,21 @@ class _DayswidState extends State<Dayswid> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                             Container(height: 70, width: 70,child: Icon(Icons.remove, color: Colors.red,size: 30,),color: Colors.white,),
-                            Container(height: 70, width: 70,child: Center(child: Text('12h', style: GoogleFonts.heebo(color:Colors.lightBlue[50],fontSize: 30),)),color: Color(0xff5fc9ed) ,),
-                            Container(height: 70, width: 70,child: Icon(Icons.add, color: Color(0xff5fc9ed),size: 30,),color: Colors.white,)
+                            Container(height: 70, width: 70,child: Center(child: Text('12h', style: GoogleFonts.heebo(color: Colors.white,fontSize: 30),)),color: Color(0xff41B4C7) ,),
+                            Container(height: 70, width: 70,child: Icon(Icons.add, color: Color(0xff41B4C7),size: 30,),color: Colors.white,)
                           ],),
                           SizedBox(height: 10,),
                           Container(
                             decoration: BoxDecoration(
-                                color:Color(0xff5fc9ed),
+                                color:Color(0xff41B4C7),
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(25.0), bottomLeft: Radius.circular(25.0) )
                             ),
                             width: MediaQuery.of(context).size.width,
                             child:
                             Column(children: [
-                              Text('Accumulation of points', style: GoogleFonts.heebo(fontSize: 18, color: Colors.lightBlue[50]),),
-                              Text('52', style:GoogleFonts.heebo(fontSize: 30, color: Colors.lightBlue[50]) ,)
+                              Text('Accumulation of points', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),),
+                              Text('52', style:GoogleFonts.heebo(fontSize: 30, color: Color(0xffF5FBFC)) ,)
                             ],),)
                         ],
                       )

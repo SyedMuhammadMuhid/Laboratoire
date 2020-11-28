@@ -15,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+        image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
     child: SafeArea(
     child: Scaffold(
       backgroundColor: Colors.transparent,
@@ -32,11 +32,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) =>Home()));
-                  },child: Icon(Icons.arrow_back, color: Colors.lightBlue[50],size: 55,)),
+                  },child: Icon(Icons.arrow_back, color:Color(0xffF5FBFC),size: 55,)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                  child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
                 )
               ]),
           Container(
@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff5fc9ed) ,),
+                          child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff41B4C7) ,),
       )
                       ],),
                       Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Colors.pink[200],),]),

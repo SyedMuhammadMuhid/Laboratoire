@@ -16,7 +16,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+        image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
     child: SafeArea(
     child: Scaffold(
     backgroundColor: Colors.transparent,
@@ -34,11 +34,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) =>Home()));
-                  },child: Icon(Icons.arrow_back, color: Colors.lightBlue[50],size: 55,)),
+                  },child: Icon(Icons.arrow_back, color: Color(0xffF5FBFC),size: 55,)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right:120.0),
-                  child: Text('Notifications', style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),),
+                  child: Text('Notifications', style: GoogleFonts.heebo(fontSize: 30, color: Colors.white),),
                 ),
               ]),
           Padding(

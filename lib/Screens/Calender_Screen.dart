@@ -37,7 +37,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/background_image_app.png"), fit: BoxFit.cover)),
+        image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
     child: SafeArea(
     child: Scaffold(
       backgroundColor: Colors.transparent,
@@ -53,9 +53,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) =>ProfileScreen()));
-                  },child: Icon(Icons.menu, color: Colors.lightBlue[50],size: 55,)),
+                  },child: Icon(Icons.menu, color: Color(0xffF5FBFC),size: 55,)),
                 ),
-                Text('Calendar', style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),),
+                Text('Calendar', style: GoogleFonts.heebo(fontSize: 30, color: Colors.white),),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(onTap: (){
@@ -63,13 +63,13 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) => NotificationScreen()));
-                  },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.lightBlue[50],size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+                  },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
                 )
               ]),
           Row(
             mainAxisAlignment:MainAxisAlignment.center,
             children: [
-            Text(formatted,style: GoogleFonts.heebo(color: Color(0xff5fc9ed), fontSize: 40, fontWeight: FontWeight.bold),)
+            Text(formatted,style: GoogleFonts.heebo(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),)
           ],),
           Stack(children: [
             Padding(
@@ -77,7 +77,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
               child: Container(
                 height: 380,
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue[50],
+                  color: Color(0xffF5FBFC),
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0), bottomRight: Radius.circular(30.0), bottomLeft: Radius.circular(30.0) ),
                   boxShadow: [
@@ -106,19 +106,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   onChanged: (val) {
                                   },
                                   style: TextStyle(
-                                    color: Color(0xff5fc9ed),
+                                    color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
                                   decoration: InputDecoration(
                                     labelText: 'Name of Event',
-                                    fillColor: Colors.lightBlue[50],
+                                    fillColor: Color(0xffF5FBFC),
                                     filled: true,
                                     enabledBorder:
                                     input_text_decoration_variable_for_focus,
                                     focusedBorder:
                                     input_text_decoration_variable_for_focus,
                                     labelStyle: TextStyle(
-                                        fontSize: 25, color: Color(0xff5fc9ed)),
+                                        fontSize: 25, color: Color(0xff41B4C7)),
                                   )),
                             ),
                             Padding(
@@ -128,19 +128,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   onChanged: (val) {
                                   },
                                   style: TextStyle(
-                                    color: Color(0xff5fc9ed),
+                                    color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
                                   decoration: InputDecoration(
                                     labelText: 'Place',
-                                    fillColor: Colors.lightBlue[50],
+                                    fillColor: Color(0xffF5FBFC),
                                     filled: true,
                                     enabledBorder:
                                     input_text_decoration_variable_for_focus,
                                     focusedBorder:
                                     input_text_decoration_variable_for_focus,
                                     labelStyle: TextStyle(
-                                        fontSize: 25, color: Color(0xff5fc9ed)),
+                                        fontSize: 25, color: Color(0xff41B4C7)),
                                   )),
                             ),
                             Row(
@@ -148,7 +148,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                                child: Text('All Day Event', style: TextStyle(fontSize: 25, color: Color(0xff5fc9ed) ),),
+                                child: Text('All Day Event', style: TextStyle(fontSize: 25, color: Color(0xff41B4C7) ),),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right:15, top:5, bottom:5),
@@ -159,7 +159,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                       switch_val=!switch_val;
                                     });
                                   },
-                                  activeColor: Color(0xff5fc9ed),
+                                  activeColor: Color(0xff41B4C7),
                                 ),
                               )
                             ],),
@@ -167,13 +167,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                                child: Text('Start Date:'+'  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}', style: TextStyle(fontSize: 25, color: Color(0xff5fc9ed) ),),
+                                child: Text('Start Date:'+'  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}', style: TextStyle(fontSize: 25, color: Color(0xff41B4C7) ),),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right:15, top:5, bottom:5),
-                                child: GestureDetector(onTap:(){
-                                  setState(() async{
-                               _dateTime_start=await showDatePicker(context: context, initialDate: _dateTime_start, firstDate: DateTime(DateTime.now().year-1), lastDate: DateTime(DateTime.now().year+1));
+                                child: GestureDetector(onTap:()async{
+                                  _dateTime_start=await showDatePicker(context: context, initialDate: _dateTime_start, firstDate: DateTime(DateTime.now().year-1), lastDate: DateTime(DateTime.now().year+1));
+                                  if(_dateTime_start==null)
+                                    _dateTime_start=DateTime.now();
+                                  setState((){
 
                                         });
                                 },child: Icon(Icons.expand_more, color: Colors.black54,size: 30,)),
@@ -183,14 +185,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                                child: Text('End Date:'+'    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}', style: TextStyle(fontSize: 25, color: Color(0xff5fc9ed) ),),
+                                child: Text('End Date:'+'    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}', style: TextStyle(fontSize: 25, color: Color(0xff41B4C7) ),),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right:15, top:5, bottom:5),
-                                child: GestureDetector(onTap:(){
-                                  setState(() async{
-                                    _dateTime_end=await showDatePicker(context: context, initialDate: _dateTime_end, firstDate: DateTime(DateTime.now().year-1), lastDate: DateTime(DateTime.now().year+1));
-
+                                child: GestureDetector(onTap:()async{
+                                  _dateTime_end=await showDatePicker(context: context, initialDate: _dateTime_end, firstDate: DateTime(DateTime.now().year-1), lastDate: DateTime(DateTime.now().year+1));
+                                  if(_dateTime_end==null)
+                                    _dateTime_end=DateTime.now();
+                                  setState((){
                                   });
                                 },child: Icon(Icons.expand_more, color: Colors.black54,size: 30,)),
                               )
@@ -198,7 +201,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             SizedBox(height: 7,),
                             Row(mainAxisAlignment: MainAxisAlignment.center
                               ,children: [
-                              CircleAvatar(radius:40,backgroundColor: Color(0xff5fc9ed),child: Icon(Icons.check, color: Colors.white,size: 50,),)
+                              CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(Icons.check, color: Colors.white,size: 50,),)
                             ],)
                           ],
                         ),
@@ -214,11 +217,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 clicked_check=!clicked_check;
               });
 
-            },child: CircleAvatar(radius:40,backgroundColor: Color(0xff5fc9ed),child: Icon(clicked_check==false?Icons.add:Icons.clear, color: Colors.white,size: 50,),))),
+            },child: CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(clicked_check==false?Icons.add:Icons.clear, color: Colors.white,size: 50,),))),
 
           ],),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-            Text('Events',style: GoogleFonts.heebo(fontSize: 30, color: Color(0xff5fc9ed)),)
+            Text('Events',style: GoogleFonts.heebo(fontSize: 30, color:Colors.white),)
           ],),
           Container(
             height: 500,

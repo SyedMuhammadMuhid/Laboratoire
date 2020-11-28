@@ -12,7 +12,7 @@ class StartScreen extends StatelessWidget {
       home: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/back_img.PNG"), fit: BoxFit.cover)),
+                    image: AssetImage("assets/login_back.png"), fit: BoxFit.cover)),
             child: SafeArea(
               child: Scaffold(
                 backgroundColor: Colors.transparent,
@@ -28,7 +28,7 @@ class StartScreen extends StatelessWidget {
                          Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
-                             Text('''Laboratoire\nBellomo & Lambert''', style: GoogleFonts.heebo(fontSize: 20,color: Color(0xff5fc9ed), ),),
+                             Text('''Laboratoire\nBellomo & Lambert''', style: GoogleFonts.heebo(fontSize: 20,color: Color(0xff41B4C7), ),),
                            ],
                          )
                        ],),
@@ -61,7 +61,7 @@ class StartScreen extends StatelessWidget {
                                      builder:
                                          (BuildContext context) => FirstProfileScreen()));
 
-                           },child: CircleAvatar(child: Icon(Icons.arrow_forward, size: 40,),backgroundColor: Colors.blue, radius: 40,))
+                           },child: CircleAvatar(child: Icon(Icons.arrow_forward, size: 40,color: Colors.white,),backgroundColor: Color(0xff41B4C7), radius: 40,))
                          ],
                        )
                      ],
