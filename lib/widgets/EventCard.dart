@@ -22,7 +22,7 @@ class _EventCardState extends State<EventCard> {
         decoration: BoxDecoration(
           color: Color(0xffF5FBFC),
           shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0), bottomRight: Radius.circular(20.0), bottomLeft: Radius.circular(20.0) ),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0), bottomRight: Radius.circular(5.0), bottomLeft: Radius.circular(5.0) ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -30,32 +30,43 @@ class _EventCardState extends State<EventCard> {
               blurRadius: 6.0,
             ),
           ],
-        ),      child: Column(
+        ),      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Container(width: 13, height: 75,color: Color(0xff41B4C7),),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left:15.0),
-                  child: Text(name, style: GoogleFonts.heebo(fontSize: 25, color: Colors.black54),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    Padding(
+                      padding: const EdgeInsets.only(left:15.0),
+                      child: Text(name, style: GoogleFonts.heebo(fontSize: 22, color: Colors.black54),),
+                    ),
+
+
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left:15.0, right: 15),
-                  child: Text(date, style: GoogleFonts.heebo(fontSize: 25, color: Colors.red),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Text(note, style: GoogleFonts.heebo(fontSize: 15, color: Colors.black45),),
+                    ),
+                  ],
                 ),
+                SizedBox(height: 10,),
 
               ],
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text(note, style: GoogleFonts.heebo(fontSize: 18, color: Colors.black45),),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left:15.0, right: 15),
+              child: Text(date, style: GoogleFonts.heebo(fontSize: 22, color: Colors.red),),
             ),
-            SizedBox(height: 10,)
           ],
         ),
       ),

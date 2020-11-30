@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
@@ -53,9 +54,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) =>ProfileScreen()));
-                  },child: Icon(Icons.menu, color: Color(0xffF5FBFC),size: 55,)),
+                  },child: Icon(Icons.menu, color: Colors.white,size: 55,)),
                 ),
-                Text('Calendar', style: GoogleFonts.heebo(fontSize: 30, color: Colors.white),),
+                Text('Actions', style: GoogleFonts.heebo(color: Colors.white, fontSize: 30),),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(onTap: (){
@@ -63,7 +64,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         MaterialPageRoute(
                             builder:
                                 (BuildContext context) => NotificationScreen()));
-                  },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+                  },child: CircleAvatar(child: Badge(badgeContent:Text('2', style: TextStyle(color: Colors.white),),child: Icon(Icons.notifications_none, color:Colors.white,size: 35,)),backgroundColor: Color(0xffFF999A),radius: 25,)),
                 )
               ]),
           Row(
@@ -75,7 +76,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
-                height: 380,
+                height: 400,
                 decoration: BoxDecoration(
                   color: Color(0xffF5FBFC),
                   shape: BoxShape.rectangle,

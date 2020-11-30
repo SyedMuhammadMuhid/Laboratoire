@@ -3,6 +3,7 @@ class ProfileListModel{
 
   String image_path;
   String name;
-  ProfileListModel({this.image_path,this.name});
+  Widget screen;
+  ProfileListModel({this.image_path,this.name, this.screen});
 
 }

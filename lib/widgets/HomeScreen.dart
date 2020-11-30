@@ -1,4 +1,5 @@
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
@@ -58,7 +59,7 @@ double TWO_PI=3.14*2;
                                  MaterialPageRoute(
                                      builder:
                                          (BuildContext context) => NotificationScreen()));
-                           },child: CircleAvatar(child: Icon(Icons.notifications_none, color:Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
+                           },child: CircleAvatar(child: Badge(badgeContent:Text('2', style: TextStyle(color: Colors.white),),child: Icon(Icons.notifications_none, color:Colors.white,size: 35,)),backgroundColor: Color(0xffFF999A),radius: 25,)),
                          )
                      ]),
                      Row(
@@ -76,6 +77,8 @@ double TWO_PI=3.14*2;
                                  height: size,
                                  child: Stack(
                                    children: [
+                                     ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 200,),
+
                                      ShaderMask(
                                        shaderCallback: (rect) {
                                          return SweepGradient(
@@ -103,19 +106,20 @@ double TWO_PI=3.14*2;
 
                                        ),
                                      ),
-                                             Center(child:  CircleAvatar(child: Padding(
+
+                                     Center(child:  CircleAvatar(child: Padding(
                                                padding: const EdgeInsets.all(15.0),
                                                child: Column(children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('52',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
                                                    child: Text(
                                                      "$percentage"+" %",
                                                      style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
                                                    ))],),
-                                             ),backgroundColor: Colors.pink[200],radius: 59,),)
+                                             ),backgroundColor: Color(0xffFF6766),radius: 59,),)
                                    ],
                                  ),
                                );
                              }),
-
+                         SizedBox(width: 15,),
                          TweenAnimationBuilder(
                              tween: Tween(begin: 0.0, end: 0.53),
                              duration: Duration(seconds: 4),
@@ -127,6 +131,8 @@ double TWO_PI=3.14*2;
                                  height: size,
                                  child: Stack(
                                    children: [
+                                     ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 200,),
+
                                      ShaderMask(
                                        shaderCallback: (rect) {
                                          return SweepGradient(
@@ -160,7 +166,7 @@ double TWO_PI=3.14*2;
                                              "$percentage"+" %",
                                              style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
                                            )),],),
-                                     ),backgroundColor: Colors.pink[200],radius: 59,),)
+                                     ),backgroundColor: Color(0xffFF6766),radius: 59,),)
                                    ],
                                  ),
                                );

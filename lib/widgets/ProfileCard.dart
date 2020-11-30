@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 
 class ProfileCard extends StatelessWidget {
   String image_path;
@@ -11,7 +12,12 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.of(context).pushReplacement(
+
+        if(name=='Actions'){index_nav=0;}
+        else if(name=='Calendar'){index_nav=1;}
+        else if(name=='Evolution'){index_nav=2;}
+        else if(name=='Performances'){index_nav=3;}
+        Navigator.of(context).push(
             MaterialPageRoute(
                 builder:
                     (BuildContext context) => Navegation));

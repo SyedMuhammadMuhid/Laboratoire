@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
@@ -36,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                  child: CircleAvatar(child: Badge(badgeContent:Text('2',style: TextStyle(color: Colors.white),),child: Icon(Icons.notifications_none, color: Colors.white,size: 35,)),backgroundColor: Color(0xffFF999A),radius: 25,),
                 )
               ]),
           Container(
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           // itemCount: _categories.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context, int index){
-                            return ProfileCard(name: profile_items[index].name, image_path: profile_items[index].image_path,);
+                            return ProfileCard(name: profile_items[index].name, image_path: profile_items[index].image_path,Navegation: profile_items[index].screen);
 
                           },
                         ),
@@ -103,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff41B4C7) ,),
       )
                       ],),
-                      Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Colors.pink[200],),]),
+                      Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Color(0xffFF999A),),]),
                       Text('Mon Profil', style: GoogleFonts.heebo(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black87),)
                     ],
                   ),

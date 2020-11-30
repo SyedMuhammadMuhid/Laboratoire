@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sample_screen/Screens/Home.dart';
 
 class LoadingScreen extends StatefulWidget {
-
-
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProviderStateMixin {
+class _LoadingScreenState extends State<LoadingScreen>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
     super.initState();
@@ -30,26 +29,24 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
   Widget build(BuildContext context) {
     _controller.forward();
 
-    Future.delayed(const Duration(milliseconds: 5000), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-              builder:
-                  (BuildContext context) => Home()));
+          MaterialPageRoute(builder: (BuildContext context) => Home()));
     });
-    return MaterialApp(
-        home: Container(
+    return Container(
         decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage("assets/loading_bg.png"), fit: BoxFit.cover)),
-
-    child: Scaffold(
-backgroundColor: Colors.transparent,
-      body: Center(
-        child: RotationTransition(
-          turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-          child: Image(image: AssetImage('assets/logo_blue.png'),),
-        ),
-      ),
-    )));
+            image: DecorationImage(
+                image: AssetImage("assets/loading_bg.png"), fit: BoxFit.cover)),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: RotationTransition(
+              turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+              child: Image(
+                image: AssetImage('assets/logo_blue.png'),
+              ),
+            ),
+          ),
+        ));
   }
 }

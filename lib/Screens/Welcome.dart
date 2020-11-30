@@ -28,8 +28,8 @@ class Welcome extends StatelessWidget {
                     Text('Do you have an account?',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
                     Text('Sign up or log in!',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
                     ],)],),
-
-                  Image(image: AssetImage('assets/faces.png'),height: height*15,width: width*10,),
+                SizedBox(height: 25,),
+                  Image(image: AssetImage('assets/faces.png'),height: height*14,width: width*9,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

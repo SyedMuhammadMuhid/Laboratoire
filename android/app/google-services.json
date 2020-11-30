@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "114489351597",
+    "firebase_url": "https://laboratoire-bellomo.firebaseio.com",
+    "project_id": "laboratoire-bellomo",
+    "storage_bucket": "laboratoire-bellomo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114489351597:android:e0b379421ddffcc20a9524",
+        "android_client_info": {
+          "package_name": "com.labortoirebellomo.sample_screen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114489351597-849evo4fnhc9hv1ndpvcpd4382612qct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa00Ic1NqRfQS3QtTENRWM4c3E0EArBFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114489351597-849evo4fnhc9hv1ndpvcpd4382612qct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

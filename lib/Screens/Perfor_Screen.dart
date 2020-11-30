@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/data.dart';
@@ -26,44 +27,27 @@ class _PerforScreenState extends State<PerforScreen> {
 
 child: Column(children: [
   Row(
-
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
       children: [
-
         Padding(
-
           padding: const EdgeInsets.all(10.0),
-
           child: GestureDetector(onTap:(){
-
             Navigator.of(context).push(
-
                 MaterialPageRoute(
-
                     builder:
-
                         (BuildContext context) =>ProfileScreen()));
-
-          },child: Icon(Icons.menu, color: Color(0xffF5FBFC),size: 55,)),
-
+          },child: Icon(Icons.menu, color: Colors.white,size: 55,)),
         ),
-
-        Text('Performances', style: GoogleFonts.heebo(fontSize: 30, color: Colors.white),),
-
+        Text('Performance', style: GoogleFonts.heebo(color: Colors.white, fontSize: 30),),
         Padding(
-
           padding: const EdgeInsets.all(10.0),
-
           child: GestureDetector(onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder:
                         (BuildContext context) => NotificationScreen()));
-          },child: CircleAvatar(child: Icon(Icons.notifications_none, color: Colors.white,size: 35,),backgroundColor: Colors.pink[200],radius: 25,)),
-
+          },child: CircleAvatar(child: Badge(badgeContent:Text('2', style: TextStyle(color: Colors.white),),child: Icon(Icons.notifications_none, color:Colors.white,size: 35,)),backgroundColor: Color(0xffFF999A),radius: 25,)),
         )
-
       ]),
   Row(mainAxisAlignment: MainAxisAlignment.center
 
@@ -90,6 +74,8 @@ child: Column(children: [
               child: Stack(
 
                 children: [
+
+                  ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 230,),
 
                   ShaderMask(
 
@@ -158,7 +144,7 @@ child: Column(children: [
 
                           )),],),
 
-                  ),backgroundColor: Colors.pink[200],radius: 79,),)
+                  ),backgroundColor: Color(0xffFF6766),radius: 79,),)
 
                 ],
 
