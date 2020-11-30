@@ -12,11 +12,12 @@ class StatScreen extends StatefulWidget {
 }
 
 class _StatScreenState extends State<StatScreen> {
-  double size = 210;
   double TWO_PI = 3.14 * 2;
   double progress = 53;
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width/2;
+
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -89,7 +90,7 @@ class _StatScreenState extends State<StatScreen> {
                             height: size,
                             child: Stack(
                               children: [
-                                ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 230,),
+                                ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: size,),
 
                                 ShaderMask(
                                   shaderCallback: (rect) {

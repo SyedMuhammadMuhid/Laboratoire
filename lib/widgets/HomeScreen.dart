@@ -22,7 +22,7 @@ import 'package:sample_screen/widgets/checkbox.dart';
    bool mechanism_check=false;
    @override
    Widget build(BuildContext context) {
-double size=170;
+double size=MediaQuery.of(context).size.width/2.7;
 double TWO_PI=3.14*2;
 
 
@@ -77,7 +77,7 @@ double TWO_PI=3.14*2;
                                  height: size,
                                  child: Stack(
                                    children: [
-                                     ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 200,),
+                                     ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: size,),
 
                                      ShaderMask(
                                        shaderCallback: (rect) {
@@ -181,7 +181,7 @@ double TWO_PI=3.14*2;
                          padding: const EdgeInsets.only(left:25.0, bottom: 8.0, right:25.0, top: 25.0),
                          child: Container(
                            height: tapped==false?130: 1560,
-                             width: 320,
+                             width: (MediaQuery.of(context).size.width/3)*2.3,
                              
                                child: Card(
                                  shape: RoundedRectangleBorder(
@@ -320,7 +320,7 @@ double TWO_PI=3.14*2;
                          ),
                              ),
                        ),
-                         Positioned(top: 55,left: 300,
+                         Positioned(top: 55,left: ((MediaQuery.of(context).size.width/3)*2.3)-20,
                              child: CircleAvatar(
                                  radius: 35,backgroundColor: Color(0xffF5FBFC),
                                  child: GestureDetector(onTap: (){

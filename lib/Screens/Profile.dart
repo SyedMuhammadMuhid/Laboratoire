@@ -50,14 +50,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Positioned(
                  top: 100,
                 child: Container(
-                  height: (MediaQuery.of(context).size.height),
+                  height: ((MediaQuery.of(context).size.height/4)*2.5)+100,
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Column(
                     children: [
                       SizedBox(height: 100,),
                       Container(
-                        height: (MediaQuery.of(context).size.height),
+                        height: (MediaQuery.of(context).size.height/4)*2.5,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
 

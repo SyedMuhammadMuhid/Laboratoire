@@ -23,7 +23,7 @@ class _DayswidState extends State<Dayswid> {
               padding: const EdgeInsets.only(left:25.0, top: 0.0),
               child: Container(
                 height: tapped==false?150:0,
-                width: tapped==false?320:0,
+                width: tapped==false?((MediaQuery.of(context).size.width/3)*2.3):0,
                 child:
                 Card(
                   shape: RoundedRectangleBorder(
@@ -49,7 +49,7 @@ class _DayswidState extends State<Dayswid> {
               padding: const EdgeInsets.only(left:25.0, bottom: 25.0, right:25.0, top: 80),
               child: Container(
                   height: tapped==false?800:0,
-                  width: tapped==false?320:0,
+                  width: tapped==false?((MediaQuery.of(context).size.width/3)*2.3):0,
                   child:
                   Card(
                       shape: RoundedRectangleBorder(
