@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Popups/Logout_popup.dart';
 import 'package:sample_screen/Screens/Home.dart';
 import 'package:sample_screen/widgets/ProfileCard.dart';
 class ProfileScreen extends StatefulWidget {
@@ -101,7 +102,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff41B4C7) ,),
+                          child: GestureDetector(onTap: (){
+                            logout_popup(context);
+                          },child: Icon(Icons.exit_to_app, size: 30,color:Color(0xff41B4C7) ,)),
       )
                       ],),
                       Stack(children: [CircleAvatar(radius: 50, backgroundColor: Colors.white,child: Image(image: AssetImage('assets/propic.png'),),),CircleAvatar(child: Icon(Icons.edit, color: Colors.white,),backgroundColor: Color(0xffFF999A),),]),

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
+import 'package:sample_screen/Services/Auth_Services.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _key = GlobalKey<FormState>();
-
+final AuthServices _authServices=AuthServices();
   String Email;
   String Pass;
   String Con_Pass;
@@ -306,14 +307,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   onPressed: (){
 
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder:
-                                                (BuildContext context) => StartScreen()));
+
                                     if (_key.currentState.validate()) {
                                       setState(() async {
                                         if(Pass==Con_Pass){
+                                      dynamic result=  await _authServices.SignUpWithEmailPass(Email, Pass, F_Name, L_Name);
+                                      if(result==null){
+                                        print('error signing up');
 
+                                      }
+                                      else if(result!= null){
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) => StartScreen()));
+                                      }
                                         }
 
                                         else if(Pass != Con_Pass){

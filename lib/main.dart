@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
+import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Wrapper.dart';
 
 import 'Screens/Home.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -17,9 +22,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:Wrapper()//Home()
+    return StreamProvider<User>.value(
+      value: AuthServices().user,
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home:Wrapper()//Home()
+      ),
     );
   }
 }

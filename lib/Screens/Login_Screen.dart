@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
+import 'package:sample_screen/Services/Auth_Services.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -12,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscureText1=true;
   String Email;
   String Pass;
+  final AuthServices _authServices=AuthServices();
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -120,12 +122,18 @@ Row(children: [
                       style: TextStyle(
                           color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: (){
+                    onPressed: ()async{
+                   dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
 
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder:
-                                  (BuildContext context) => LoadingScreen()));
+                   if(result==null){
+                     print('error signing in');
+                   }
+                   else if(result!=null) {
+                     Navigator.of(context).pushReplacement(
+                         MaterialPageRoute(
+                             builder:
+                                 (BuildContext context) => LoadingScreen()));
+                   }
 
                     }),
               ),
