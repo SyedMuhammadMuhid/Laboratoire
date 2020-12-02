@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_screen/Screens/Home.dart';
+import 'package:sample_screen/Screens/Profile.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override

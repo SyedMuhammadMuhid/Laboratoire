@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
+import 'package:sample_screen/Wrapper.dart';
+import 'package:sample_screen/main.dart';
 
 void logout_popup( BuildContext context)
 {
@@ -24,8 +26,14 @@ void logout_popup( BuildContext context)
                 FlatButton(
                   child: Text('Logout', style: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 16 ),),
                   onPressed: ()async{
+
                     await _auth.Sign_Out();
-                    Navigator.pop(context);
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                Wrapper()));
+                //   Navigator.pop(context);
+
                   },
                 ),
               ],

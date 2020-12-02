@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_screen/Screens/Start_Screen.dart';
-import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Wrapper.dart';
 
@@ -26,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       value: AuthServices().user,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home:Wrapper()//Home()
+          home:Wrapper(),//Home()
       ),
     );
   }

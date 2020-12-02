@@ -18,3 +18,8 @@ const input_text_decoration_variable_for_focus= OutlineInputBorder(
 bool tapped=false;
 
 int index_nav=0;
+
+String uid_constant='';
+String F_Name=' ';
+String L_Name=' ';
+String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';

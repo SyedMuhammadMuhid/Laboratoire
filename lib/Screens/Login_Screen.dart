@@ -11,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool obscureText1=true;
+  final _key = GlobalKey<FormState>();
   String Email;
   String Pass;
   final AuthServices _authServices=AuthServices();
@@ -38,75 +39,82 @@ class _LoginScreenState extends State<LoginScreen> {
 Row(children: [
   Text('Courriel',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
 ],),
-              Container(
-                height: 60,
-                child: TextFormField(
-                  validator: (val) =>
-                  val.length < 6 ? 'email incorrect' : null,
-                  obscureText: false,
-                  onChanged: (val) {
-                    setState(() {
-                      Email = val;
-                    });
-                  },
-                  style: TextStyle(
-                    color: Color(0xff41B4C7),
-                    fontSize: 25,
-                  ),
-                  decoration: InputDecoration(
+              Form(key: _key,
+               child: Column(children: [
 
-                    fillColor: Color(0xffF5FBFC),
-                    filled: true,
-                    enabledBorder:
-                    input_text_decoration_variable_for_focus,
-                    focusedBorder:
-                    input_text_decoration_variable_for_focus,
-                    labelStyle: TextStyle(
-                        fontSize: 25, color: Color(0xff41B4C7)),
-                  )),
-              ),
-              SizedBox(height: 20,),
-              Row(children: [
-                Text('Mot de passe',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-              ],),
-              Container(
-                height: 60,
-                child: TextFormField(
-                    validator: (val) =>
-                    val.length < 6 ? 'Password Length' : null,
-                    obscureText: obscureText1,
-                    onChanged: (val) {
-                      setState(() {
-                        Pass = val;
-                      });
-                    },
-                    style: TextStyle(
-                      color: Color(0xff41B4C7),
-                      fontSize: 25,
-                    ),
-                    decoration: InputDecoration(
 
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            obscureText1 = !obscureText1;
-                          });
-                        },
-                        child: Icon(obscureText1 == true
-                            ? Icons.visibility_off
-                            : Icons.visibility),
-                      ),
-                      fillColor: Color(0xffF5FBFC),
-                      filled: true,
-                      enabledBorder:
-                      input_text_decoration_variable_for_focus,
-                      focusedBorder:
-                      input_text_decoration_variable_for_focus,
+                 Container(
+                   height: 60,
+                   child: TextFormField(
+                       validator: (val) =>
+                       val.length < 6 ? 'email incorrect' : null,
+                       obscureText: false,
+                       onChanged: (val) {
+                         setState(() {
+                           Email = val;
+                         });
+                       },
+                       style: TextStyle(
+                         color: Color(0xff41B4C7),
+                         fontSize: 25,
+                       ),
+                       decoration: InputDecoration(
 
-                      labelStyle: TextStyle(
-                          fontSize: 25, color: Color(0xff41B4C7)),
-                    )),
-              ),
+                         fillColor: Color(0xffF5FBFC),
+                         filled: true,
+                         enabledBorder:
+                         input_text_decoration_variable_for_focus,
+                         focusedBorder:
+                         input_text_decoration_variable_for_focus,
+                         labelStyle: TextStyle(
+                             fontSize: 25, color: Color(0xff41B4C7)),
+                       )),
+                 ),
+                 SizedBox(height: 20,),
+                 Row(children: [
+                   Text('Mot de passe',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                 ],),
+                 Container(
+                   height: 60,
+                   child: TextFormField(
+                       validator: (val) =>
+                       val.length < 6 ? 'Password Length' : null,
+                       obscureText: obscureText1,
+                       onChanged: (val) {
+                         setState(() {
+                           Pass = val;
+                         });
+                       },
+                       style: TextStyle(
+                         color: Color(0xff41B4C7),
+                         fontSize: 25,
+                       ),
+                       decoration: InputDecoration(
+
+                         suffixIcon: GestureDetector(
+                           onTap: () {
+                             setState(() {
+                               obscureText1 = !obscureText1;
+                             });
+                           },
+                           child: Icon(obscureText1 == true
+                               ? Icons.visibility_off
+                               : Icons.visibility),
+                         ),
+                         fillColor: Color(0xffF5FBFC),
+                         filled: true,
+                         enabledBorder:
+                         input_text_decoration_variable_for_focus,
+                         focusedBorder:
+                         input_text_decoration_variable_for_focus,
+
+                         labelStyle: TextStyle(
+                             fontSize: 25, color: Color(0xff41B4C7)),
+                       )),
+                 ),
+
+                ],)),
+
               SizedBox(height: 20,),
               Container(
                 decoration: BoxDecoration(
@@ -123,18 +131,24 @@ Row(children: [
                           color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     onPressed: ()async{
-                   dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
 
-                   if(result==null){
-                     print('error signing in');
-                   }
-                   else if(result!=null) {
-                     Navigator.of(context).pushReplacement(
-                         MaterialPageRoute(
-                             builder:
-                                 (BuildContext context) => LoadingScreen()));
-                   }
+                      if (_key.currentState.validate()) {
+                        setState(() async {
 
+                          dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
+
+                          if(result==null){
+                            print('error signing in');
+                          }
+                          else if(result!=null) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder:
+                                        (BuildContext context) => LoadingScreen()));
+                          }
+
+                        });
+                      }
                     }),
               ),
 SizedBox(height: 10,),
