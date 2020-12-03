@@ -5,6 +5,9 @@ import 'package:sample_screen/Models/profile_list_model.dart';
 import 'package:sample_screen/Screens/Home.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Tips_Screen.dart';
+List months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+DateTime now = DateTime.now();
+int current_mon = now.month-1;
 
 List Pain = [
   'Gum pain',
@@ -31,13 +34,47 @@ List To_do = [
   "Rinse mouth with fluoride every day",
   "Number of hours I wore my device\ntoday, including last night"
 ];
-String Congrats_Statement='Congratulations! ';
-String Todo_Statement='To Do: ';
-String Oops_Statement='Oops! ';
+String Congrats_Statement = 'Congratulations! ';
+String Todo_Statement = 'To Do: ';
+String Oops_Statement = 'Oops! ';
 
-List Days = ['Jour 1', 'Jour 2', 'Jour 3'];
-List Date = ['23', '24', '25'];
+List Days = [
+  'Jour 1',
+  'Jour 2',
+  'Jour 3',
+  'Jour 4',
+  'Jour 5',
+  'Jour 6',
+  'Jour 7',
+  'Jour 8',
+  'Jour 9',
+  'Jour 10',
+  'Jour 11',
+  'Jour 12',
+  'Jour 13',
+  'Jour 14'
+];
 
+DateTime _now = DateTime.now();
+
+List Date = [
+  ((_now.day).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+  ( (_now.day + 1).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+  ((_now.day + 2).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+   (_now.day + 3).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+   (_now.day + 4).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+   (_now.day + 5).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+   (_now.day+6).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+7).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+8).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+   (_now.day+9).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+10).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+11).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+12).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString()
+];
+
+List ToDo_number=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToDo7','ToDo8'];
 List profile_items = [
   ProfileListModel(
       name: 'Actions', image_path: 'assets/actions_logo.png', screen: Home()),
@@ -111,3 +148,5 @@ List notification_list = [
   'Au-s tu Active la vis?',
   'As-tu nettoye ton appareil\napres ton dejeuner?'
 ];
+
+int total_points=0;

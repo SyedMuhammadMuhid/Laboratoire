@@ -8,21 +8,46 @@ import 'package:sample_screen/Services/database.dart';
 
 class FaireCard extends StatefulWidget {
   String Data;
-  FaireCard({this.Data});
+  int points;
+  int index_of_day;
+  int index_of_todo;
+  FaireCard({this.Data,this.points,this.index_of_day,this.index_of_todo});
   @override
-  _FaireCardState createState() => _FaireCardState(Data: Data);
+  _FaireCardState createState() => _FaireCardState(Data: Data,points: points,index_of_day: index_of_day,index_of_todo: index_of_todo);
 }
 
 class _FaireCardState extends State<FaireCard> {
   String Data;
-  _FaireCardState({this.Data});
+  int points;
+  int index_of_day;
+  int index_of_todo;
+  _FaireCardState({this.Data,this.points,this.index_of_todo,this.index_of_day});
   String image_link = "assets/trans_img.png";
   bool clicked = false;
   int Statement = 0;
+  int anything=0;
   @override
+
   Widget build(BuildContext context) {
     final user=Provider.of<User>(context);
 
+    total_points+=points;
+
+    if(anything==0&&points==0){
+      image_link="assets/trans_img.png";
+      Statement=0;
+    }
+    else if(anything==0&&points==10){
+      image_link="assets/congradulations.png";
+      Statement=1;
+      clicked=true;
+    }
+    else if(anything==0&&points==-1){
+      image_link='assets/oops.png';
+      Statement=2;
+      clicked=true;
+    }
+    anything++;
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Container(
@@ -46,12 +71,14 @@ class _FaireCardState extends State<FaireCard> {
                         setState(() {
                           if (clicked == false) {
                             image_link = "assets/congradulations.png";
-                            DatabaseService(uid: user.uid).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 10);
                             clicked = true;
                           } else if (clicked) {
                             image_link = "assets/trans_img.png";
                             clicked = false;
                             Statement = 0;
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 0);
+
                           }
                         });
                       },
@@ -61,11 +88,14 @@ class _FaireCardState extends State<FaireCard> {
                           if (clicked == false) {
                             image_link = 'assets/oops.png';
                             clicked = true;
-                            DatabaseService(uid: user.uid).UpdatePoints(10, 0, 0, 0, 0, 0, 0, 0,"Day 1");
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+
 
                           } else if (clicked == true) {
                             image_link = 'assets/oops.png';
                             clicked = true;
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+
                           }
                         });
                       },

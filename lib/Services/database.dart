@@ -103,8 +103,29 @@ UserData _userDatafromSnapshot(DocumentSnapshot snapshot) {
   }
   Stream<PointData> get userPoints{
 
-    return _collectionReference_points.doc().snapshots()
+    return _collectionReference_points.doc('Day $Day_Count').snapshots()
         .map(_userPointsfromSnapshot);
   }
+
+
+
+  Future UpdatePointsSingleUpdate(int index_of_todo,int index_of_day, int value)async{
+index_of_todo=index_of_todo+1;
+index_of_day=index_of_day+1;
+    try{
+      return await _collectionReference_points.doc('Day $index_of_day').update({
+        'ToDo$index_of_todo':value
+      });
+
+    }catch(e){
+      return null;
+    }
+
+
+
+  }
+
+
+
 
 }

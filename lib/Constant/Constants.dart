@@ -20,6 +20,8 @@ bool tapped=false;
 int index_nav=0;
 
 String uid_constant='';
+int Day_Count=1;
+int documents_lenght;
 String F_Name=' ';
 String L_Name=' ';
 String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';

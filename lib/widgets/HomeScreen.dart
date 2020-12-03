@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,10 +9,8 @@ import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
-import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/Days.dart';
-import 'package:sample_screen/widgets/FaireCard.dart';
 import 'package:sample_screen/widgets/checkbox.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -602,17 +601,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           ]),
                           Container(
                             height: tapped == false ? 1100 : 0,
-                            child: ListView.builder(
-                              physics: BouncingScrollPhysics(),
-                              itemCount: Days.length,
-                              // itemCount: _categories.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Dayswid(
-                                  Date: Date[index],
-                                  Jour: Days[index],
+                            child: StreamBuilder(
+                              stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points').snapshots(),
+                              builder: (context, snapshot) {
+                                if(!snapshot.hasData)return Container();
+
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: snapshot.data.docs.length!=null?snapshot.data.docs.length:3,
+                                  // itemCount: _categories.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    print(snapshot.data.docs[index].toString()+' its the TODO1 form the list on home pge');
+                                    return Dayswid(
+                                      Date: Date[index],
+                                      Jour: Days[index],
+                                      document: snapshot.data.docs[index],
+                                      index_of_day: index
+                                    );
+                                  },
                                 );
-                              },
+                              }
                             ),
                           ),
                           /*Stack(
