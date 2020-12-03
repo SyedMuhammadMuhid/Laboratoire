@@ -1,4 +1,3 @@
-
 import 'package:badges/badges.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,361 +13,609 @@ import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/Days.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
 import 'package:sample_screen/widgets/checkbox.dart';
- class HomeScreen extends StatefulWidget {
-   @override
-   _HomeScreenState createState() => _HomeScreenState();
- }
 
- class _HomeScreenState extends State<HomeScreen> {
-   List pain_check=[false,false, false, false, false];
-   bool self_confidence_check=false;
-   bool sleep_check=false;
-   bool locution_check=false;
-   bool mechanism_check=false;
-   @override
-   Widget build(BuildContext context) {
-     final user=Provider.of<User>(context);
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
-     double size=MediaQuery.of(context).size.width/2.7;
-double TWO_PI=3.14*2;
-     return StreamBuilder<UserData>(
-         stream: DatabaseService(uid: user.uid).userData,
-     builder: (context, snapshot) {
-     if(!snapshot.hasData)return CircularProgressIndicator();
-     UserData userdata = snapshot.data;
-     F_Name=userdata.F_Name;
-     L_Name=userdata.L_Name;
-     Image_url=userdata.Image_url;
-       return Container(
-           decoration: BoxDecoration(
-               image: DecorationImage(
-                   image: AssetImage("assets/all_app.png"), fit: BoxFit.cover)),
-           child: SafeArea(
-             child: Scaffold(
-               backgroundColor: Colors.transparent,
-               body: SingleChildScrollView(
-                 child: Stack( children: [
-                   Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                           Padding(
-                           padding: const EdgeInsets.all(10.0),
-                           child: GestureDetector(onTap:(){
-                             Navigator.of(context).push(
-                                 MaterialPageRoute(
-                                     builder:
-                                         (BuildContext context) =>ProfileScreen()));
-                           },child: Icon(Icons.menu, color: Colors.white,size: 55,)),
-                         ),
-                           Text('Actions', style: GoogleFonts.heebo(color: Colors.white, fontSize: 30),),
-                           Padding(
-                             padding: const EdgeInsets.all(10.0),
-                             child: GestureDetector(onTap: (){
-                               Navigator.of(context).push(
-                                   MaterialPageRoute(
-                                       builder:
-                                           (BuildContext context) => NotificationScreen()));
-                             },child: CircleAvatar(child: Badge(badgeContent:Text('2', style: TextStyle(color: Colors.white),),child: Icon(Icons.notifications_none, color:Colors.white,size: 35,)),backgroundColor: Color(0xffFF999A),radius: 25,)),
-                           )
-                       ]),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                          SizedBox(width: 10,),
-                           TweenAnimationBuilder(
-                               tween: Tween(begin: 0.0, end: 0.53),
-                               duration: Duration(seconds: 4),
-                               builder: (context, value, child) {
-                                 // percentage to show in Center Text
-                                 int percentage = (value * 100).ceil();
-                                 return Container(
-                                   width: size,
-                                   height: size,
-                                   child: Stack(
-                                     children: [
-                                       ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: size,),
-
-                                       ShaderMask(
-                                         shaderCallback: (rect) {
-                                           return SweepGradient(
-                                               startAngle: 0.0,
-                                               endAngle: TWO_PI,
-                                               stops: [value, value], // value from Tween Animation Builder
-                                               // 0.0 , 0.5 , 0.5 , 1.0
-                                               center: Alignment.center,
-                                               colors: [Colors.yellow, Colors.transparent])
-                                               .createShader(rect);
-                                         },
-                                         child: Container(
-                                           width: size,
-                                           height: size,
-                                           decoration: BoxDecoration(
-                                               shape: BoxShape.circle, color: Colors.yellow),
-                                         ),
-                                       ),
-                                       Center(
-                                         child: Container(
-                                           width: size - 18,
-                                           height: size - 18,
-                                           decoration: BoxDecoration(
-                                               color:  Color(0xffA3D5D9), shape: BoxShape.circle),
-
-                                         ),
-                                       ),
-
-                                       Center(child:  CircleAvatar(child: Padding(
-                                                 padding: const EdgeInsets.all(15.0),
-                                                 child: Column(children: [Text('POINTS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('52',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
-                                                     child: Text(
-                                                       "$percentage"+" %",
-                                                       style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
-                                                     ))],),
-                                               ),backgroundColor: Color(0xffFF6766),radius: 59,),)
-                                     ],
-                                   ),
-                                 );
-                               }),
-                           SizedBox(width: 15,),
-                           TweenAnimationBuilder(
-                               tween: Tween(begin: 0.0, end: 0.53),
-                               duration: Duration(seconds: 4),
-                               builder: (context, value, child) {
-                                 // percentage to show in Center Text
-                                 int percentage = (value * 100).ceil();
-                                 return Container(
-                                   width: size,
-                                   height: size,
-                                   child: Stack(
-                                     children: [
-                                       ImageIcon(AssetImage('assets/dotted.png'),color: Colors.white,size: 200,),
-
-                                       ShaderMask(
-                                         shaderCallback: (rect) {
-                                           return SweepGradient(
-                                               startAngle: 0.0,
-                                               endAngle: TWO_PI,
-                                               stops: [value, value], // value from Tween Animation Builder
-                                               // 0.0 , 0.5 , 0.5 , 1.0
-                                               center: Alignment.center,
-                                               colors: [Colors.yellow, Colors.transparent])
-                                               .createShader(rect);
-                                         },
-                                         child: Container(
-                                           width: size,
-                                           height: size,
-                                           decoration: BoxDecoration(
-                                               shape: BoxShape.circle, color: Colors.yellow),
-                                         ),
-                                       ),
-                                       Center(
-                                         child: Container(
-                                           width: size - 18,
-                                           height: size - 18,
-                                           decoration: BoxDecoration(
-                                               color: Color(0xffA3D5D9), shape: BoxShape.circle),
-                                         ),
-                                       ),
-                                       Center(child:  CircleAvatar(child: Padding(
-                                         padding: const EdgeInsets.all(15.0),
-                                         child: Column(children: [Text('JOURS', style: GoogleFonts.heebo(fontSize: 18, color: Color(0xffF5FBFC)),), Text('217',style: GoogleFonts.heebo(fontSize: 30,color: Color(0xffF5FBFC)),),Center(
-                                             child: Text(
-                                               "$percentage"+" %",
-                                               style: GoogleFonts.heebo(fontSize: 11, color: Color(0xffF5FBFC))
-                                             )),],),
-                                       ),backgroundColor: Color(0xffFF6766),radius: 59,),)
-                                     ],
-                                   ),
-                                 );
-                               }),
-                           SizedBox(width: 10,)
-                         ],
-                       ),
-
-                       Stack(
-                         children: [
-                           Padding(
-                           padding: const EdgeInsets.only(left:25.0, bottom: 8.0, right:25.0, top: 25.0),
-                           child: SingleChildScrollView(
-                             child: Container(
-                               height: tapped==false?130: 1690,
-                                 width: (MediaQuery.of(context).size.width/3)*2.3,
-
-                                   child: Card(
-                                     shape: RoundedRectangleBorder(
-                                       borderRadius: BorderRadius.all(Radius.circular(35)),
-                                     ),
-                                     elevation: 0,
-                                     color: Color(0xffF5FBFC),
-                               child: Column(
-                                   children: [
-                                     Center(child: Text('Comment ca Va?', style: GoogleFonts.heebo(fontSize: 20, color: Color(0xff41B4C7)),)),
-                                     Row(
-                                       mainAxisAlignment: MainAxisAlignment.center,
-                                       children: [
-                                       Padding(
-                                         padding: const EdgeInsets.all(8.0),
-                                         child: Image(image: AssetImage('assets/happy1.png'),height: 70,width: 70,),
-                                       ),
-                                       Padding(
-                                         padding: const EdgeInsets.all(4.0),
-                                         child: Image(image: AssetImage('assets/happy2.png'),height: 70,width: 140,),
-                                       ),
-                                       SizedBox(width: 20,)
-                                       ],),
-                                    Container(
-                                      height: tapped==false?0:1560,
-                                      child: Column(
+class _HomeScreenState extends State<HomeScreen> {
+  List pain_check = [false, false, false, false, false];
+  bool self_confidence_check = false;
+  bool sleep_check = false;
+  bool locution_check = false;
+  bool mechanism_check = false;
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    uid_constant = user.uid;
+    print('myuid $uid_constant');
+    double size = MediaQuery.of(context).size.width / 2.7;
+    double TWO_PI = 3.14 * 2;
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          UserData userdata = snapshot.data;
+          F_Name = userdata.F_Name;
+          L_Name = userdata.L_Name;
+          Image_url = userdata.Image_url;
+          return Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/all_app.png"),
+                    fit: BoxFit.cover)),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        ProfileScreen()));
+                                      },
+                                      child: Icon(
+                                        Icons.menu,
+                                        color: Colors.white,
+                                        size: 55,
+                                      )),
+                                ),
+                                Text(
+                                  'Actions',
+                                  style: GoogleFonts.heebo(
+                                      color: Colors.white, fontSize: 30),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        NotificationScreen()));
+                                      },
+                                      child: CircleAvatar(
+                                        child: Badge(
+                                            badgeContent: Text(
+                                              '2',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            child: Icon(
+                                              Icons.notifications_none,
+                                              color: Colors.white,
+                                              size: 35,
+                                            )),
+                                        backgroundColor: Color(0xffFF999A),
+                                        radius: 25,
+                                      )),
+                                )
+                              ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              TweenAnimationBuilder(
+                                  tween: Tween(begin: 0.0, end: 0.53),
+                                  duration: Duration(seconds: 4),
+                                  builder: (context, value, child) {
+                                    // percentage to show in Center Text
+                                    int percentage = (value * 100).ceil();
+                                    return Container(
+                                      width: size,
+                                      height: size,
+                                      child: Stack(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              Image(image: AssetImage('assets/pain.png'),),
-                                              SizedBox(width: 20,),
-
-                                              Text('Pain', style: GoogleFonts.heebo(fontSize: 20, color: Colors.black87),)
-                                            ],),
+                                          ImageIcon(
+                                            AssetImage('assets/dotted.png'),
+                                            color: Colors.white,
+                                            size: size,
                                           ),
-                                          Container(
-                                            height: 270,
-                                            child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: Pain.length,
-                                              // itemCount: _categories.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (BuildContext context, int index){
-                                                return Checkboxwid(value: Pain[index]);
-                                              },
+                                          ShaderMask(
+                                            shaderCallback: (rect) {
+                                              return SweepGradient(
+                                                  startAngle: 0.0,
+                                                  endAngle: TWO_PI,
+                                                  stops: [
+                                                    value,
+                                                    value
+                                                  ], // value from Tween Animation Builder
+                                                  // 0.0 , 0.5 , 0.5 , 1.0
+                                                  center: Alignment.center,
+                                                  colors: [
+                                                    Colors.yellow,
+                                                    Colors.transparent
+                                                  ]).createShader(rect);
+                                            },
+                                            child: Container(
+                                              width: size,
+                                              height: size,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.yellow),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              Image(image: AssetImage('assets/self_confidence.png'),),
-                                              SizedBox(width: 20,),
-                                              Text('Self Confidence', style: GoogleFonts.heebo(fontSize: 20, color: Colors.black87),)
-                                            ],),
-                                          ),
-                                          Container(
-                                            height: 215,
-                                            child: ListView.builder(
-
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: Self_con.length,
-                                              // itemCount: _categories.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (BuildContext context, int index){
-                                                return Checkboxwid(value: Self_con[index]);
-                                              },
+                                          Center(
+                                            child: Container(
+                                              width: size - 18,
+                                              height: size - 18,
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xffA3D5D9),
+                                                  shape: BoxShape.circle),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              Image(image: AssetImage('assets/sleep.png'),),
-                                              SizedBox(width: 20,),
-                                              Text('Sleep', style: GoogleFonts.heebo(fontSize: 20, color: Colors.black87),)
-                                            ],),
-                                          ),
-                                          Container(
-                                            height: 215,
-                                            child: ListView.builder(
-
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: Sleep.length,
-                                              // itemCount: _categories.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (BuildContext context, int index){
-                                                return Checkboxwid(value: Sleep[index]);
-                                              },
+                                          Center(
+                                            child: CircleAvatar(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      'POINTS',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 18,
+                                                          color: Color(
+                                                              0xffF5FBFC)),
+                                                    ),
+                                                    Text(
+                                                      '52',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 30,
+                                                          color: Color(
+                                                              0xffF5FBFC)),
+                                                    ),
+                                                    Center(
+                                                        child: Text(
+                                                            "$percentage" +
+                                                                " %",
+                                                            style: GoogleFonts.heebo(
+                                                                fontSize: 11,
+                                                                color: Color(
+                                                                    0xffF5FBFC))))
+                                                  ],
+                                                ),
+                                              ),
+                                              backgroundColor:
+                                                  Color(0xffFF6766),
+                                              radius: 59,
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              Image(image: AssetImage('assets/locution.png'),),
-                                              SizedBox(width: 20,),
-                                              Text('Locution', style: GoogleFonts.heebo(fontSize: 20, color: Colors.black87),)
-                                            ],),
-                                          ),
-                                          Container(
-                                            height: 200,
-                                            child: ListView.builder(
-
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: Locution.length,
-                                              // itemCount: _categories.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (BuildContext context, int index){
-                                                return Checkboxwid(value: Locution[index]);
-                                              },
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              Image(image: AssetImage('assets/mechanism.png'),),
-                                              SizedBox(width: 20,),
-                                              Text('Mechanism', style: GoogleFonts.heebo(fontSize: 20, color: Colors.black87),)
-                                            ],),
-                                          ),
-                                          Container(
-                                            height: 100,
-                                            child: ListView.builder(
-
-                                              physics: NeverScrollableScrollPhysics(),
-                                              itemCount: Mechanism.length,
-                                              // itemCount: _categories.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (BuildContext context, int index){
-                                                return Checkboxwid(value: Mechanism[index]);
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(height: 20,),
-                                          Image(image: AssetImage('assets/dropdown_btn.png'),)
+                                          )
                                         ],
                                       ),
-                                    )
-                                   ],
-                               ),
-                             ),
-                                 ),
-                           ),
-                         ),
-                           Positioned(top: 55,left: ((MediaQuery.of(context).size.width/3)*2.3)-20,
-                               child: CircleAvatar(
-                                   radius: 35,backgroundColor: Color(0xffF5FBFC),
-                                   child: GestureDetector(onTap: (){
-                                     tapped=!tapped;
-                                     setState(() {
-
-                                       print('i am tapped'+ tapped.toString());
-                                     });
-                                   },
-                                     child: CircleAvatar(
-                                       child: Icon(tapped==false?Icons.add:Icons.remove,color: Color(0xffF5FBFC),),
-                                       backgroundColor: Color(0xff41B4C7),
-                                     ),
-                                   ))),
-
-                         ]),
-                       Container(
-                         height: tapped==false?1000:0,
-                         child: ListView.builder(
-
-                           physics: BouncingScrollPhysics(),
-                           itemCount: Days.length,
-                           // itemCount: _categories.length,
-                           scrollDirection: Axis.horizontal,
-                           itemBuilder: (BuildContext context, int index){
-                             return Dayswid(Date: Date[index],Jour: Days[index],);
-                           },
-                         ),
-                       ),
-                       /*Stack(
+                                    );
+                                  }),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              TweenAnimationBuilder(
+                                  tween: Tween(begin: 0.0, end: 0.53),
+                                  duration: Duration(seconds: 4),
+                                  builder: (context, value, child) {
+                                    // percentage to show in Center Text
+                                    int percentage = (value * 100).ceil();
+                                    return Container(
+                                      width: size,
+                                      height: size,
+                                      child: Stack(
+                                        children: [
+                                          ImageIcon(
+                                            AssetImage('assets/dotted.png'),
+                                            color: Colors.white,
+                                            size: 200,
+                                          ),
+                                          ShaderMask(
+                                            shaderCallback: (rect) {
+                                              return SweepGradient(
+                                                  startAngle: 0.0,
+                                                  endAngle: TWO_PI,
+                                                  stops: [
+                                                    value,
+                                                    value
+                                                  ], // value from Tween Animation Builder
+                                                  // 0.0 , 0.5 , 0.5 , 1.0
+                                                  center: Alignment.center,
+                                                  colors: [
+                                                    Colors.yellow,
+                                                    Colors.transparent
+                                                  ]).createShader(rect);
+                                            },
+                                            child: Container(
+                                              width: size,
+                                              height: size,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.yellow),
+                                            ),
+                                          ),
+                                          Center(
+                                            child: Container(
+                                              width: size - 18,
+                                              height: size - 18,
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xffA3D5D9),
+                                                  shape: BoxShape.circle),
+                                            ),
+                                          ),
+                                          Center(
+                                            child: CircleAvatar(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      'JOURS',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 18,
+                                                          color: Color(
+                                                              0xffF5FBFC)),
+                                                    ),
+                                                    Text(
+                                                      '217',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 30,
+                                                          color: Color(
+                                                              0xffF5FBFC)),
+                                                    ),
+                                                    Center(
+                                                        child: Text(
+                                                            "$percentage" +
+                                                                " %",
+                                                            style: GoogleFonts.heebo(
+                                                                fontSize: 11,
+                                                                color: Color(
+                                                                    0xffF5FBFC)))),
+                                                  ],
+                                                ),
+                                              ),
+                                              backgroundColor:
+                                                  Color(0xffFF6766),
+                                              radius: 59,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                              SizedBox(
+                                width: 10,
+                              )
+                            ],
+                          ),
+                          Stack(children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 25.0,
+                                  bottom: 8.0,
+                                  right: 25.0,
+                                  top: 25.0),
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  height: tapped == false ? 130 : 1690,
+                                  width:
+                                      (MediaQuery.of(context).size.width / 3) *
+                                          2.3,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(35)),
+                                    ),
+                                    elevation: 0,
+                                    color: Color(0xffF5FBFC),
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                            child: Text(
+                                          'Comment ca Va?',
+                                          style: GoogleFonts.heebo(
+                                              fontSize: 20,
+                                              color: Color(0xff41B4C7)),
+                                        )),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Image(
+                                                image: AssetImage(
+                                                    'assets/happy1.png'),
+                                                height: 70,
+                                                width: 70,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Image(
+                                                image: AssetImage(
+                                                    'assets/happy2.png'),
+                                                height: 70,
+                                                width: 140,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          height: tapped == false ? 0 : 1560,
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          'assets/pain.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      'Pain',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black87),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 270,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: Pain.length,
+                                                  // itemCount: _categories.length,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Checkboxwid(
+                                                        value: Pain[index]);
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          'assets/self_confidence.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      'Self Confidence',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black87),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 215,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: Self_con.length,
+                                                  // itemCount: _categories.length,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Checkboxwid(
+                                                        value: Self_con[index]);
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          'assets/sleep.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      'Sleep',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black87),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 215,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: Sleep.length,
+                                                  // itemCount: _categories.length,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Checkboxwid(
+                                                        value: Sleep[index]);
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          'assets/locution.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      'Locution',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black87),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 200,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: Locution.length,
+                                                  // itemCount: _categories.length,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Checkboxwid(
+                                                        value: Locution[index]);
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          'assets/mechanism.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      'Mechanism',
+                                                      style: GoogleFonts.heebo(
+                                                          fontSize: 20,
+                                                          color:
+                                                              Colors.black87),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 100,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: Mechanism.length,
+                                                  // itemCount: _categories.length,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Checkboxwid(
+                                                        value:
+                                                            Mechanism[index]);
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Image(
+                                                image: AssetImage(
+                                                    'assets/dropdown_btn.png'),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                top: 55,
+                                left: ((MediaQuery.of(context).size.width / 3) *
+                                        2.3) -
+                                    20,
+                                child: CircleAvatar(
+                                    radius: 35,
+                                    backgroundColor: Color(0xffF5FBFC),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        tapped = !tapped;
+                                        setState(() {
+                                          print('i am tapped' +
+                                              tapped.toString());
+                                        });
+                                      },
+                                      child: CircleAvatar(
+                                        child: Icon(
+                                          tapped == false
+                                              ? Icons.add
+                                              : Icons.remove,
+                                          color: Color(0xffF5FBFC),
+                                        ),
+                                        backgroundColor: Color(0xff41B4C7),
+                                      ),
+                                    ))),
+                          ]),
+                          Container(
+                            height: tapped == false ? 1100 : 0,
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: Days.length,
+                              // itemCount: _categories.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Dayswid(
+                                  Date: Date[index],
+                                  Jour: Days[index],
+                                );
+                              },
+                            ),
+                          ),
+                          /*Stack(
                          children: [
                            Padding(
                              padding: const EdgeInsets.only(left:25.0, top: 0.0),
@@ -425,17 +672,14 @@ double TWO_PI=3.14*2;
                                )),
                          ),
                        ]),*/
-
-                     ],
-                   ),
-
-                 ],),
-               ),
-             ),
-           ),
-
-       );}
-     );
-
-   }
- }
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+}

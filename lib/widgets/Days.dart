@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
+import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
 class Dayswid extends StatefulWidget {
   String Date;
@@ -48,7 +49,7 @@ class _DayswidState extends State<Dayswid> {
             Padding(
               padding: const EdgeInsets.only(left:25.0, bottom: 25.0, right:25.0, top: 80),
               child: Container(
-                  height: tapped==false?800:0,
+                  height: tapped==false?1063:0,
                   width: tapped==false?((MediaQuery.of(context).size.width/3)*2.3):0,
                   child:
                   Card(
@@ -62,16 +63,16 @@ class _DayswidState extends State<Dayswid> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: 500,
+                            height: 800,
                             child: ListView.builder(
 
-                              physics: BouncingScrollPhysics(),
-                              itemCount:5,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount:To_do.length,
                               // itemCount: _categories.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (BuildContext context, int index){
                                 return FaireCard(
-
+                                  Data: To_do[index],
                                 );
 
                               },

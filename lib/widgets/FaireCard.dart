@@ -1,16 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Services/database.dart';
+
 class FaireCard extends StatefulWidget {
+  String Data;
+  FaireCard({this.Data});
   @override
-  _FaireCardState createState() => _FaireCardState();
+  _FaireCardState createState() => _FaireCardState(Data: Data);
 }
 
 class _FaireCardState extends State<FaireCard> {
-  String image_link="";
-  bool clicked=false;
+  String Data;
+  _FaireCardState({this.Data});
+  String image_link = "assets/trans_img.png";
+  bool clicked = false;
+  int Statement = 0;
   @override
   Widget build(BuildContext context) {
+    final user=Provider.of<User>(context);
+
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Container(
@@ -28,25 +40,50 @@ class _FaireCardState extends State<FaireCard> {
             children: <Widget>[
               Column(
                 children: [
-                  GestureDetector(onTap: (){setState(() {
-                    if(clicked==false){
-                    image_link="assets/congradulations.png";
-                    clicked=true;}
-                    else if(clicked){
-                      image_link="";
-                      clicked=false;
-                    }
-                  });},
-                      onDoubleTap: (){
-                    setState(() {
-                      if(clicked==false){
-                        image_link='assets/oops.png';
-                        clicked=true;
-                      }
+                  InkWell(
+                      onTap: () {
+                        Statement = 1;
+                        setState(() {
+                          if (clicked == false) {
+                            image_link = "assets/congradulations.png";
+                            DatabaseService(uid: user.uid).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                            clicked = true;
+                          } else if (clicked) {
+                            image_link = "assets/trans_img.png";
+                            clicked = false;
+                            Statement = 0;
+                          }
+                        });
+                      },
+                      onDoubleTap: () {
+                        Statement = 2;
+                        setState(() {
+                          if (clicked == false) {
+                            image_link = 'assets/oops.png';
+                            clicked = true;
+                            DatabaseService(uid: user.uid).UpdatePoints(10, 0, 0, 0, 0, 0, 0, 0,"Day 1");
 
-                    });
-                  },child: Stack(children: [Icon(Icons.cloud_queue, color: Colors.black45,), Image(image: AssetImage(image_link),)])),
-                  Center(child:Container(height: 60, width: 7, child: VerticalDivider(color: Colors.black)),)
+                          } else if (clicked == true) {
+                            image_link = 'assets/oops.png';
+                            clicked = true;
+                          }
+                        });
+                      },
+                      child: Stack(children: [
+                        Icon(
+                          Icons.cloud_queue,
+                          color: Colors.black45,
+                        ),
+                        Image(
+                          image: AssetImage(image_link,),
+                        )
+                      ])),
+                  Center(
+                    child: Container(
+                        height: 60,
+                        width: 7,
+                        child: VerticalDivider(color: Colors.black)),
+                  )
                 ],
               ),
               Column(
@@ -54,18 +91,43 @@ class _FaireCardState extends State<FaireCard> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 12, top: 3),
-                    child: Text('A faires', style: GoogleFonts.heebo(fontSize: 15, color: Colors.black45),),
+                    child: Text(
+                      Statement == 0
+                          ? Todo_Statement
+                          : Statement == 1
+                              ? Congrats_Statement
+                              : Statement == 2
+                                  ? Oops_Statement
+                                  : Todo_Statement,
+                      style: GoogleFonts.heebo(
+                          fontSize: 15, color: Colors.black45),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 12, top:0),
-                    child: Text("J'ai porte mon apperail", style: GoogleFonts.heebo(fontSize: 15, color: Colors.black),),
-                  ),Padding(
                     padding: const EdgeInsets.only(left: 12, top: 0),
-                    child: Text("toute la nuit", style: GoogleFonts.heebo(fontSize: 15, color: Colors.black),),
+                    child: Text(
+                      Data,
+                      style:
+                          GoogleFonts.heebo(fontSize: 15, color: Colors.black),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12, top: 0),
-                    child: Text("+10 pts", style: GoogleFonts.heebo(fontSize: 15, color: Colors.black26),),
+                    child: Text(
+                      "+10 pts",
+                      style: GoogleFonts.heebo(
+                          decoration: Statement == 2
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          fontSize: 15,
+                          color: Statement == 0
+                              ? Colors.black26
+                              : Statement == 1
+                                  ? Color(0xff41B4C7)
+                                  : Statement == 2
+                                      ? Colors.red
+                                      : Colors.black26),
+                    ),
                   ),
                 ],
               )

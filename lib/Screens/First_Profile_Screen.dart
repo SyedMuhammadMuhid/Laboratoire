@@ -1256,7 +1256,42 @@ print(Image_url);
                                                         Total_duration,
                                                         Instructions,
                                                         Image_url);
+                                            if(Frequency=='1x /Day'){
+                                             await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                                            }
+                                            else if(Frequency=='3x /Day'){
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 2');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 3');
 
+                                            }
+                                            else if(Frequency=='1x /Week'){
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 2');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 3');
+                                              await  DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 4');
+                                              await  DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 5');
+                                              await  DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 6');
+                                              await  DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 7');
+
+                                            }
+                                            else if(Frequency=='2x /Week'){
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 2');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 3');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 4');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 5');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 6');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 7');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 8');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 9');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 10');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 11');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 12');
+                                              await  DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 13');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 14');
+
+                                            }
 
 
                                             Navigator.of(context)
