@@ -25,3 +25,5 @@ int documents_lenght;
 String F_Name=' ';
 String L_Name=' ';
 String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
+int number_of_Jours=0;
+int One_time_only=0;

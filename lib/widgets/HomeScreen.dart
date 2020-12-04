@@ -9,6 +9,7 @@ import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
+import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/Days.dart';
 import 'package:sample_screen/widgets/checkbox.dart';
@@ -24,9 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool sleep_check = false;
   bool locution_check = false;
   bool mechanism_check = false;
+
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     uid_constant = user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.7;
@@ -34,8 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
+          if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
+          //------
+          if(One_time_only==0){
+          Date_and_Day_Setter(userdata.Total_duration);
+          }
+          One_time_only++;
+          //-----
           F_Name = userdata.F_Name;
           L_Name = userdata.L_Name;
           Image_url = userdata.Image_url;
@@ -608,11 +618,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                 return ListView.builder(
                                   physics: BouncingScrollPhysics(),
-                                  itemCount: snapshot.data.docs.length!=null?snapshot.data.docs.length:3,
+                                  itemCount: snapshot.data.docs.length,
                                   // itemCount: _categories.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (BuildContext context, int index) {
-                                    print(snapshot.data.docs[index].toString()+' its the TODO1 form the list on home pge');
+                                    total_points_constant[index]=snapshot.data.docs[index]["TotalPoints"];
+                                    total_hour_points_constant[index]=snapshot.data.docs[index]["HourPoints"];
+                                    print(total_points_constant[index].toString()+" data from stuff from day "+index.toString());
                                     return Dayswid(
                                       Date: Date[index],
                                       Jour: Days[index],

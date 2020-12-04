@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Models/PerformancesModel.dart';
 import 'package:sample_screen/Models/events_data_model.dart';
 import 'package:sample_screen/Models/profile_list_model.dart';
@@ -38,43 +39,46 @@ String Congrats_Statement = 'Congratulations! ';
 String Todo_Statement = 'To Do: ';
 String Oops_Statement = 'Oops! ';
 
-List Days = [
-  'Jour 1',
-  'Jour 2',
-  'Jour 3',
-  'Jour 4',
-  'Jour 5',
-  'Jour 6',
-  'Jour 7',
-  'Jour 8',
-  'Jour 9',
-  'Jour 10',
-  'Jour 11',
-  'Jour 12',
-  'Jour 13',
-  'Jour 14'
-];
-
+// List Days = [
+//   'Jour 1',
+//   'Jour 2',
+//   'Jour 3',
+//   'Jour 4',
+//   'Jour 5',
+//   'Jour 6',
+//   'Jour 7',
+//   'Jour 8',
+//   'Jour 9',
+//   'Jour 10',
+//   'Jour 11',
+//   'Jour 12',
+//   'Jour 13',
+//   'Jour 14'
+// ];
+List Days=[];
 DateTime _now = DateTime.now();
 
-List Date = [
-  ((_now.day).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-  ( (_now.day + 1).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-  ((_now.day + 2).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-   (_now.day + 3).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day + 4).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day + 5).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day+6).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+7).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+8).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day+9).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+10).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+11).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+12).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString()
-];
+// List Date = [
+//   ((_now.day).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+//   ( (_now.day + 1).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+//   ((_now.day + 2).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
+//    (_now.day + 3).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//    (_now.day + 4).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//    (_now.day + 5).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//    (_now.day+6).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+7).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+8).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//    (_now.day+9).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+10).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+11).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+12).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+//   (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString()
+// ];
+List Date=[];
 
 List ToDo_number=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToDo7','ToDo8'];
+List ToDo_and_total_values=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToDo7','ToDo8',"HourPoints"];
+
 List profile_items = [
   ProfileListModel(
       name: 'Actions', image_path: 'assets/actions_logo.png', screen: Home()),
@@ -149,4 +153,20 @@ List notification_list = [
   'As-tu nettoye ton appareil\napres ton dejeuner?'
 ];
 
-int total_points=0;
+// List total_points_constant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+// List total_hour_points_constant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+List total_points_constant=[];
+List total_hour_points_constant=[];
+
+void Date_and_Day_Setter(int count){
+print('hamara count $count');
+
+  for(int i=1; i<=count;i++){
+     Days.add('Jour $i');
+     Date.add(((_now.day+(i-1)).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString());
+     total_points_constant.add(0);
+     total_hour_points_constant.add(0);
+  }
+
+}

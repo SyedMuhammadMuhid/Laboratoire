@@ -38,7 +38,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   String Dentist_address;
   String Blood_type ;
   String Frequency ;
-  String Total_duration;
+  int Total_duration;
   String Instructions;
   String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
   int times=0;
@@ -1183,10 +1183,10 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         obscureText: false,
                                         onChanged: (val) {
                                           setState(() {
-                                            Total_duration = val;
+                                            Total_duration = int.parse(val);
                                           });
                                         },
-                                        initialValue: userdata.Total_duration,
+                                        initialValue: userdata.Total_duration.toString(),
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -1255,34 +1255,39 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                         Total_duration,
                                                         Instructions,
                                                         Image_url);
-                                            if(Frequency=='1x /Day'){
-                                             await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+
+                                            for(int i=1; i<=Total_duration;i++){
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
                                             }
-                                            else if(Frequency=='3x /Day'){
-                                              for(int i=1; i<4;i++)
-                                              {
-                                                await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
 
-                                              }
-
-                                            }
-                                            else if(Frequency=='1x /Week'){
-                                              for(int i=1; i<8;i++)
-                                              {
-                                                await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
-
-                                              }
-
-                                            }
-                                            else if(Frequency=='2x /Week'){
-
-                                              for(int i=1; i<15;i++)
-                                                {
-                                                  await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
-
-                                                }
-
-                                            }
+                                            // if(Frequency=='1x /Day'){
+                                            //  await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
+                                            // }
+                                            // else if(Frequency=='3x /Day'){
+                                            //   for(int i=1; i<4;i++)
+                                            //   {
+                                            //     await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0,0,0, 0,'Day $i');
+                                            //
+                                            //   }
+                                            //
+                                            // }
+                                            // else if(Frequency=='1x /Week'){
+                                            //   for(int i=1; i<8;i++)
+                                            //   {
+                                            //     await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
+                                            //
+                                            //   }
+                                            //
+                                            // }
+                                            // else if(Frequency=='2x /Week'){
+                                            //
+                                            //   for(int i=1; i<15;i++)
+                                            //     {
+                                            //       await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
+                                            //
+                                            //     }
+                                            //
+                                            // }
 
 
                                             Navigator.of(context)

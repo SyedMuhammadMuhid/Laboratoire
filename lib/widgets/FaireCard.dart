@@ -21,17 +21,19 @@ class _FaireCardState extends State<FaireCard> {
   int points;
   int index_of_day;
   int index_of_todo;
+
   _FaireCardState({this.Data,this.points,this.index_of_todo,this.index_of_day});
+
   String image_link = "assets/trans_img.png";
   bool clicked = false;
   int Statement = 0;
   int anything=0;
+  bool Iam_oops=false;
   @override
 
   Widget build(BuildContext context) {
     final user=Provider.of<User>(context);
 
-    total_points+=points;
 
     if(anything==0&&points==0){
       image_link="assets/trans_img.png";
@@ -72,12 +74,23 @@ class _FaireCardState extends State<FaireCard> {
                           if (clicked == false) {
                             image_link = "assets/congradulations.png";
                             DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 10);
+                            total_points_constant[index_of_day]+=10;
+                            print(total_points_constant[index_of_day].toString()+" this is sthe farie card and the total point dynamic variable");
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day] );
+                            Iam_oops=false;
                             clicked = true;
-                          } else if (clicked) {
+                          }
+                          else if (clicked) {
                             image_link = "assets/trans_img.png";
                             clicked = false;
                             Statement = 0;
                             DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 0);
+                            if(Iam_oops!=true){
+                            total_points_constant[index_of_day]-=10;
+                            print(total_points_constant[index_of_day].toString()+" this is sthe - command farie card and the total point dynamic variable");
+
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day]);
+                            }
 
                           }
                         });
@@ -89,12 +102,16 @@ class _FaireCardState extends State<FaireCard> {
                             image_link = 'assets/oops.png';
                             clicked = true;
                             DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+                            Iam_oops=true;
 
 
-                          } else if (clicked == true) {
+                          } else if (clicked == true && Iam_oops!=true) {
                             image_link = 'assets/oops.png';
                             clicked = true;
                             DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+                            Iam_oops=true;
+                            total_points_constant[index_of_day]-=10;
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day]);
 
                           }
                         });
