@@ -1257,7 +1257,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                         Image_url);
 
                                             for(int i=1; i<=Total_duration;i++){
-                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day $i');
+                                              await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                                             }
 
                                             // if(Frequency=='1x /Day'){

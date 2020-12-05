@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
     uid_constant = user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.7;
@@ -41,10 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
           if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
           //------
-          if(One_time_only==0){
-          Date_and_Day_Setter(userdata.Total_duration);
-          }
-          One_time_only++;
+          // if(One_time_only==0){
+          // Date_and_Day_Setter(userdata.Total_duration);
+          // }
+          // One_time_only++;
           //-----
           F_Name = userdata.F_Name;
           L_Name = userdata.L_Name;
@@ -622,19 +621,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   // itemCount: _categories.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (BuildContext context, int index) {
-                                    total_points_constant[index]=snapshot.data.docs[index]["TotalPoints"];
-                                    total_hour_points_constant[index]=snapshot.data.docs[index]["HourPoints"];
-                                    print(total_points_constant[index].toString()+" data from stuff from day "+index.toString());
+
+                                    print(snapshot.data.docs[index]["TotalPoints"].toString()+" data from stuff from day "+index.toString());
                                     return Dayswid(
                                       Date: Date[index],
                                       Jour: Days[index],
                                       document: snapshot.data.docs[index],
-                                      index_of_day: index
-                                    );
-                                  },
+                                      index_of_day: index,
+                                      total_hour_point_of_the_day: snapshot.data.docs[index]["HourPoints"],
+                                      total_point_of_the_day: snapshot.data.docs[index]["TotalPoints"],
+                                      document_id:snapshot.data.docs[index].documentID
                                 );
                               }
-                            ),
+                            );}
                           ),
                           /*Stack(
                          children: [
@@ -693,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                )),
                          ),
                        ]),*/
-                        ],
+                          )],
                       ),
                     ],
                   ),

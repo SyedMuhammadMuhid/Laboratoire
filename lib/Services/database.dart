@@ -62,10 +62,10 @@ UserData _userDatafromSnapshot(DocumentSnapshot snapshot) {
         .map(_userDatafromSnapshot);
   }
 
-  Future UpdatePoints(int todo1,int todo2,int todo3,int todo4,int todo5,int todo6,int todo7,int todo8,int total_points, int hour_points, String todopoint_name)async{
+  Future UpdatePoints(int todo1,int todo2,int todo3,int todo4,int todo5,int todo6,int todo7,int todo8,int total_points, int hour_points)async{
 
     try{
-      return await _collectionReference_points.doc(todopoint_name).set({
+      return await _collectionReference_points.doc().set({
         "ToDo1":todo1,
         "ToDo2":todo2,
         "ToDo3":todo3,
@@ -88,11 +88,12 @@ UserData _userDatafromSnapshot(DocumentSnapshot snapshot) {
   }
 
 
-  Future UpdatePointsSingleUpdate(int index_of_todo,int index_of_day, int value)async{
+  Future UpdatePointsSingleUpdate(int index_of_todo,String index_of_day, int value)async{
+
 index_of_todo=index_of_todo+1;
-index_of_day=index_of_day+1;
+
     try{
-      return await _collectionReference_points.doc('Day $index_of_day').update({
+      return await _collectionReference_points.doc(index_of_day).update({
         'ToDo$index_of_todo':value
       });
 
@@ -103,10 +104,9 @@ index_of_day=index_of_day+1;
 
 
   }
-  Future UpdatePointsTotal(String name_of_entry,int index_of_day, int value)async{
-    index_of_day=index_of_day+1;
+  Future UpdatePointsTotal(String name_of_entry,String index_of_day, int value)async{
     try{
-      return await _collectionReference_points.doc('Day $index_of_day').update({
+      return await _collectionReference_points.doc(index_of_day).update({
         '$name_of_entry':value
       });
 

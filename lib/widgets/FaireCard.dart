@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Services/database.dart';
 
@@ -11,9 +13,12 @@ class FaireCard extends StatefulWidget {
   int points;
   int index_of_day;
   int index_of_todo;
-  FaireCard({this.Data,this.points,this.index_of_day,this.index_of_todo});
+  int total_point_of_the_day;
+ String document_id;
+
+  FaireCard({this.Data,this.points,this.index_of_day,this.index_of_todo,this.total_point_of_the_day,this.document_id});
   @override
-  _FaireCardState createState() => _FaireCardState(Data: Data,points: points,index_of_day: index_of_day,index_of_todo: index_of_todo);
+  _FaireCardState createState() => _FaireCardState(Data: Data,points: points,index_of_day: index_of_day,index_of_todo: index_of_todo,total_point_of_the_day: total_point_of_the_day,document_id: document_id);
 }
 
 class _FaireCardState extends State<FaireCard> {
@@ -21,8 +26,11 @@ class _FaireCardState extends State<FaireCard> {
   int points;
   int index_of_day;
   int index_of_todo;
+  int total_point_of_the_day;
+  String document_id;
 
-  _FaireCardState({this.Data,this.points,this.index_of_todo,this.index_of_day});
+
+  _FaireCardState({this.Data,this.points,this.index_of_todo,this.index_of_day,this.total_point_of_the_day,this.document_id});
 
   String image_link = "assets/trans_img.png";
   bool clicked = false;
@@ -33,6 +41,7 @@ class _FaireCardState extends State<FaireCard> {
 
   Widget build(BuildContext context) {
     final user=Provider.of<User>(context);
+
 
 
     if(anything==0&&points==0){
@@ -50,6 +59,17 @@ class _FaireCardState extends State<FaireCard> {
       clicked=true;
     }
     anything++;
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+        .collection('UserData')
+        .doc(uid_constant)
+        .collection('Points')
+        .snapshots(),
+    builder: (context, snapshot) {
+    if (!snapshot.hasData) return Container();
+
+    total_point_of_the_day=snapshot.data.docs[index_of_day]['TotalPoints'];
+
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Container(
@@ -73,10 +93,10 @@ class _FaireCardState extends State<FaireCard> {
                         setState(() {
                           if (clicked == false) {
                             image_link = "assets/congradulations.png";
-                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 10);
-                            total_points_constant[index_of_day]+=10;
-                            print(total_points_constant[index_of_day].toString()+" this is sthe farie card and the total point dynamic variable");
-                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day] );
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, document_id, 10);
+                            total_point_of_the_day+=10;
+                            print(total_point_of_the_day.toString()+" this is sthe farie card and the total point dynamic variable");
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", document_id,total_point_of_the_day );
                             Iam_oops=false;
                             clicked = true;
                           }
@@ -84,12 +104,12 @@ class _FaireCardState extends State<FaireCard> {
                             image_link = "assets/trans_img.png";
                             clicked = false;
                             Statement = 0;
-                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, 0);
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, document_id, 0);
                             if(Iam_oops!=true){
-                            total_points_constant[index_of_day]-=10;
-                            print(total_points_constant[index_of_day].toString()+" this is sthe - command farie card and the total point dynamic variable");
+                            total_point_of_the_day-=10;
+                            print(total_point_of_the_day.toString()+" this is sthe - command farie card and the total point dynamic variable");
 
-                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day]);
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", document_id,total_point_of_the_day);
                             }
 
                           }
@@ -101,17 +121,17 @@ class _FaireCardState extends State<FaireCard> {
                           if (clicked == false) {
                             image_link = 'assets/oops.png';
                             clicked = true;
-                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, document_id, -1);
                             Iam_oops=true;
 
 
                           } else if (clicked == true && Iam_oops!=true) {
                             image_link = 'assets/oops.png';
                             clicked = true;
-                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, index_of_day, -1);
+                            DatabaseService(uid: user.uid).UpdatePointsSingleUpdate(index_of_todo, document_id, -1);
                             Iam_oops=true;
-                            total_points_constant[index_of_day]-=10;
-                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", index_of_day,total_points_constant[index_of_day]);
+                           total_point_of_the_day-=10;
+                            DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", document_id, total_point_of_the_day);
 
                           }
                         });
@@ -182,7 +202,7 @@ class _FaireCardState extends State<FaireCard> {
           ),
         ),
       ),
-    );
+    );});
   }
 }
 
