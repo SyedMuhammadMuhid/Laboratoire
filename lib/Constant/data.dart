@@ -53,7 +53,10 @@ List Days = [
   'Jour 11',
   'Jour 12',
   'Jour 13',
-  'Jour 14'
+  'Jour 14',
+  'Jour 15',
+  'Jour 16',
+  'Jour 17'
 ];
 // List Days=[];
 DateTime _now = DateTime.now();
@@ -72,7 +75,11 @@ List Date = [
   (_now.day+10).toString()+' '+months[current_mon]+' '+_now.year.toString(),
   (_now.day+11).toString()+' '+months[current_mon]+' '+_now.year.toString(),
   (_now.day+12).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString()
+  (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+  (_now.day+14).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+    (_now.day+15).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+    (_now.day+16).toString()+' '+months[current_mon]+' '+_now.year.toString(),
+
 ];
 // List Date=[];
 

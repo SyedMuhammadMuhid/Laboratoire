@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
@@ -25,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool sleep_check = false;
   bool locution_check = false;
   bool mechanism_check = false;
+
+  static IndexedScrollController controller = IndexedScrollController(initialIndex: 12,initialScrollOffset: 0);
 
 
   @override
@@ -620,11 +623,13 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points').snapshots(),
           builder: (context, snapshot) {
           if(!snapshot.hasData)return Container();
-
-          return ListView.builder(
+          return IndexedListView.builder(
+              controller: controller,
+        //  return ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemCount: snapshot.data.docs.length,
-          // itemCount: _categories.length,
+         minItemCount: 0,
+         maxItemCount: snapshot.data.docs.length-1,
+         // itemCount: snapshot.data.docs.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
 

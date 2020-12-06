@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
@@ -207,7 +208,7 @@ class _DayswidState extends State<Dayswid> {
                                 InkWell(
                                     onTap: () {
                                       setState(() {
-                                        if (total_hour_point_of_the_day < 25) {
+                                        if (total_hour_point_of_the_day < 20) {
                                           total_hour_point_of_the_day += 1;
                                           print(
                                               'Checking index value${total_hour_point_of_the_day}');
