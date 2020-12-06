@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as StorageReference;
 import 'package:path/path.dart' as Path;
 import 'package:provider/provider.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
@@ -304,7 +305,12 @@ class _StatScreenState extends State<StatScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
                               height: 300,
-                              child: GridView.builder(
+                              child:  StreamBuilder(
+                               stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('ImageGrid').snapshots(),
+                               builder: (context, snapshot) {
+                               if(!snapshot.hasData)return Container();
+                               List Local_image_list=snapshot.data.docs[0]["ImageList"];
+                            return  GridView.builder(
                                 physics: ClampingScrollPhysics(),
                                 itemCount: newList.length,
                                 gridDelegate:
@@ -316,9 +322,14 @@ class _StatScreenState extends State<StatScreen> {
                                 itemBuilder: (BuildContext context, int index) {
                                   //if(newList[index].contains('firebasestorage'))
                                   return InkWell(
-                                    onTap: () {
+                                    onTap: ()async {
                                       if (newList[index] == button[0]) {
                                         chooseFile();
+                                        print(snapshot.data.docs[0].documentID+" doc id");
+                                       await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
+                                        setState(() {
+
+                                        });
                                       }
                                     },
                                     child: Padding(
@@ -327,7 +338,7 @@ class _StatScreenState extends State<StatScreen> {
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: NetworkImage(
-                                                    newList[index]),
+                                                   Local_image_list[index].toString() ),
                                                 fit: newList[index] == button[0]
                                                     ? BoxFit.none
                                                     : BoxFit.cover),
@@ -353,7 +364,7 @@ class _StatScreenState extends State<StatScreen> {
                                     ),
                                   );
                                 },
-                              ),
+                              );}),
                             ),
                           ),
 
@@ -405,9 +416,9 @@ images.add(fileURL);
 
 
     });
-    setState(() {
-
-    });
+    // setState(() {
+    //
+    // });
   }
 
 

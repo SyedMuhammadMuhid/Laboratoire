@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_screen/Constant/Constants.dart';
+import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
 class DatabaseService{
 final String uid;
@@ -10,6 +11,7 @@ DatabaseService({this.uid});
   final CollectionReference _collectionReference_userdata= FirebaseFirestore.instance.collection('UserData');
   final CollectionReference _collectionReference_points= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points');
   final CollectionReference _collectionReference_checkpoints= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('CheckPoints');
+final CollectionReference _collectionReference_imagegrid= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('ImageGrid');
 
 
 Future UpdateUserData(String F_Name, String L_Name, String Age, String Sex, String Device, String Allergies, String Doctor_address, String Dentist_address, String Blood_type, String Frequency, int Total_duration, String Instructions,String Image_url)
@@ -153,7 +155,31 @@ Future UpdateCheckPoint(String pain, String self_confidence, String sleep, Strin
     }
 
 
+  }
 
+
+  Future UpdateImageList(List image)async{
+    try{
+      return await _collectionReference_imagegrid.doc().set({
+        'ImageList':image
+      });
+    }catch(e){
+      return null;
+    }
+
+  }
+  Future UpdateImageListSingle(String document_id, List image)async{
+  print(image.toString()+" This is he list");
+  print(document_id+" thid id the document id fron the database class");
+
+    try{
+      return await _collectionReference_imagegrid.doc(document_id).update({
+        'ImageList':image
+      });
+
+    }catch(e){
+      return null;
+    }
 
 
   }

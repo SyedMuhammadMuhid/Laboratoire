@@ -31,13 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool locution_check = false;
   bool mechanism_check = false;
 
-
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
-    uid_constant = user.uid;
+    uid_constant=user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.5;
     double TWO_PI = 3.14 * 2;

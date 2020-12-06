@@ -41,6 +41,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   String Instructions;
   String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
   int times=0;
+  List image=[];
   // a choose file function--------------
 
   void chooseFile() async {
@@ -1260,8 +1261,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             }
                                             for(int i=1; i<=Total_duration;i++){
                                               await DatabaseService(uid: uid_constant).UpdateCheckPoint(' ', ' ', ' ', ' ', ' ');
-                                              ;
+
                                             }
+                                            DatabaseService(uid: uid_constant).UpdateImageList(image);
 
                                             // if(Frequency=='1x /Day'){
                                             //  await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day 1');
