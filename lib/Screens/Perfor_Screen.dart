@@ -1,8 +1,14 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
+import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/PerformancesCard.dart';
 
 import 'Profile.dart';
@@ -17,7 +23,19 @@ class _PerforScreenState extends State<PerforScreen> {
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.width / 2;
+    final user = Provider.of<User>(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+    builder: (context, snapshot) {
+    if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+    UserData userdata = snapshot.data;
+    int Day_index= (Timestamp.now().toDate().difference(userdata.Start_date.toDate()).inDays);
 
+
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points').snapshots(),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData)return Container();
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -82,7 +100,7 @@ class _PerforScreenState extends State<PerforScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TweenAnimationBuilder(
-                                tween: Tween(begin: 0.0, end: 0.53),
+                                tween: Tween(begin: 0.0, end: snapshot.data.docs[Day_index]["TotalPoints"]/100),
                                 duration: Duration(seconds: 4),
                                 builder: (context, value, child) {
                                   // percentage to show in Center Text
@@ -151,7 +169,7 @@ class _PerforScreenState extends State<PerforScreen> {
                                                             Color(0xffF5FBFC)),
                                                   ),
                                                   Text(
-                                                    '53',
+                                                    snapshot.data.docs[Day_index]["TotalPoints"].toString(),
                                                     style: GoogleFonts.heebo(
                                                         fontSize: 30,
                                                         color:
@@ -203,6 +221,6 @@ class _PerforScreenState extends State<PerforScreen> {
                       ],
                     ),
                   ),
-                ))));
+                ))));});});
   }
 }

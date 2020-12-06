@@ -630,7 +630,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return IndexedListView.builder(
               controller: controller,
         //  return ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: ClampingScrollPhysics(),
          minItemCount: 0,
          maxItemCount: snapshot.data.docs.length-1,
          // itemCount: snapshot.data.docs.length,
@@ -639,13 +639,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
           print(snapshot.data.docs[index]["TotalPoints"].toString()+" data from stuff from day "+index.toString());
           return Dayswid(
-          Date: Date[index],
-          Jour: Days[index],
           document: snapshot.data.docs[index],
           index_of_day: index,
           total_hour_point_of_the_day: snapshot.data.docs[index]["HourPoints"],
           total_point_of_the_day: snapshot.data.docs[index]["TotalPoints"],
-          document_id:snapshot.data.docs[index].documentID
+          document_id:snapshot.data.docs[index].documentID,
+                 Date_from_database: userdata.Start_date.toDate().add(Duration(days: index )),
           );
           }
           );}

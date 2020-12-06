@@ -6,9 +6,7 @@ import 'package:sample_screen/Models/profile_list_model.dart';
 import 'package:sample_screen/Screens/Home.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Tips_Screen.dart';
-List months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-DateTime now = DateTime.now();
-int current_mon = now.month-1;
+
 
 List Pain = [
   'Gum pain',
@@ -39,49 +37,8 @@ String Congrats_Statement = 'Congratulations! ';
 String Todo_Statement = 'To Do: ';
 String Oops_Statement = 'Oops! ';
 
-List Days = [
-  'Jour 1',
-  'Jour 2',
-  'Jour 3',
-  'Jour 4',
-  'Jour 5',
-  'Jour 6',
-  'Jour 7',
-  'Jour 8',
-  'Jour 9',
-  'Jour 10',
-  'Jour 11',
-  'Jour 12',
-  'Jour 13',
-  'Jour 14',
-  'Jour 15',
-  'Jour 16',
-  'Jour 17'
-];
-// List Days=[];
-DateTime _now = DateTime.now();
 
-List Date = [
-  ((_now.day).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-  ( (_now.day + 1).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-  ((_now.day + 2).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString(),
-   (_now.day + 3).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day + 4).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day + 5).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day+6).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+7).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+8).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-   (_now.day+9).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+10).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+11).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+12).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+13).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-  (_now.day+14).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-    (_now.day+15).toString()+' '+months[current_mon]+' '+_now.year.toString(),
-    (_now.day+16).toString()+' '+months[current_mon]+' '+_now.year.toString(),
 
-];
-// List Date=[];
 
 List ToDo_number=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToDo7','ToDo8'];
 List ToDo_and_total_values=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToDo7','ToDo8',"HourPoints"];
@@ -161,18 +118,3 @@ List notification_list = [
 ];
 
 
-//
-// List total_points_constant=[];
-// List total_hour_points_constant=[];
-
-// void Date_and_Day_Setter(int count){
-// print('hamara count $count');
-//
-//   for(int i=1; i<=count;i++){
-//      Days.add('Jour $i');
-//      Date.add(((_now.day+(i-1)).toString()+' '+months[current_mon]+' '+_now.year.toString()).toString());
-//      total_points_constant.add(0);
-//      total_hour_points_constant.add(0);
-//   }
-//
-// }

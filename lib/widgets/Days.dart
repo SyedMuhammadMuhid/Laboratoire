@@ -11,52 +11,55 @@ import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
 
 class Dayswid extends StatefulWidget {
-  String Date;
-  String Jour;
+
+
   QueryDocumentSnapshot document;
   int index_of_day;
   int total_point_of_the_day;
   int total_hour_point_of_the_day;
   String document_id;
+  DateTime  Date_from_database;
   Dayswid(
-      {this.Date,
-      this.Jour,
+      {
       this.document,
       this.index_of_day,
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
-      this.document_id});
+      this.document_id,this.Date_from_database});
   @override
   _DayswidState createState() => _DayswidState(
-      Date: Date,
-      Jour: Jour,
+
       document: document,
       index_of_day: index_of_day,
       total_point_of_the_day: total_point_of_the_day,
       total_hour_point_of_the_day: total_hour_point_of_the_day,
-      document_id: document_id);
+      document_id: document_id,Date_from_database: Date_from_database);
 }
 
 class _DayswidState extends State<Dayswid> {
-  String Date;
-  String Jour;
+
   int index_of_day;
   QueryDocumentSnapshot document;
   int total_point_of_the_day;
   int total_hour_point_of_the_day;
   String document_id;
+  DateTime Date_from_database;
 
   _DayswidState(
-      {this.Date,
-      this.Jour,
+      {
       this.document,
       this.index_of_day,
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
-      this.document_id});
+      this.document_id,
+      this.Date_from_database});
 
   @override
   Widget build(BuildContext context) {
+    List months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    DateTime now = Date_from_database;
+    int current_mon = now.month-1;
+
     final user = Provider.of<User>(context);
 
     //   _totalPoints=0;
@@ -96,12 +99,12 @@ class _DayswidState extends State<Dayswid> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            Date,
+                            Date_from_database.day.toString()+' '+months[current_mon]+" "+Date_from_database.year.toString(),
                             style: GoogleFonts.heebo(
                                 fontSize: 15, color: Color(0xff41B4C7)),
                           ),
                           Text(
-                            Jour,
+                            "Jour ${index_of_day+1}",
                             style: GoogleFonts.heebo(
                                 fontSize: 35, color: Color(0xff41B4C7)),
                           ),

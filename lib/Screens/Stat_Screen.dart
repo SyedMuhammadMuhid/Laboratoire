@@ -1,9 +1,14 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
+import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/ImageCard.dart';
 
 class StatScreen extends StatefulWidget {
@@ -13,10 +18,21 @@ class StatScreen extends StatefulWidget {
 
 class _StatScreenState extends State<StatScreen> {
   double TWO_PI = 3.14 * 2;
-  double progress = 53;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
+
     double size = MediaQuery.of(context).size.width/2;
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+    UserData userdata=snapshot.data;
+      int progress =(100/userdata.Total_duration).toInt()+1;
+
+    int Day_index= (Timestamp.now().toDate().difference(userdata.Start_date.toDate()).inDays);
+
 
     return Container(
         decoration: BoxDecoration(
@@ -78,7 +94,7 @@ class _StatScreenState extends State<StatScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TweenAnimationBuilder(
-                        tween: Tween(begin: 0.0, end: 0.53),
+                        tween: Tween(begin: 0.0, end:  ((100/userdata.Total_duration)*(Day_index+1))/100),
                         duration: Duration(seconds: 4),
                         builder: (context, value, child) {
                           // percentage to show in Center Text
@@ -142,7 +158,7 @@ class _StatScreenState extends State<StatScreen> {
                                                 color: Color(0xffF5FBFC)),
                                           ),
                                           Text(
-                                            '217',
+                                            userdata.Total_duration.toString(),
                                             style: GoogleFonts.heebo(
                                                 fontSize: 30,
                                                 color: Color(0xffF5FBFC)),
@@ -179,7 +195,7 @@ class _StatScreenState extends State<StatScreen> {
                               width: 400,
                             ),
                             Positioned(
-                                top: 100 - progress,
+                                top: 100 - progress.toDouble(),
                                 left: 0 + (progress * 3.4),
                                 child: Stack(
                                   children: [
@@ -223,6 +239,6 @@ class _StatScreenState extends State<StatScreen> {
               ],
             ),
           ),
-        )));
+        )));});
   }
 }
