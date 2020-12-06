@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as StorageReference;
 import 'package:flutter/cupertino.dart';
@@ -90,24 +90,29 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   Widget build(BuildContext context) {
     final user=Provider.of<User>(context);
 
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid:user.uid ).userData,
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).snapshots(),
         builder: (context, snapshot) {
-          UserData userdata = snapshot.data;
+          if(!snapshot.hasData) return Center(child: CircularProgressIndicator());
+         // UserData userdata = snapshot.data;
+          print (snapshot.data.toString()+" this is snapshot data from fisrt screen");
+         // print(snapshot.data['F_Name']+" this is the first calling");
+          print(snapshot.data(['F_Name'])+" this is the Second calling");
+
           if(times<1){
-            F_Name=userdata.F_Name;
-            L_Name=userdata.L_Name;
-           Age=userdata.Age;
-           Sex=userdata.Sex;
-           Device=userdata.Device;
-           Allergies=userdata.Allergies;
-           Doctor_address=userdata.Doctor_address;
-           Dentist_address=userdata.Dentist_address;
-           Frequency=userdata.Frequency;
-           Total_duration=userdata.Total_duration;
-           Blood_type=userdata.Blood_type;
-           Instructions=userdata.Instructions;
-           Image_url=userdata.Image_url;}
+           F_Name= snapshot.data()['F_Name'];
+            L_Name= snapshot.data()['L_Name'];
+           Age=snapshot.data()['Age'];
+           Sex=snapshot.data()['Sex'];
+           Device=snapshot.data()['Device'];
+           Allergies=snapshot.data()['Allergies'];
+           Doctor_address=snapshot.data()['Doctor_address'];
+           Dentist_address=snapshot.data()['Dentist_address'];
+           Frequency=snapshot.data()['Frequency'];
+           Total_duration=snapshot.data()['Total_duration'];
+           Blood_type=snapshot.data()['Blood_type'];
+           Instructions=snapshot.data()['Instruction'];
+           Image_url=snapshot.data()['Image_url'];}
           times++;
           return Container(
               decoration: BoxDecoration(
@@ -246,7 +251,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             F_Name= val;
                                           });
                                         },
-                                        initialValue: userdata.F_Name,
+                                        initialValue: snapshot.data()['F_Name'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -280,7 +285,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             L_Name = val;
                                           });
                                         },
-                                        initialValue: userdata.L_Name,
+                                        initialValue: snapshot.data()['L_Name'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -312,7 +317,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Age = val;
                                           });
                                         },
-                                        initialValue: userdata.Age,
+                                        initialValue: snapshot.data()['Age'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -346,7 +351,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Sex = val;
                                           });
                                         },
-                                        initialValue: userdata.Sex,
+                                        initialValue: snapshot.data()['Sex'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -588,7 +593,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Dentist_address = val;
                                           });
                                         },
-                                        initialValue: userdata.Dentist_address,
+                                        initialValue: snapshot.data()['Dentist_address'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -622,7 +627,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Doctor_address = val;
                                           });
                                         },
-                                        initialValue: userdata.Doctor_address,
+                                        initialValue: snapshot.data()['Doctor_address'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -656,7 +661,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Allergies = val;
                                           });
                                         },
-                                        initialValue: userdata.Allergies,
+                                        initialValue: snapshot.data()['Allergies'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -1186,7 +1191,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Total_duration = int.parse(val);
                                           });
                                         },
-                                        initialValue: userdata.Total_duration.toString(),
+                                        initialValue: snapshot.data()['Total_duration'].toString(),
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -1220,7 +1225,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             Instructions = val;
                                           });
                                         },
-                                        initialValue: userdata.Instructions,
+                                        initialValue: snapshot.data()['Instructions'],
                                         style: TextStyle(
                                           color: Color(0xff41B4C7),
                                           fontSize: 25,
@@ -1254,7 +1259,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                         Frequency,
                                                         Total_duration,
                                                         Instructions,
-                                                        Image_url);
+                                                        Image_url,
+                                                         DateTime.now()
+                                                );
 
                                             for(int i=1; i<=Total_duration;i++){
                                               await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

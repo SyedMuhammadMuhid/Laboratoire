@@ -47,7 +47,9 @@ class AuthServices {
           'Choose Frequency',
           0,
           ' ',
-          'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+          'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c',
+           DateTime.now()
+      );
       return user;
     } catch (e) {
       return null;

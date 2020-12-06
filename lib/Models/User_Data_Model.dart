@@ -14,5 +14,7 @@ class UserData{
   int Total_duration;
   String Instructions;
   String Image_url;
-  UserData({this.F_Name,this.L_Name,this.Age, this.Sex,this.Device,this.Allergies,this.Doctor_address,this.Dentist_address,this.Blood_type,this.Frequency,this.Total_duration,this.Instructions,this.Image_url});
+  DateTime Start_date;
+  DateTime End_date;
+  UserData({this.F_Name,this.L_Name,this.Age, this.Sex,this.Device,this.Allergies,this.Doctor_address,this.Dentist_address,this.Blood_type,this.Frequency,this.Total_duration,this.Instructions,this.Image_url,this.Start_date,this.End_date});
 }
