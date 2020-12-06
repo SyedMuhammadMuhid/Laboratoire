@@ -23,7 +23,7 @@ class _StatScreenState extends State<StatScreen> {
     final user = Provider.of<User>(context);
 
 
-    double size = MediaQuery.of(context).size.width/2;
+    double size = MediaQuery.of(context).size.width/1.85;
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
     builder: (context, snapshot) {

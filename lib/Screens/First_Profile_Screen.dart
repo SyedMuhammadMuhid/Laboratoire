@@ -1259,6 +1259,10 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             for(int i=1; i<=Total_duration;i++){
                                               await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                                             }
+                                            for(int i=1; i<=Total_duration;i++){
+                                              await DatabaseService(uid: uid_constant).UpdateCheckPoint(' ', ' ', ' ', ' ', ' ');
+                                              ;
+                                            }
 
                                             // if(Frequency=='1x /Day'){
                                             //  await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'Day 1');

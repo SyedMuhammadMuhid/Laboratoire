@@ -9,8 +9,10 @@ DatabaseService({this.uid});
 
   final CollectionReference _collectionReference_userdata= FirebaseFirestore.instance.collection('UserData');
   final CollectionReference _collectionReference_points= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points');
+  final CollectionReference _collectionReference_checkpoints= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('CheckPoints');
 
-  Future UpdateUserData(String F_Name, String L_Name, String Age, String Sex, String Device, String Allergies, String Doctor_address, String Dentist_address, String Blood_type, String Frequency, int Total_duration, String Instructions,String Image_url)
+
+Future UpdateUserData(String F_Name, String L_Name, String Age, String Sex, String Device, String Allergies, String Doctor_address, String Dentist_address, String Blood_type, String Frequency, int Total_duration, String Instructions,String Image_url)
   async{
     try{
   return await _collectionReference_userdata.doc(uid).set({
@@ -120,9 +122,40 @@ index_of_todo=index_of_todo+1;
 
 
 
+
+
   }
 
+Future UpdateCheckPoint(String pain, String self_confidence, String sleep, String locution, String mechanism)async{
+  try{
+    return await _collectionReference_checkpoints.doc().set({
+      'Pain':pain,
+      'Self_confidence':self_confidence,
+      'Sleep':sleep,
+      'Locution': locution,
+      'Mechanisc':mechanism
+
+    });
+  }catch(e){
+    return null;
+  }
+
+}
+
+  Future UpdateCheckSingle(String name_of_checkbox,String index_of_day, String name_of_entry)async{
+    try{
+      return await _collectionReference_checkpoints.doc(index_of_day).update({
+        '$name_of_entry':name_of_checkbox
+      });
+
+    }catch(e){
+      return null;
+    }
 
 
+
+
+
+  }
 
 }

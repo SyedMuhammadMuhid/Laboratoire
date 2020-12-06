@@ -22,7 +22,7 @@ class _PerforScreenState extends State<PerforScreen> {
   double TWO_PI = 3.14 * 2;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).size.width / 2;
+    double size = MediaQuery.of(context).size.width / 1.85;
     final user = Provider.of<User>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,

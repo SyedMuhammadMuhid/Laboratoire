@@ -13,7 +13,11 @@ import 'package:sample_screen/Screens/Profile.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/Days.dart';
-import 'package:sample_screen/widgets/checkbox.dart';
+import 'package:sample_screen/widgets/checkbox_locution.dart';
+import 'package:sample_screen/widgets/checkbox_mechanism.dart';
+import 'package:sample_screen/widgets/checkbox_pain.dart';
+import 'package:sample_screen/widgets/checkbox_self_confidence.dart';
+import 'package:sample_screen/widgets/checkbox_sleep.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     uid_constant = user.uid;
     print('myuid $uid_constant');
-    double size = MediaQuery.of(context).size.width / 2.7;
+    double size = MediaQuery.of(context).size.width / 2.5;
     double TWO_PI = 3.14 * 2;
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -51,8 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
           F_Name = userdata.F_Name;
           L_Name = userdata.L_Name;
           Image_url = userdata.Image_url;
-           
+
           int Day_index= (Timestamp.now().toDate().difference(userdata.Start_date.toDate()).inDays);
+          index_of_the_day_constant=Day_index;
+          print(Day_index.toString()+"its is the DAy index");
 
           IndexedScrollController controller = IndexedScrollController(initialIndex: Day_index ,initialScrollOffset: 0);
 
@@ -416,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder:
           (BuildContext context,
           int index) {
-          return Checkboxwid(
+          return Checkbox_pain(
           value: Pain[index]);
           },
           ),
@@ -455,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder:
           (BuildContext context,
           int index) {
-          return Checkboxwid(
+          return Checkbox_self_confidence(
           value: Self_con[index]);
           },
           ),
@@ -494,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder:
           (BuildContext context,
           int index) {
-          return Checkboxwid(
+          return Checkbox_sleep(
           value: Sleep[index]);
           },
           ),
@@ -533,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder:
           (BuildContext context,
           int index) {
-          return Checkboxwid(
+          return Checkbox_locution(
           value: Locution[index]);
           },
           ),
@@ -572,7 +578,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder:
           (BuildContext context,
           int index) {
-          return Checkboxwid(
+          return Checkbox_mechanism(
           value:
           Mechanism[index]);
           },
@@ -581,9 +587,16 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
           height: 20,
           ),
-          Image(
-          image: AssetImage(
-          'assets/dropdown_btn.png'),
+          InkWell(
+                 onTap: (){
+                        setState(() {
+                          tapped=false;
+                        });
+                 },
+            child: Image(
+            image: AssetImage(
+            'assets/dropdown_btn.png'),
+            ),
           )
           ],
           ),
