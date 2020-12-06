@@ -26,7 +26,9 @@ DatabaseService({this.uid});
     'Frequency': Frequency,
     'Total_duration':Total_duration,
     'Instructions':Instructions,
-    'Image_url': Image_url
+    'Image_url': Image_url,
+    'Start_date': DateTime.now(),
+    'End_date':DateTime.now().add(Duration(days: Total_duration))
 
   });}catch(e){
       return null;
@@ -52,6 +54,8 @@ UserData _userDatafromSnapshot(DocumentSnapshot snapshot) {
     Image_url: snapshot.data()['Image_url'],
     Total_duration: snapshot.data()['Total_duration'],
     Frequency: snapshot.data()['Frequency'],
+    Start_date: snapshot.data()['Start_date'],
+    End_date: snapshot.data()['End_date']
   );
 
 }

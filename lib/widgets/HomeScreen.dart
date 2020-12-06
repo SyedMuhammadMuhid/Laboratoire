@@ -27,12 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool locution_check = false;
   bool mechanism_check = false;
 
-  static IndexedScrollController controller = IndexedScrollController(initialIndex: 12,initialScrollOffset: 0);
 
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     uid_constant = user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.7;
@@ -51,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
           F_Name = userdata.F_Name;
           L_Name = userdata.L_Name;
           Image_url = userdata.Image_url;
+           
+          int Day_index= (Timestamp.now().toDate().difference(userdata.Start_date.toDate()).inDays);
+
+          IndexedScrollController controller = IndexedScrollController(initialIndex: Day_index ,initialScrollOffset: 0);
 
    return StreamBuilder(
     stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points').snapshots(),
@@ -129,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 10,
           ),
           TweenAnimationBuilder(
-          tween: Tween(begin: 0.0, end: snapshot.data.docs[0]["TotalPoints"]/100),
+          tween: Tween(begin: 0.0, end: snapshot.data.docs[Day_index]["TotalPoints"]/100),
           duration: Duration(seconds: 4),
           builder: (context, value, child) {
           // percentage to show in Center Text
@@ -192,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
           0xffF5FBFC)),
           ),
           Text(
-            snapshot.data.docs[0]["TotalPoints"].toString(),
+            snapshot.data.docs[Day_index]["TotalPoints"].toString(),
           style: GoogleFonts.heebo(
           fontSize: 30,
           color: Color(
@@ -222,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 15,
           ),
           TweenAnimationBuilder(
-          tween: Tween(begin: 0.0, end: 0.53),
+          tween: Tween(begin: 0.0, end: ((100/userdata.Total_duration)*(Day_index+1))/100),
           duration: Duration(seconds: 4),
           builder: (context, value, child) {
           // percentage to show in Center Text
@@ -285,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
           0xffF5FBFC)),
           ),
           Text(
-          '217',
+          userdata.Total_duration.toString(),
           style: GoogleFonts.heebo(
           fontSize: 30,
           color: Color(

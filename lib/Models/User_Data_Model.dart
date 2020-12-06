@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class UserData{
 
@@ -14,5 +15,7 @@ class UserData{
   int Total_duration;
   String Instructions;
   String Image_url;
-  UserData({this.F_Name,this.L_Name,this.Age, this.Sex,this.Device,this.Allergies,this.Doctor_address,this.Dentist_address,this.Blood_type,this.Frequency,this.Total_duration,this.Instructions,this.Image_url});
+  Timestamp Start_date;
+  Timestamp End_date;
+  UserData({this.F_Name,this.L_Name,this.Age, this.Sex,this.Device,this.Allergies,this.Doctor_address,this.Dentist_address,this.Blood_type,this.Frequency,this.Total_duration,this.Instructions,this.Image_url,this.Start_date,this.End_date});
 }
