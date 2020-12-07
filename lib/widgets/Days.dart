@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
+import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
 
@@ -19,13 +20,14 @@ class Dayswid extends StatefulWidget {
   int total_hour_point_of_the_day;
   String document_id;
   DateTime  Date_from_database;
+  BuildContext Context;
   Dayswid(
       {
       this.document,
       this.index_of_day,
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
-      this.document_id,this.Date_from_database});
+      this.document_id,this.Date_from_database,this.Context});
   @override
   _DayswidState createState() => _DayswidState(
 
@@ -33,7 +35,8 @@ class Dayswid extends StatefulWidget {
       index_of_day: index_of_day,
       total_point_of_the_day: total_point_of_the_day,
       total_hour_point_of_the_day: total_hour_point_of_the_day,
-      document_id: document_id,Date_from_database: Date_from_database);
+      document_id: document_id,Date_from_database: Date_from_database,
+  Context: Context);
 }
 
 class _DayswidState extends State<Dayswid> {
@@ -44,6 +47,9 @@ class _DayswidState extends State<Dayswid> {
   int total_hour_point_of_the_day;
   String document_id;
   DateTime Date_from_database;
+  BuildContext Context;
+
+  int Init=0;
 
   _DayswidState(
       {
@@ -52,7 +58,7 @@ class _DayswidState extends State<Dayswid> {
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
       this.document_id,
-      this.Date_from_database});
+      this.Date_from_database,this.Context});
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,8 @@ class _DayswidState extends State<Dayswid> {
     int current_mon = now.month-1;
 
     final user = Provider.of<User>(context);
+    // Motivation_popup(Context, total_point_of_the_day, ' ' , Init);
+    // Init--;
 
     //   _totalPoints=0;
     // for(int i=0; i< ToDo_and_total_values.length;i++){
@@ -184,6 +192,8 @@ class _DayswidState extends State<Dayswid> {
                                                   "TotalPoints",
                                                   document_id,
                                                   total_point_of_the_day);
+                                          Motivation_popup(context, total_point_of_the_day ,'' , -1);
+
                                         }
                                       });
                                     },
@@ -228,6 +238,7 @@ class _DayswidState extends State<Dayswid> {
                                                   document_id,
                                                   total_point_of_the_day);
                                         }
+                                        Motivation_popup(Context, total_point_of_the_day, ' ', -1);
                                       });
                                     },
                                     child: Container(

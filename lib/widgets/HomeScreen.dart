@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
+import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Popups/Notifications.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
@@ -31,6 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool sleep_check = false;
   bool locution_check = false;
   bool mechanism_check = false;
+  BuildContext my_context;
+
+
 @override
   void initState() {
     // TODO: implement initState
@@ -40,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+my_context=context;
+         final user = Provider.of<User>(context);
     uid_constant=user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.5;
@@ -50,15 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
-          //------
-          // if(One_time_only==0){
-          // Date_and_Day_Setter(userdata.Total_duration);
-          // }
-          // One_time_only++;
-          //-----
           F_Name = userdata.F_Name;
           L_Name = userdata.L_Name;
           Image_url = userdata.Image_url;
+
 
           int Day_index= (Timestamp.now().toDate().difference(userdata.Start_date.toDate()).inDays);
           index_of_the_day_constant=Day_index;
@@ -626,6 +626,14 @@ class _HomeScreenState extends State<HomeScreen> {
           print('i am tapped' +
           tapped.toString());
           });
+          if(Mid==0){
+                 if((index_of_the_day_constant+1)==(userdata.Total_duration/2).ceil()){
+                 Motivation_popup(my_context, -1, "", 100);}
+                 else{
+                 Motivation_popup(my_context, -1, "", Init2);}
+
+          Mid++;
+          }
           },
           child: CircleAvatar(
           child: Icon(
@@ -644,6 +652,7 @@ class _HomeScreenState extends State<HomeScreen> {
           stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points').snapshots(),
           builder: (context, snapshot) {
           if(!snapshot.hasData)return Container();
+
           return IndexedListView.builder(
               controller: controller,
         //  return ListView.builder(
@@ -654,6 +663,8 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
 
+
+
           print(snapshot.data.docs[index]["TotalPoints"].toString()+" data from stuff from day "+index.toString());
           return Dayswid(
           document: snapshot.data.docs[index],
@@ -662,6 +673,7 @@ class _HomeScreenState extends State<HomeScreen> {
           total_point_of_the_day: snapshot.data.docs[index]["TotalPoints"],
           document_id:snapshot.data.docs[index].documentID,
                  Date_from_database: userdata.Start_date.toDate().add(Duration(days: index )),
+                 Context: my_context,
           );
           }
           );}
@@ -731,6 +743,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           ),
           );
+
           });
         });
   }

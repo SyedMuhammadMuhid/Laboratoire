@@ -113,8 +113,16 @@ List performance_list = [
       logo: 'assets/white_medal.png')
 ];
 List notification_list = [
-  'Au-s tu Active la vis?',
-  'As-tu nettoye ton appareil\napres ton dejeuner?'
+  'Reminder to rinse your mouth with fluoride every day',
+  'Did you wear your device last night?',
+  'Did you clean your appliance after your breakfast?',
+  'Did you clean your braces after lunch?',
+  ' Did you clean your braces after dinner?',
+  'Did you talk while biting on to your device?',
+  'Have you activated the screw?',
+  'How many hours did you wear your braces today including last night?',
+
 ];
+List notification_timing=['7:00 AM','8:00 AM','9:00 AM','1:00 PM','7:00 PM', '8:00 PM', '9:00 PM','9:00 PM'];
 
 

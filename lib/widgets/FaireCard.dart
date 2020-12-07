@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Services/database.dart';
 
 class FaireCard extends StatefulWidget {
@@ -99,6 +100,8 @@ class _FaireCardState extends State<FaireCard> {
                             DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", document_id,total_point_of_the_day );
                             Iam_oops=false;
                             clicked = true;
+                            Motivation_popup(context, -1 ,Data , -1);
+
                           }
                           else if (clicked) {
                             image_link = "assets/trans_img.png";
@@ -111,6 +114,7 @@ class _FaireCardState extends State<FaireCard> {
 
                             DatabaseService(uid: user.uid).UpdatePointsTotal("TotalPoints", document_id,total_point_of_the_day);
                             }
+                            Motivation_popup(context, total_point_of_the_day ,'' , -1);
 
                           }
                         });

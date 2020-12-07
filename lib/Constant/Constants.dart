@@ -28,3 +28,7 @@ String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
 int number_of_Jours=0;
 int One_time_only=0;
 int index_of_the_day_constant=0;
+
+int Init=1;
+int Mid=0;
+int Init2=0;

@@ -14,7 +14,15 @@ class NotificationCard extends StatelessWidget {
           children: [
           CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
             SizedBox(width: 20,),
-            Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),
+
+                ),
+              ),
+            ),
+
 
           ],
           

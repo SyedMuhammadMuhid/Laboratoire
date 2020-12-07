@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
+import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
 import 'package:sample_screen/widgets/EventCard.dart';
@@ -33,8 +34,17 @@ class _CalenderScreenState extends State<CalenderScreen> {
     _dateTime_start=DateTime.now();
     _dateTime_end=DateTime.now();
   }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
@@ -216,6 +226,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
             Positioned(left: 290,child: GestureDetector(onTap: (){
               setState(() {
                 clicked_check=!clicked_check;
+                Motivation_popup(context,-1, " ", Init);
+                Init++;
               });
 
             },child: CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(clicked_check==false?Icons.add:Icons.clear, color: Colors.white,size: 50,),))),

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/widgets/NotificationCard.dart';
+import 'package:intl/intl.dart';
 
 import 'Home.dart';
 class NotificationScreen extends StatefulWidget {
@@ -13,6 +14,10 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+
+    String formattedTime = DateFormat.jm().format(now);
+    print(formattedTime);
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
