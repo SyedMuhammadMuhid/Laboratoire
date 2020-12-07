@@ -24,7 +24,7 @@ class StatScreen extends StatefulWidget {
 }
 
 class _StatScreenState extends State<StatScreen> {
-  List<String> images = [
+  List<dynamic> images = [
     // 'assets/pain.png'
 //        'https://i.stack.imgur.com/ILTQq.png',
 //        'https://i.stack.imgur.com/ILTQq.png',
@@ -310,6 +310,7 @@ class _StatScreenState extends State<StatScreen> {
                                if(!snapshot.hasData)return Container();
                                List Local_image_list=snapshot.data.docs[0]["ImageList"];
                                print(Local_image_list.toString()+" this is the Local image list that is assigned the list from database ");
+
                             return  GridView.builder(
                                 physics: ClampingScrollPhysics(),
                                // itemCount: newList.length,
@@ -325,7 +326,7 @@ class _StatScreenState extends State<StatScreen> {
                                   return InkWell(
                                     onTap: ()async {
                                       if (Local_image_list[index] == button[0]) {
-                                       await chooseFile(snapshot);
+                                       await chooseFile(snapshot,Local_image_list);
                                         print(snapshot.data.docs[0].documentID+" doc id in function");
                                         print(newList.toString()+" checking if newList list got updated");
                                       //  await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
@@ -380,8 +381,9 @@ class _StatScreenState extends State<StatScreen> {
         });
   }
 
-  void chooseFile( snapshot ) async {
+  void chooseFile( snapshot , Local_imagme_list) async {
     List newList;
+    List<dynamic> Local;
     File selected = await ImagePicker.pickImage(source: ImageSource.gallery);
    // images.add(selected.path);
 
@@ -404,8 +406,12 @@ class _StatScreenState extends State<StatScreen> {
     storageReference.getDownloadURL().then((fileURL) async {
       //  _uploadedFileURL = fileURL;
       // print(fileURL)
+      Local=Local_imagme_list;
+      Local.removeLast();
+      images=Local;
       images.add(fileURL);
      newList=[ ...images,...button];
+
 ////print(CRUD.imgUrl);
 
       await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
