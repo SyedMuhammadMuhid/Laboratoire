@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
+import 'package:sample_screen/Popups/Notifications.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
@@ -30,7 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
   bool sleep_check = false;
   bool locution_check = false;
   bool mechanism_check = false;
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    PushNotificationsManager().init();
+    print('I am init state of home screen, I was run');
+  }
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);

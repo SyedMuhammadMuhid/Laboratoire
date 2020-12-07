@@ -88,6 +88,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   // end of function-------------
   @override
   Widget build(BuildContext context) {
+
     final user=Provider.of<User>(context);
 
     return StreamBuilder<UserData>(
