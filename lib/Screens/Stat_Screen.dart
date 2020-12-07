@@ -53,13 +53,13 @@ class _StatScreenState extends State<StatScreen> {
           if (!snapshot.hasData)
             return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
-          int progress = (100 / userdata.Total_duration).toInt() + 1;
 
           int Day_index = (Timestamp
               .now()
               .toDate()
               .difference(userdata.Start_date.toDate())
               .inDays);
+          double progress = (((100 / userdata.Total_duration) * (Day_index + 1)).ceil()).toDouble();
 
           return Container(
               decoration: BoxDecoration(
@@ -129,14 +129,13 @@ class _StatScreenState extends State<StatScreen> {
                               TweenAnimationBuilder(
                                   tween: Tween(
                                       begin: 0.0,
-                                      end: ((100 / userdata.Total_duration) *
-                                          (Day_index + 1)) /
-                                          100),
+                                      end: ((100 / userdata.Total_duration) * (Day_index + 1)) / 100),
                                   duration: Duration(seconds: 4),
                                   builder: (context, value, child) {
                                     // percentage to show in Center Text
 
                                     int percentage = (value * 100).ceil();
+                                   // progress=percentage;
 
                                     return Container(
                                       width: size,
@@ -244,7 +243,7 @@ class _StatScreenState extends State<StatScreen> {
                                         width: 400,
                                       ),
                                       Positioned(
-                                          top: 100 - progress.toDouble(),
+                                          top: 100 - progress,
                                           left: 0 + (progress * 3.4),
                                           child: Stack(
                                             children: [
@@ -310,9 +309,11 @@ class _StatScreenState extends State<StatScreen> {
                                builder: (context, snapshot) {
                                if(!snapshot.hasData)return Container();
                                List Local_image_list=snapshot.data.docs[0]["ImageList"];
+                               print(Local_image_list.toString()+" this is the Local image list that is assigned the list from database ");
                             return  GridView.builder(
                                 physics: ClampingScrollPhysics(),
-                                itemCount: newList.length,
+                               // itemCount: newList.length,
+                               itemCount: Local_image_list.length,
                                 gridDelegate:
                                 new SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
@@ -323,13 +324,14 @@ class _StatScreenState extends State<StatScreen> {
                                   //if(newList[index].contains('firebasestorage'))
                                   return InkWell(
                                     onTap: ()async {
-                                      if (newList[index] == button[0]) {
-                                        chooseFile();
-                                        print(snapshot.data.docs[0].documentID+" doc id");
-                                       await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
-                                        setState(() {
+                                      if (Local_image_list[index] == button[0]) {
+                                       await chooseFile(snapshot);
+                                        print(snapshot.data.docs[0].documentID+" doc id in function");
+                                        print(newList.toString()+" checking if newList list got updated");
+                                      //  await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
+                                       setState(() {
 
-                                        });
+                                         });
                                       }
                                     },
                                     child: Padding(
@@ -339,7 +341,7 @@ class _StatScreenState extends State<StatScreen> {
                                             image: DecorationImage(
                                                 image: NetworkImage(
                                                    Local_image_list[index].toString() ),
-                                                fit: newList[index] == button[0]
+                                                fit: Local_image_list[index] == button[0]
                                                     ? BoxFit.none
                                                     : BoxFit.cover),
                                             color: Colors.white,
@@ -378,7 +380,8 @@ class _StatScreenState extends State<StatScreen> {
         });
   }
 
-  void chooseFile() async {
+  void chooseFile( snapshot ) async {
+    List newList;
     File selected = await ImagePicker.pickImage(source: ImageSource.gallery);
    // images.add(selected.path);
 
@@ -401,9 +404,12 @@ class _StatScreenState extends State<StatScreen> {
     storageReference.getDownloadURL().then((fileURL) async {
       //  _uploadedFileURL = fileURL;
       // print(fileURL)
-
-images.add(fileURL);
+      images.add(fileURL);
+     newList=[ ...images,...button];
 ////print(CRUD.imgUrl);
+
+      await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);
+
 //
 //    // CRUD.imgUrl=fileURL;
 //    // showSpinner = false;
