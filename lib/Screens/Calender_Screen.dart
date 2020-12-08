@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
@@ -6,6 +7,7 @@ import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
+import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/EventCard.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +25,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
   bool switch_val=false;
   DateTime _dateTime_start;
   DateTime _dateTime_end;
+  String Name_of_the_Event='';
+  String Place='';
+
 
   bool clicked_check=false;
 
@@ -111,15 +116,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 3),
+                              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 10),
                               child: TextFormField(
                                   obscureText: false,
                                   onChanged: (val) {
+                                          setState(() {
+                                            Name_of_the_Event=val;
+                                          });
                                   },
                                   style: TextStyle(
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
+                                  initialValue: Name_of_the_Event,
                                   decoration: InputDecoration(
                                     labelText: 'Name of Event',
                                     fillColor: Color(0xffF5FBFC),
@@ -137,13 +146,18 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               child: TextFormField(
                                   obscureText: false,
                                   onChanged: (val) {
+                                    setState(() {
+                                      Place=val;
+                                    });
                                   },
                                   style: TextStyle(
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
+                                  initialValue: Place,
                                   decoration: InputDecoration(
                                     labelText: 'Place',
+
                                     fillColor: Color(0xffF5FBFC),
                                     filled: true,
                                     enabledBorder:
@@ -212,7 +226,16 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             SizedBox(height: 7,),
                             Row(mainAxisAlignment: MainAxisAlignment.center
                               ,children: [
-                              CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(Icons.check, color: Colors.white,size: 50,),)
+                              InkWell(onTap: ()async{
+                               await  DatabaseService(uid: uid_constant).UpdateEvents(Name_of_the_Event, Place, switch_val, _dateTime_start, _dateTime_end);
+                               setState(() {
+                                 Name_of_the_Event=' ';
+                                 Place=' ';
+                                 _dateTime_end=DateTime.now();
+                                 _dateTime_start=DateTime.now();
+                                 clicked_check=false;
+                               });
+                              },child: CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(Icons.check, color: Colors.white,size: 50,),))
                             ],)
                           ],
                         ),
@@ -238,16 +261,24 @@ class _CalenderScreenState extends State<CalenderScreen> {
           ],),
           Container(
             height: 500,
-            child: ListView.builder(
+   child: StreamBuilder(
+    stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Events').snapshots(),
+    builder: (context, snapshot) {
+    if(!snapshot.hasData)return Container();
+
+            return ListView.builder(
 
               physics: BouncingScrollPhysics(),
-              itemCount: Events_data.length,
+              itemCount: snapshot.data.docs.length,
               // itemCount: _categories.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int index){
-                return  EventCard(name: Events_data[index].name,note: Events_data[index].note,date: Events_data[index].date,);
+                return  EventCard(name: snapshot.data.docs[index]["EventName"],
+                  note: snapshot.data.docs[index]["Place"],date:snapshot.data.docs[index]["StartDate"],
+                doc_id:snapshot.data.docs[index].documentID);
               },
-            ),
+            );
+    })
           ),
         ],),
       ),

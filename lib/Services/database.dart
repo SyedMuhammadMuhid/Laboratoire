@@ -12,6 +12,7 @@ DatabaseService({this.uid});
   final CollectionReference _collectionReference_points= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Points');
   final CollectionReference _collectionReference_checkpoints= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('CheckPoints');
 final CollectionReference _collectionReference_imagegrid= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('ImageGrid');
+final CollectionReference _collectionReference_events= FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Events');
 
 
 Future UpdateUserData(String F_Name, String L_Name, String Age, String Sex, String Device, String Allergies, String Doctor_address, String Dentist_address, String Blood_type, String Frequency, int Total_duration, String Instructions,String Image_url)
@@ -184,4 +185,30 @@ Future UpdateCheckPoint(String pain, String self_confidence, String sleep, Strin
 
   }
 
-}
+
+  Future UpdateEvents(String Event_name, String Place, bool All_day, DateTime Start_date, DateTime End_date)async {
+    try {
+      return await _collectionReference_events.doc().set({
+        "EventName": Event_name,
+        "Place": Place,
+        "AllDayEvent": All_day,
+        "StartDate": Start_date,
+        "EndDate": End_date
+      });
+    } catch (e) {
+      return null;
+    }
+  }
+  Future UpdateDeleteEvent(String document_id)async{
+
+    try{
+      return await _collectionReference_events.doc(document_id).delete();
+    }catch(e){
+      return null;
+    }
+
+
+  }
+
+
+  }
