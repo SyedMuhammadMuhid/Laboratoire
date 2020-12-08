@@ -161,8 +161,7 @@ class _DayswidState extends State<Dayswid> {
                                           Data: To_do[index],
                                           index_of_day: index_of_day,
                                           index_of_todo: index,
-                                          total_point_of_the_day: snapshot
-                                              .data.docs[index]["TotalPoints"],
+                                          total_point_of_the_day: total_point_of_the_day,
                                           document_id: document_id,
 
                                         );

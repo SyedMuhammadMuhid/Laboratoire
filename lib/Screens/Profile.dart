@@ -17,8 +17,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final AuthServices _authServices= AuthServices();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -153,6 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       child: GestureDetector(
                                           onTap: () async {
                                             logout_popup(context);
+
                                           },
                                           child: Icon(
                                             Icons.exit_to_app, size: 30,

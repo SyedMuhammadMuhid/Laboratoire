@@ -4,6 +4,7 @@ import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
+import 'package:sample_screen/Wrapper.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -132,8 +133,9 @@ Row(children: [
                     ),
                     onPressed: ()async{
 
-                      if (_key.currentState.validate()) {
-                        setState(() async {
+
+                        if (_key.currentState.validate()) {
+
 
                           dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
 
@@ -147,8 +149,12 @@ Row(children: [
                                         (BuildContext context) => LoadingScreen()));
                           }
 
-                        });
-                      }
+
+                        }
+
+
+
+
                     }),
               ),
 SizedBox(height: 10,),

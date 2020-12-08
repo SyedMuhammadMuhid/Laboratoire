@@ -305,11 +305,11 @@ final AuthServices _authServices=AuthServices();
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),
-                                  onPressed: (){
+                                  onPressed: ()async{
 
 
                                     if (_key.currentState.validate()) {
-                                      setState(() async {
+
                                         if(Pass==Con_Pass){
                                       dynamic result=  await _authServices.SignUpWithEmailPass(Email, Pass, F_Name, L_Name);
                                       if(result==null){
@@ -327,7 +327,9 @@ final AuthServices _authServices=AuthServices();
                                         else if(Pass != Con_Pass){
                                           float_toast("Passwords Don't Match");
                                         }
-                                      });
+                                     setState(() {
+
+                                     });
                                     }
                                   }),
                             ),

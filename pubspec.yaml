@@ -36,6 +36,7 @@ dependencies:
   firebase_storage: ^5.1.0
   indexed_list_view: ^1.1.5
   firebase_messaging: ^5.1.2
+  google_sign_in: ^4.5.6
 
   # syncfusion_flutter_charts: ^17.3.26
 

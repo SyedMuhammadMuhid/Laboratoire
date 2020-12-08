@@ -41,7 +41,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   String Instructions;
   String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
   int times=0;
-  List image=[];
+  List image=['https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/plus_btn.png?alt=media&token=d2463c61-e318-4d16-9002-c5634f09b6e8'];
   // a choose file function--------------
 
   void chooseFile() async {
@@ -304,9 +304,10 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ],
                                     ),
                                     TextFormField(
-                                        validator: (val) => val.length < 2
+                                        validator: (val) => val.isEmpty
                                             ? 'Please Fill This Field'
                                             : null,
+                                        keyboardType: TextInputType.number,
                                         obscureText: false,
                                         onChanged: (val) {
                                           setState(() {
@@ -1178,10 +1179,11 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ],
                                     ),
                                     TextFormField(
-                                        validator: (val) => val.length < 1
+                                        validator: (val) => val.isEmpty
                                             ? 'Please Fill This Field'
                                             : null,
                                         obscureText: false,
+                                        keyboardType: TextInputType.number,
                                         onChanged: (val) {
                                           setState(() {
                                             Total_duration = int.parse(val);
