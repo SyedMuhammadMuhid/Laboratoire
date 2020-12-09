@@ -28,8 +28,13 @@ class _CalenderScreenState extends State<CalenderScreen> {
   String Name_of_the_Event='';
   String Place='';
 
+var _clear_controler=TextEditingController();
+var _clear_controler2=TextEditingController();
+
 
   bool clicked_check=false;
+  List months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 
   @override
   void initState() {
@@ -109,7 +114,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     children: [
                       SizedBox(height: 30,),
                       Container(
-                          height:clicked_check==false?370:0,
+                          height:clicked_check==false?410:0,
                           child: TableCalendar(calendarController: _controller,)),
                       Container(
                         height:clicked_check==false?0:370,
@@ -124,11 +129,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                             Name_of_the_Event=val;
                                           });
                                   },
+                                  controller: _clear_controler,
                                   style: TextStyle(
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
-                                  initialValue: Name_of_the_Event,
                                   decoration: InputDecoration(
                                     labelText: 'Name of Event',
                                     fillColor: Color(0xffF5FBFC),
@@ -154,7 +159,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
-                                  initialValue: Place,
+                                  controller: _clear_controler2,
                                   decoration: InputDecoration(
                                     labelText: 'Place',
 
@@ -228,6 +233,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               ,children: [
                               InkWell(onTap: ()async{
                                await  DatabaseService(uid: uid_constant).UpdateEvents(Name_of_the_Event, Place, switch_val, _dateTime_start, _dateTime_end);
+                               _clear_controler.clear();
+                                _clear_controler2.clear();
                                setState(() {
                                  Name_of_the_Event=' ';
                                  Place=' ';
@@ -273,9 +280,80 @@ class _CalenderScreenState extends State<CalenderScreen> {
               // itemCount: _categories.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int index){
-                return  EventCard(name: snapshot.data.docs[index]["EventName"],
-                  note: snapshot.data.docs[index]["Place"],date:snapshot.data.docs[index]["StartDate"],
-                doc_id:snapshot.data.docs[index].documentID);
+                // return  EventCard(name: snapshot.data.docs[index]["EventName"],
+                //   note: snapshot.data.docs[index]["Place"],date:snapshot.data.docs[index]["StartDate"],
+                // doc_id:snapshot.data.docs[index].documentID);
+//----------------------------------------------------------------
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffF5FBFC),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0), bottomRight: Radius.circular(5.0), bottomLeft: Radius.circular(5.0) ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 1.0), //(x,y)
+                          blurRadius: 6.0,
+                        ),
+                      ],
+                    ),      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(width: 13, height: 75,color: Color(0xff41B4C7),),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Padding(
+                                padding: const EdgeInsets.only(left:15.0),
+                                child: Text(snapshot.data.docs[index]["EventName"], style: GoogleFonts.heebo(fontSize: 22, color: Colors.black54),),
+                              ),
+
+
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Text(snapshot.data.docs[index]["Place"], style: GoogleFonts.heebo(fontSize: 15, color: Colors.black45),),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10,),
+
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:15.0, right: 15),
+                        child: Text(snapshot.data.docs[index]["StartDate"].toDate().day.toString()+ " "+months[snapshot.data.docs[index]["StartDate"].toDate().month-1], style: GoogleFonts.heebo(fontSize: 22, color: Colors.red),),
+                      ),
+
+                      InkWell(
+                        onTap: ()async{
+                          await DatabaseService(uid: uid_constant).UpdateDeleteEvent(snapshot.data.docs[index].documentID);
+                          index_nav=1;
+                          setState(() {});
+
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.delete, color: Colors.red,),
+                        ),
+                      )
+                    ],
+                  ),
+                  ),
+                );
+                //-------------------------------------------------------------------
+
               },
             );
     })
