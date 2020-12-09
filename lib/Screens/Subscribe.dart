@@ -16,8 +16,8 @@ class Subscribe extends StatelessWidget {
   AuthServices _authServices = AuthServices();
 
   @override
- Widget build(BuildContext context) {
-//    _authServices.signOutGoogle();
+  Widget build(BuildContext context) {
+    // _authServices.signOutGoogle();
 //    _authServices.FBLogout();
 //   _authServices.Sign_Out();
     double height = MediaQuery.of(context).size.height / 40;
@@ -90,13 +90,20 @@ class Subscribe extends StatelessWidget {
                       print('error loging in');
                     } else if (user != null) {
                       uid_constant = await user.user.uid;
-                      final DocumentSnapshot resultQuery =
-                          await FirebaseFirestore.instance
-                              .collection('UserData')
-                              .doc(uid_constant)
-                              .get();
-                      if (resultQuery == null) {
-                        await DatabaseService(uid: uid_constant).UpdateUserData(
+                      final snapShot = await FirebaseFirestore.instance
+                          .collection('UserData')
+                          .doc(uid_constant)
+                          .get();
+
+                      if (snapShot.exists) {
+                        //it exists
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LoadingScreen()));
+                      } else {
+                        //not exists
+                        DatabaseService(uid: uid_constant).UpdateUserData(
                             ' ',
                             ' ',
                             ' ',
@@ -110,13 +117,8 @@ class Subscribe extends StatelessWidget {
                             0,
                             ' ',
                             'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
-
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (BuildContext context) => StartScreen()));
-                      } else if(resultQuery!=null) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                LoadingScreen()));
                       }
                     }
                   }
@@ -171,37 +173,37 @@ class Subscribe extends StatelessWidget {
                       //         .doc(uid_constant)
                       //         .get();
                       // resultQuery == null
-                      StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('UserData')
-                            .doc(uid_constant).snapshots(),
-                        builder: (context, snapshot) {
 
-                          if (!snapshot.hasData) {
-                             DatabaseService(uid: uid_constant)
-                                .UpdateUserData(
-                                ' ',
-                                ' ',
-                                ' ',
-                                ' ',
-                                'Choose a Device',
-                                ' ',
-                                ' ',
-                                ' ',
-                                'Blood Type',
-                                'Choose Frequency',
-                                0,
-                                ' ',
-                                'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+                      final snapShot = await FirebaseFirestore.instance
+                          .collection('UserData')
+                          .doc(uid_constant)
+                          .get();
 
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        StartScreen()));
-                          }
-                        });
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (BuildContext context) => LoadingScreen()));
+                      if (snapShot.exists) {
+                        //it exists
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LoadingScreen()));
+                      } else {
+                        //not exists
+                        DatabaseService(uid: uid_constant).UpdateUserData(
+                            ' ',
+                            ' ',
+                            ' ',
+                            ' ',
+                            'Choose a Device',
+                            ' ',
+                            ' ',
+                            ' ',
+                            'Blood Type',
+                            'Choose Frequency',
+                            0,
+                            ' ',
+                            'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) => StartScreen()));
+                      }
                     }
                   },
                   child: Container(

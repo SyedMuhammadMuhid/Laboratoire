@@ -44,17 +44,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-//    AuthServices _authServices = AuthServices();
-//    _authServices.signOutGoogle();
+    //AuthServices _authServices = AuthServices();
+    // _authServices.signOutGoogle();
 //    _authServices.FBLogout();
 //    _authServices.Sign_Out();
     my_context = context;
-    final user = Provider.of<User>(context);
+    final user = Provider.of<User>(context, listen: false);
 
-    uid_constant =  user.uid;
+    uid_constant = user.uid;
     print('myuid $uid_constant');
     double size = MediaQuery.of(context).size.width / 2.5;
     double TWO_PI = 3.14 * 2;
+
+//    final snapShot =  FirebaseFirestore.instance
+//        .collection('UserData')
+//        .doc(uid_constant)
+//        .get();
+
+//    if (snapShot.exists) {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -184,10 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     return SweepGradient(
                                                         startAngle: 0.0,
                                                         endAngle: TWO_PI,
-                                                        stops: [
-                                                          value,
-                                                          value
-                                                        ], // value from Tween Animation Builder
+                                                        stops: [value, value],
+                                                        // value from Tween Animation Builder
                                                         // 0.0 , 0.5 , 0.5 , 1.0
                                                         center:
                                                             Alignment.center,
@@ -255,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     backgroundColor:
                                                         Color(0xffFF6766),
-                                                    radius: 59,
+                                                    radius: (size-25)/2,
                                                   ),
                                                 )
                                               ],
@@ -293,10 +298,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     return SweepGradient(
                                                         startAngle: 0.0,
                                                         endAngle: TWO_PI,
-                                                        stops: [
-                                                          value,
-                                                          value
-                                                        ], // value from Tween Animation Builder
+                                                        stops: [value, value],
+                                                        // value from Tween Animation Builder
                                                         // 0.0 , 0.5 , 0.5 , 1.0
                                                         center:
                                                             Alignment.center,
@@ -360,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     backgroundColor:
                                                         Color(0xffFF6766),
-                                                    radius: 59,
+                                                    radius: (size-25)/2,
                                                   ),
                                                 )
                                               ],
@@ -381,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         top: 25.0),
                                     child: SingleChildScrollView(
                                       child: Container(
-                                        height: tapped == false ? 130 : 1690,
+                                        height: tapped == false ? 130 : MediaQuery.of(context).size.width<400?1820:1670,
                                         width:
                                             (MediaQuery.of(context).size.width /
                                                     3) *
@@ -435,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               Container(
                                                 height:
-                                                    tapped == false ? 0 : 1560,
+                                                    tapped == false ? 0 : MediaQuery.of(context).size.width<400?1670: 1560,
                                                 child: Column(
                                                   children: [
                                                     Padding(
@@ -464,7 +467,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 270,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 300
+                                                              : 270,
                                                       child: ListView.builder(
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
@@ -508,7 +517,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 215,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 250
+                                                              : 215,
                                                       child: ListView.builder(
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
@@ -553,7 +568,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 215,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 250
+                                                              : 215,
                                                       child: ListView.builder(
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
@@ -597,7 +618,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 200,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 250
+                                                              : 200,
                                                       child: ListView.builder(
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
@@ -642,7 +669,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 100,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 150
+                                                              : 100,
                                                       child: ListView.builder(
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
@@ -730,7 +763,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ))),
                                 ]),
                                 Container(
-                                  height: tapped == false ? 1100 : 0,
+                                  height: tapped == false ? 1730 : 0,
                                   child: StreamBuilder(
                                       stream: FirebaseFirestore.instance
                                           .collection('UserData')
@@ -746,8 +779,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             //  return ListView.builder(
                                             physics: ClampingScrollPhysics(),
                                             minItemCount: 0,
-                                            maxItemCount:snapshot.data==null?0:
-                                                snapshot.data.docs.length - 1,
+                                            maxItemCount: snapshot.data == null
+                                                ? 0
+                                                : snapshot.data.docs.length - 1,
                                             // itemCount: snapshot.data.docs.length,
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (BuildContext context,
@@ -846,5 +880,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               });
         });
+    //}
   }
 }

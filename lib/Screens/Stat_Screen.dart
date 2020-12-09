@@ -221,7 +221,7 @@ class _StatScreenState extends State<StatScreen> {
                                               ),
                                               backgroundColor: Color(
                                                   0xffFF6766),
-                                              radius: 79,
+                                              radius: (size-30)/2,
                                             ),
                                           )
                                         ],
@@ -239,8 +239,8 @@ class _StatScreenState extends State<StatScreen> {
                                     children: [
                                       Image.asset(
                                         'assets/mountains.png',
-                                        height: 200,
-                                        width: 400,
+                                        height: MediaQuery.of(context).size.width<400?150:200,
+                                        width: MediaQuery.of(context).size.width<400?350:400,
                                       ),
                                       Positioned(
                                           top: 100 - progress,

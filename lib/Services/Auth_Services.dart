@@ -9,7 +9,7 @@ import 'package:sample_screen/Services/database.dart';
 
 class AuthServices {
   final FirebaseAuth auth = FirebaseAuth.instance;
-
+  UserCredential facebookUser;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   // auth change user stream
 
@@ -21,15 +21,11 @@ class AuthServices {
     return googleSignIn.onCurrentUserChanged;
   }
 
-
-
-
   //sign in with facebook
   final fbLogin = FacebookLogin();
-  final facebookSignIn = FacebookLogin();
+
   //FacebookLogin _facebookLogin=new FacebookLogin();
   Future<UserCredential> signInFB() async {
-
     final FacebookLoginResult result =
         await fbLogin.logIn(["email", 'public_profile']);
     final String token = result.accessToken.token;
@@ -38,51 +34,17 @@ class AuthServices {
 //
     AuthCredential credential = FacebookAuthProvider.credential(token);
 //
-    var user = await auth.signInWithCredential(credential);
+    facebookUser = await auth.signInWithCredential(credential);
     //  final profile = jsonDecode(graphResponse.body);
     print('sucesssss');
-    print(user.user.uid);
+    print(facebookUser.user.uid);
 
-
-
-
-
-
-      return user;
-  }
-
-  Future<Null> login() async {
-    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
-
-    switch (result.status) {
-      case FacebookLoginStatus.loggedIn:
-        final FacebookAccessToken accessToken = result.accessToken;
-        _showMessage('''
-         Logged in!
-         
-         Token: ${accessToken.token}
-         User id: ${accessToken.userId}
-         Expires: ${accessToken.expires}
-         Permissions: ${accessToken.permissions}
-         Declined permissions: ${accessToken.declinedPermissions}
-         ''');
-        break;
-      case FacebookLoginStatus.cancelledByUser:
-        _showMessage('Login cancelled by the user.');
-        break;
-      case FacebookLoginStatus.error:
-        _showMessage('Something went wrong with the login process.\n'
-            'Here\'s the error Facebook gave us: ${result.errorMessage}');
-        break;
-    }
-  }
-
-  void _showMessage(String message) {
-    print(message);
+    return facebookUser;
   }
 
   Future FBLogout() async {
     await fbLogin.logOut();
+
     print('logged out');
   }
 
@@ -110,20 +72,6 @@ class AuthServices {
     print('signInWithGoogle succeeded:');
     print(id);
     uid_constant = id;
-//    await DatabaseService(uid:id).UpdateUserData(
-//        ' ',
-//        ' ',
-//        ' ',
-//        ' ',
-//        'Choose a Device',
-//        ' ',
-//        ' ',
-//        ' ',
-//        'Blood Type',
-//        'Choose Frequency',
-//        0,
-//        ' ',
-//        'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
 
     return user;
   }

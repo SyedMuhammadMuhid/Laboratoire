@@ -74,7 +74,7 @@ class _FaireCardState extends State<FaireCard> {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Container(
-        height: 100,
+        height: MediaQuery.of(context).size.width<400?132:121,
         width: 30,
         child: Card(
           shape: RoundedRectangleBorder(
@@ -151,7 +151,7 @@ class _FaireCardState extends State<FaireCard> {
                       ])),
                   Center(
                     child: Container(
-                        height: 60,
+                        height: MediaQuery.of(context).size.width<400?80:65,
                         width: 7,
                         child: VerticalDivider(color: Colors.black)),
                   )
@@ -174,12 +174,18 @@ class _FaireCardState extends State<FaireCard> {
                           fontSize: 15, color: Colors.black45),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12, top: 0),
-                    child: Text(
-                      Data,
-                      style:
-                          GoogleFonts.heebo(fontSize: 15, color: Colors.black),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width/2,
+                         child: Text(
+                          Data,
+                          style:
+                              GoogleFonts.heebo(fontSize: 15, color: Colors.black),
+
+                        ),
+                      ),
                     ),
                   ),
                   Padding(

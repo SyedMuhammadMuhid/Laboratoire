@@ -126,7 +126,7 @@ class _DayswidState extends State<Dayswid> {
                 padding: const EdgeInsets.only(
                     left: 25.0, bottom: 25.0, right: 25.0, top: 80),
                 child: Container(
-                    height: tapped == false ? 1063 : 0,
+                    height: tapped == false ? 1330 : 0,
                     width: tapped == false
                         ? ((MediaQuery.of(context).size.width / 3) * 2.3)
                         : 0,
@@ -140,7 +140,7 @@ class _DayswidState extends State<Dayswid> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              height: 800,
+                              height: MediaQuery.of(context).size.width<400?1100:1000,
                               child: StreamBuilder(
                                   stream: FirebaseFirestore.instance
                                       .collection('UserData')
@@ -169,9 +169,7 @@ class _DayswidState extends State<Dayswid> {
                                     );
                                   }),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

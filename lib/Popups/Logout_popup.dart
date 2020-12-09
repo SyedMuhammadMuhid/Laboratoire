@@ -44,7 +44,7 @@ void logout_popup(BuildContext context) {
                   ),
                   onPressed: () async {
                     await _auth.signOutGoogle();
-                    await _auth.FBLogout();
+                    await _auth.FBLogout().whenComplete(() => print('done'));
                     await _auth.Sign_Out();
 
 //                    if (await _auth.googleSignIn.currentUser!=null) {

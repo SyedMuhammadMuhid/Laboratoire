@@ -12,14 +12,18 @@ class PerformancesCard extends StatelessWidget {
         children: [
           Container(
             height: 70,
+
             width: MediaQuery.of(context).size.width,
             color: Colors.transparent,
             child: Row(mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(logo),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 16),),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(data, style: GoogleFonts.heebo(color:Colors.white,fontSize: 16),),
+                  ),
                 )
               ],
             ),
