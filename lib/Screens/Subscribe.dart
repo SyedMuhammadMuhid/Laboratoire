@@ -80,33 +80,39 @@ class Subscribe extends StatelessWidget {
                 SizedBox(
                   height: height,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.0),
-                          topRight: Radius.circular(15.0),
-                          bottomRight: Radius.circular(15.0),
-                          bottomLeft: Radius.circular(15.0))),
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/facebook.png'),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text('Facebook',
-                            style: GoogleFonts.heebo(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold))
-                      ],
+                InkWell(
+                  onTap: ()async{
+                    //await _authServices.signInFB();
+                    await _authServices.login();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15.0),
+                            topRight: Radius.circular(15.0),
+                            bottomRight: Radius.circular(15.0),
+                            bottomLeft: Radius.circular(15.0))),
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/facebook.png'),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text('Facebook',
+                              style: GoogleFonts.heebo(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))
+                        ],
+                      ),
                     ),
                   ),
                 ),

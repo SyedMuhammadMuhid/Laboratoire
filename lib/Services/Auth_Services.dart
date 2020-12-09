@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Services/database.dart';
@@ -16,6 +19,72 @@ class AuthServices {
   Stream<GoogleSignInAccount> get googleUser {
     return googleSignIn.onCurrentUserChanged;
   }
+
+
+
+  //sign in with facebook
+  final fbLogin = FacebookLogin();
+  final facebookSignIn = FacebookLogin();
+  //FacebookLogin _facebookLogin=new FacebookLogin();
+  Future signInFB() async {
+//    var result =
+//    await fbLogin.logInWithReadPermissions(['email', 'public_profile']);
+    //final FacebookLoginResult result = await fbLogin.logIn(["email",'public_profile']);
+
+    final FacebookLoginResult result = await fbLogin.logIn(["email",'public_profile']);
+    final String token = result.accessToken.token;
+    final response = await       http.get('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+    final profile = jsonDecode(response.body);
+
+
+//      AuthCredential credential =
+//      FacebookAuthProvider.credential(myToken.token);
+//
+//      var user = await FirebaseAuth.instance.signInWithCredential(credential);
+    //  final profile = jsonDecode(graphResponse.body);
+      print('sucesssss');
+      print(profile);
+    }
+
+  Future<Null> login() async {
+    final FacebookLoginResult result =
+    await facebookSignIn.logIn(['email']);
+
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        _showMessage('''
+         Logged in!
+         
+         Token: ${accessToken.token}
+         User id: ${accessToken.userId}
+         Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        _showMessage('Login cancelled by the user.');
+        break;
+      case FacebookLoginStatus.error:
+        _showMessage('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        break;
+    }
+  }
+
+
+
+  void _showMessage(String message) {
+  print(message);
+  }
+
+
+Future  FBLogout()async{
+  await fbLogin.logOut();
+}
+
+
   // sign in with google
 
   Future<User> signInWithGoogle() async {
