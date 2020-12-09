@@ -89,7 +89,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final user=Provider.of<User>(context);
+    final user=Provider.of<User>(context,listen: false);
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid:user.uid ).userData,

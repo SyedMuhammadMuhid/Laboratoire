@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -22,33 +23,36 @@ class AuthServices {
 
 
 
+
   //sign in with facebook
   final fbLogin = FacebookLogin();
   final facebookSignIn = FacebookLogin();
   //FacebookLogin _facebookLogin=new FacebookLogin();
-  Future signInFB() async {
-//    var result =
-//    await fbLogin.logInWithReadPermissions(['email', 'public_profile']);
-    //final FacebookLoginResult result = await fbLogin.logIn(["email",'public_profile']);
+  Future<UserCredential> signInFB() async {
 
-    final FacebookLoginResult result = await fbLogin.logIn(["email",'public_profile']);
+    final FacebookLoginResult result =
+        await fbLogin.logIn(["email", 'public_profile']);
     final String token = result.accessToken.token;
-    final response = await       http.get('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
-    final profile = jsonDecode(response.body);
-
-
-//      AuthCredential credential =
-//      FacebookAuthProvider.credential(myToken.token);
+//    final response = await http.get(
+//        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
 //
-//      var user = await FirebaseAuth.instance.signInWithCredential(credential);
+    AuthCredential credential = FacebookAuthProvider.credential(token);
+//
+    var user = await auth.signInWithCredential(credential);
     //  final profile = jsonDecode(graphResponse.body);
-      print('sucesssss');
-      print(profile);
-    }
+    print('sucesssss');
+    print(user.user.uid);
+
+
+
+
+
+
+      return user;
+  }
 
   Future<Null> login() async {
-    final FacebookLoginResult result =
-    await facebookSignIn.logIn(['email']);
+    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
@@ -73,17 +77,14 @@ class AuthServices {
     }
   }
 
-
-
   void _showMessage(String message) {
-  print(message);
+    print(message);
   }
 
-
-Future  FBLogout()async{
-  await fbLogin.logOut();
-}
-
+  Future FBLogout() async {
+    await fbLogin.logOut();
+    print('logged out');
+  }
 
   // sign in with google
 
@@ -105,7 +106,7 @@ Future  FBLogout()async{
 
     final User currentUser = await auth.currentUser;
     //assert(user.uid == currentUser.uid);
-    var id= await currentUser.uid;
+    var id = await currentUser.uid;
     print('signInWithGoogle succeeded:');
     print(id);
     uid_constant = id;

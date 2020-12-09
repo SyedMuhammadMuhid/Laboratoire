@@ -3,11 +3,13 @@
     <string name="app_name">Sourire Parfait</string>
 
     <!-- Replace "000000000000" with your Facebook App ID here. -->
-    <string name="facebook_app_id">440682500257699</string>
+
+    <string name="facebook_app_id">250153436537129</string>
+    <string name="fb_login_protocol_scheme">fb250153436537129</string>
 
     <!--
       Replace "000000000000" with your Facebook App ID here.
       **NOTE**: The scheme needs to start with `fb` and then your ID.
     -->
-    <string name="fb_login_protocol_scheme">fb440682500257699</string>
+
 </resources>

@@ -44,9 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+//    AuthServices _authServices = AuthServices();
+//    _authServices.signOutGoogle();
+//    _authServices.FBLogout();
+//    _authServices.Sign_Out();
     my_context = context;
-    final user = Provider.of<User>(context,listen: false);
+    final user = Provider.of<User>(context);
 
     uid_constant =  user.uid;
     print('myuid $uid_constant');

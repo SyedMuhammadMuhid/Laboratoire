@@ -16,8 +16,10 @@ class Subscribe extends StatelessWidget {
   AuthServices _authServices = AuthServices();
 
   @override
-  Widget build(BuildContext context) {
-    //_authServices.signOutGoogle();
+ Widget build(BuildContext context) {
+//    _authServices.signOutGoogle();
+//    _authServices.FBLogout();
+//   _authServices.Sign_Out();
     double height = MediaQuery.of(context).size.height / 40;
     return SafeArea(
       child: Scaffold(
@@ -81,10 +83,46 @@ class Subscribe extends StatelessWidget {
                   height: height,
                 ),
                 InkWell(
-                  onTap: ()async{
-                    //await _authServices.signInFB();
-                    await _authServices.login();
-                  },
+                  onTap: () async {
+                    UserCredential user = await _authServices.signInFB();
+                    print('heloooo');
+                    if (user == null) {
+                      print('error loging in');
+                    } else if (user != null) {
+                      uid_constant = await user.user.uid;
+                      final DocumentSnapshot resultQuery =
+                          await FirebaseFirestore.instance
+                              .collection('UserData')
+                              .doc(uid_constant)
+                              .get();
+                      if (resultQuery == null) {
+                        await DatabaseService(uid: uid_constant).UpdateUserData(
+                            ' ',
+                            ' ',
+                            ' ',
+                            ' ',
+                            'Choose a Device',
+                            ' ',
+                            ' ',
+                            ' ',
+                            'Blood Type',
+                            'Choose Frequency',
+                            0,
+                            ' ',
+                            'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) => StartScreen()));
+                      } else if(resultQuery!=null) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LoadingScreen()));
+                      }
+                    }
+                  }
+
+                  // await _authServices.login();
+                  ,
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.blue,
