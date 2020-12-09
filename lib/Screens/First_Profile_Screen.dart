@@ -94,6 +94,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid:user.uid ).userData,
         builder: (context, snapshot) {
+          if(!snapshot.hasData) return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
           if(times<1){
             F_Name=userdata.F_Name;
@@ -1319,6 +1320,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                   ),
                 ),
               )));
-        });
+        }
+
+
+        );
   }
 }
