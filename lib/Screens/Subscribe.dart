@@ -165,31 +165,41 @@ class Subscribe extends StatelessWidget {
                       print('error loging in');
                     } else if (user != null) {
                       uid_constant = await user.uid;
-                      final DocumentSnapshot resultQuery =
-                          await FirebaseFirestore.instance
-                              .collection('UserData')
-                              .doc(uid_constant)
-                              .get();
-                      if (resultQuery == null) {
-                        await DatabaseService(uid: uid_constant).UpdateUserData(
-                            ' ',
-                            ' ',
-                            ' ',
-                            ' ',
-                            'Choose a Device',
-                            ' ',
-                            ' ',
-                            ' ',
-                            'Blood Type',
-                            'Choose Frequency',
-                            0,
-                            ' ',
-                            'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+                      // final DocumentSnapshot resultQuery =
+                      //     await FirebaseFirestore.instance
+                      //         .collection('UserData')
+                      //         .doc(uid_constant)
+                      //         .get();
+                      // resultQuery == null
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('UserData')
+                            .doc(uid_constant).snapshots(),
+                        builder: (context, snapshot) {
 
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (BuildContext context) => StartScreen()));
-                      }
+                          if (!snapshot.hasData) {
+                             DatabaseService(uid: uid_constant)
+                                .UpdateUserData(
+                                ' ',
+                                ' ',
+                                ' ',
+                                ' ',
+                                'Choose a Device',
+                                ' ',
+                                ' ',
+                                ' ',
+                                'Blood Type',
+                                'Choose Frequency',
+                                0,
+                                ' ',
+                                'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
 
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        StartScreen()));
+                          }
+                        });
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (BuildContext context) => LoadingScreen()));
                     }
