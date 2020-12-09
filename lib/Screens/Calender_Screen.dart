@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
@@ -6,6 +7,7 @@ import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Popups/Motivation_popup.dart';
 import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Profile.dart';
+import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/EventCard.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
@@ -23,8 +25,16 @@ class _CalenderScreenState extends State<CalenderScreen> {
   bool switch_val=false;
   DateTime _dateTime_start;
   DateTime _dateTime_end;
+  String Name_of_the_Event='';
+  String Place='';
+
+var _clear_controler=TextEditingController();
+var _clear_controler2=TextEditingController();
+
 
   bool clicked_check=false;
+  List months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 
   @override
   void initState() {
@@ -104,18 +114,22 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     children: [
                       SizedBox(height: 30,),
                       Container(
-                          height:clicked_check==false?370:0,
+                          height:clicked_check==false?410:0,
                           child: TableCalendar(calendarController: _controller,)),
                       Container(
                         height:clicked_check==false?0:370,
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 3),
+                              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 10),
                               child: TextFormField(
                                   obscureText: false,
                                   onChanged: (val) {
+                                          setState(() {
+                                            Name_of_the_Event=val;
+                                          });
                                   },
+                                  controller: _clear_controler,
                                   style: TextStyle(
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
@@ -137,13 +151,18 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               child: TextFormField(
                                   obscureText: false,
                                   onChanged: (val) {
+                                    setState(() {
+                                      Place=val;
+                                    });
                                   },
                                   style: TextStyle(
                                     color: Color(0xff41B4C7),
                                     fontSize: 20,
                                   ),
+                                  controller: _clear_controler2,
                                   decoration: InputDecoration(
                                     labelText: 'Place',
+
                                     fillColor: Color(0xffF5FBFC),
                                     filled: true,
                                     enabledBorder:
@@ -212,7 +231,18 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             SizedBox(height: 7,),
                             Row(mainAxisAlignment: MainAxisAlignment.center
                               ,children: [
-                              CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(Icons.check, color: Colors.white,size: 50,),)
+                              InkWell(onTap: ()async{
+                               await  DatabaseService(uid: uid_constant).UpdateEvents(Name_of_the_Event, Place, switch_val, _dateTime_start, _dateTime_end);
+                               _clear_controler.clear();
+                                _clear_controler2.clear();
+                               setState(() {
+                                 Name_of_the_Event=' ';
+                                 Place=' ';
+                                 _dateTime_end=DateTime.now();
+                                 _dateTime_start=DateTime.now();
+                                 clicked_check=false;
+                               });
+                              },child: CircleAvatar(radius:40,backgroundColor: Color(0xff41B4C7),child: Icon(Icons.check, color: Colors.white,size: 50,),))
                             ],)
                           ],
                         ),
@@ -238,16 +268,95 @@ class _CalenderScreenState extends State<CalenderScreen> {
           ],),
           Container(
             height: 500,
-            child: ListView.builder(
+   child: StreamBuilder(
+    stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('Events').snapshots(),
+    builder: (context, snapshot) {
+    if(!snapshot.hasData)return Container();
+
+            return ListView.builder(
 
               physics: BouncingScrollPhysics(),
-              itemCount: Events_data.length,
+              itemCount: snapshot.data.docs.length,
               // itemCount: _categories.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, int index){
-                return  EventCard(name: Events_data[index].name,note: Events_data[index].note,date: Events_data[index].date,);
+                // return  EventCard(name: snapshot.data.docs[index]["EventName"],
+                //   note: snapshot.data.docs[index]["Place"],date:snapshot.data.docs[index]["StartDate"],
+                // doc_id:snapshot.data.docs[index].documentID);
+//----------------------------------------------------------------
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffF5FBFC),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0), bottomRight: Radius.circular(5.0), bottomLeft: Radius.circular(5.0) ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 1.0), //(x,y)
+                          blurRadius: 6.0,
+                        ),
+                      ],
+                    ),      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(width: 13, height: 75,color: Color(0xff41B4C7),),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Padding(
+                                padding: const EdgeInsets.only(left:15.0),
+                                child: Text(snapshot.data.docs[index]["EventName"], style: GoogleFonts.heebo(fontSize: 22, color: Colors.black54),),
+                              ),
+
+
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Text(snapshot.data.docs[index]["Place"], style: GoogleFonts.heebo(fontSize: 15, color: Colors.black45),),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10,),
+
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:15.0, right: 15),
+                        child: Text(snapshot.data.docs[index]["StartDate"].toDate().day.toString()+ " "+months[snapshot.data.docs[index]["StartDate"].toDate().month-1], style: GoogleFonts.heebo(fontSize: 22, color: Colors.red),),
+                      ),
+
+                      InkWell(
+                        onTap: ()async{
+                          await DatabaseService(uid: uid_constant).UpdateDeleteEvent(snapshot.data.docs[index].documentID);
+                          index_nav=1;
+                          setState(() {});
+
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.delete, color: Colors.red,),
+                        ),
+                      )
+                    ],
+                  ),
+                  ),
+                );
+                //-------------------------------------------------------------------
+
               },
-            ),
+            );
+    })
           ),
         ],),
       ),
