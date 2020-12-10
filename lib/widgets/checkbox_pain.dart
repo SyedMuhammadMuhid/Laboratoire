@@ -20,7 +20,7 @@ class _Checkbox_painState extends State<Checkbox_pain> {
    return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('CheckPoints').snapshots(),
     builder: (context, snapshot) {
-    if(!snapshot.hasData)return Container();
+    if(!snapshot.hasData)return Center(child: CircularProgressIndicator());
    if(snapshot.data.docs[index_of_the_day_constant]["Pain"]== value)
      {
        check=true;

@@ -307,7 +307,7 @@ class _StatScreenState extends State<StatScreen> {
                               child:  StreamBuilder(
                                stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('ImageGrid').snapshots(),
                                builder: (context, snapshot) {
-                               if(!snapshot.hasData)return Container();
+                               if(!snapshot.hasData)return Center(child: CircularProgressIndicator());
                                List Local_image_list=snapshot.data.docs[0]["ImageList"];
                                print(Local_image_list.toString()+" this is the Local image list that is assigned the list from database ");
 
@@ -327,6 +327,7 @@ class _StatScreenState extends State<StatScreen> {
                                     onTap: ()async {
                                       if (Local_image_list[index] == button[0]) {
                                        await chooseFile(snapshot,Local_image_list);
+
                                         print(snapshot.data.docs[0].documentID+" doc id in function");
                                         print(newList.toString()+" checking if newList list got updated");
                                       //  await DatabaseService(uid: uid_constant).UpdateImageListSingle(snapshot.data.docs[0].documentID, newList);

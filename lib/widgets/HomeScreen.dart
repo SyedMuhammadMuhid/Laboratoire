@@ -34,17 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
   bool mechanism_check = false;
   BuildContext my_context;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    PushNotificationsManager().init();
-    print('I am init state of home screen, I was run');
-  }
+  //@override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   PushNotificationsManager().init();
+  //   print('I am init state of home screen, I was run');
+  // }
 
   @override
   Widget build(BuildContext context) {
-    //AuthServices _authServices = AuthServices();
+   // AuthServices _authServices = AuthServices();
     // _authServices.signOutGoogle();
 //    _authServices.FBLogout();
     //_authServices.Sign_Out();
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   .collection('Points')
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return Container();
+                if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
                 return Container(
                   decoration: BoxDecoration(
@@ -438,278 +438,278 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               Container(
                                                 height:
-                                                    tapped == false ? 0 : MediaQuery.of(context).size.width<400?1670: 1560,
+                                                    tapped == false ? 0 : MediaQuery.of(context).size.width<400?1640: 1530,
                                                 child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                'assets/pain.png'),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          Text(
-                                                            'Pain',
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .black87),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width <
-                                                                  400
-                                                              ? 300
-                                                              : 270,
-                                                      child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount: Pain.length,
-                                                        // itemCount: _categories.length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Checkbox_pain(
-                                                              value:
-                                                                  Pain[index]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                'assets/self_confidence.png'),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          Text(
-                                                            'Self Confidence',
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .black87),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width <
-                                                                  400
-                                                              ? 250
-                                                              : 215,
-                                                      child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            Self_con.length,
-                                                        // itemCount: _categories.length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Checkbox_self_confidence(
-                                                              value: Self_con[
-                                                                  index]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                'assets/sleep.png'),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          Text(
-                                                            'Sleep',
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .black87),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width <
-                                                                  400
-                                                              ? 250
-                                                              : 215,
-                                                      child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount: Sleep.length,
-                                                        // itemCount: _categories.length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Checkbox_sleep(
-                                                              value:
-                                                                  Sleep[index]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                'assets/locution.png'),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          Text(
-                                                            'Locution',
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .black87),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width <
-                                                                  400
-                                                              ? 250
-                                                              : 200,
-                                                      child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            Locution.length,
-                                                        // itemCount: _categories.length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Checkbox_locution(
-                                                              value: Locution[
-                                                                  index]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                'assets/mechanism.png'),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 20,
-                                                          ),
-                                                          Text(
-                                                            'Mechanism',
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .black87),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width <
-                                                                  400
-                                                              ? 150
-                                                              : 100,
-                                                      child: ListView.builder(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            Mechanism.length,
-                                                        // itemCount: _categories.length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Checkbox_mechanism(
-                                                              value: Mechanism[
-                                                                  index]);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          tapped = false;
-                                                        });
-                                                      },
-                                                      child: Image(
-                                                        image: AssetImage(
-                                                            'assets/dropdown_btn.png'),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
+                                                 children: [
+                                                   Padding(
+                                                     padding:
+                                                         const EdgeInsets.all(
+                                                             8.0),
+                                                     child: Row(
+                                                       children: [
+                                                         Image(
+                                                           image: AssetImage(
+                                                               'assets/pain.png'),
+                                                         ),
+                                                         SizedBox(
+                                                           width: 20,
+                                                         ),
+                                                         Text(
+                                                           'Pain',
+                                                           style: GoogleFonts
+                                                               .heebo(
+                                                                   fontSize:
+                                                                       20,
+                                                                   color: Colors
+                                                                       .black87),
+                                                         )
+                                                       ],
+                                                     ),
+                                                   ),
+                                                   Container(
+                                                     height:
+                                                         MediaQuery.of(context)
+                                                                     .size
+                                                                     .width <
+                                                                 400
+                                                             ? 300
+                                                             : 270,
+                                                     child: ListView.builder(
+                                                       physics:
+                                                           NeverScrollableScrollPhysics(),
+                                                       itemCount: Pain.length,
+                                                       // itemCount: _categories.length,
+                                                       scrollDirection:
+                                                           Axis.vertical,
+                                                       itemBuilder:
+                                                           (BuildContext
+                                                                   context,
+                                                               int index) {
+                                                         return Checkbox_pain(
+                                                             value:
+                                                                 Pain[index]);
+                                                       },
+                                                     ),
+                                                   ),
+                                                   Padding(
+                                                     padding:
+                                                         const EdgeInsets.all(
+                                                             8.0),
+                                                     child: Row(
+                                                       children: [
+                                                         Image(
+                                                           image: AssetImage(
+                                                               'assets/self_confidence.png'),
+                                                         ),
+                                                         SizedBox(
+                                                           width: 20,
+                                                         ),
+                                                         Text(
+                                                           'Self Confidence',
+                                                           style: GoogleFonts
+                                                               .heebo(
+                                                                   fontSize:
+                                                                       20,
+                                                                   color: Colors
+                                                                       .black87),
+                                                         )
+                                                       ],
+                                                     ),
+                                                   ),
+                                                   Container(
+                                                     height:
+                                                         MediaQuery.of(context)
+                                                                     .size
+                                                                     .width <
+                                                                 400
+                                                             ? 250
+                                                             : 215,
+                                                     child: ListView.builder(
+                                                       physics:
+                                                           NeverScrollableScrollPhysics(),
+                                                       itemCount:
+                                                           Self_con.length,
+                                                       // itemCount: _categories.length,
+                                                       scrollDirection:
+                                                           Axis.vertical,
+                                                       itemBuilder:
+                                                           (BuildContext
+                                                                   context,
+                                                               int index) {
+                                                         return Checkbox_self_confidence(
+                                                             value: Self_con[
+                                                                 index]);
+                                                       },
+                                                     ),
+                                                   ),
+                                                   Padding(
+                                                     padding:
+                                                         const EdgeInsets.all(
+                                                             8.0),
+                                                     child: Row(
+                                                       children: [
+                                                         Image(
+                                                           image: AssetImage(
+                                                               'assets/sleep.png'),
+                                                         ),
+                                                         SizedBox(
+                                                           width: 20,
+                                                         ),
+                                                         Text(
+                                                           'Sleep',
+                                                           style: GoogleFonts
+                                                               .heebo(
+                                                                   fontSize:
+                                                                       20,
+                                                                   color: Colors
+                                                                       .black87),
+                                                         )
+                                                       ],
+                                                     ),
+                                                   ),
+                                                   Container(
+                                                     height:
+                                                         MediaQuery.of(context)
+                                                                     .size
+                                                                     .width <
+                                                                 400
+                                                             ? 250
+                                                             : 215,
+                                                     child: ListView.builder(
+                                                       physics:
+                                                           NeverScrollableScrollPhysics(),
+                                                       itemCount: Sleep.length,
+                                                       // itemCount: _categories.length,
+                                                       scrollDirection:
+                                                           Axis.vertical,
+                                                       itemBuilder:
+                                                           (BuildContext
+                                                                   context,
+                                                               int index) {
+                                                         return Checkbox_sleep(
+                                                             value:
+                                                                 Sleep[index]);
+                                                       },
+                                                     ),
+                                                   ),
+                                                   Padding(
+                                                     padding:
+                                                         const EdgeInsets.all(
+                                                             8.0),
+                                                     child: Row(
+                                                       children: [
+                                                         Image(
+                                                           image: AssetImage(
+                                                               'assets/locution.png'),
+                                                         ),
+                                                         SizedBox(
+                                                           width: 20,
+                                                         ),
+                                                         Text(
+                                                           'Locution',
+                                                           style: GoogleFonts
+                                                               .heebo(
+                                                                   fontSize:
+                                                                       20,
+                                                                   color: Colors
+                                                                       .black87),
+                                                         )
+                                                       ],
+                                                     ),
+                                                   ),
+                                                   Container(
+                                                     height:
+                                                         MediaQuery.of(context)
+                                                                     .size
+                                                                     .width <
+                                                                 400
+                                                             ? 250
+                                                             : 200,
+                                                     child: ListView.builder(
+                                                       physics:
+                                                           NeverScrollableScrollPhysics(),
+                                                       itemCount:
+                                                           Locution.length,
+                                                       // itemCount: _categories.length,
+                                                       scrollDirection:
+                                                           Axis.vertical,
+                                                       itemBuilder:
+                                                           (BuildContext
+                                                                   context,
+                                                               int index) {
+                                                         return Checkbox_locution(
+                                                             value: Locution[
+                                                                 index]);
+                                                       },
+                                                     ),
+                                                   ),
+                                                   Padding(
+                                                     padding:
+                                                         const EdgeInsets.all(
+                                                             8.0),
+                                                     child: Row(
+                                                       children: [
+                                                         Image(
+                                                           image: AssetImage(
+                                                               'assets/mechanism.png'),
+                                                         ),
+                                                         SizedBox(
+                                                           width: 20,
+                                                         ),
+                                                         Text(
+                                                           'Mechanism',
+                                                           style: GoogleFonts
+                                                               .heebo(
+                                                                   fontSize:
+                                                                       20,
+                                                                   color: Colors
+                                                                       .black87),
+                                                         )
+                                                       ],
+                                                     ),
+                                                   ),
+                                                   Container(
+                                                     height:
+                                                         MediaQuery.of(context)
+                                                                     .size
+                                                                     .width <
+                                                                 400
+                                                             ? 150
+                                                             : 100,
+                                                     child: ListView.builder(
+                                                       physics:
+                                                           NeverScrollableScrollPhysics(),
+                                                       itemCount:
+                                                           Mechanism.length,
+                                                       // itemCount: _categories.length,
+                                                       scrollDirection:
+                                                           Axis.vertical,
+                                                       itemBuilder:
+                                                           (BuildContext
+                                                                   context,
+                                                               int index) {
+                                                         return Checkbox_mechanism(
+                                                             value: Mechanism[
+                                                                 index]);
+                                                       },
+                                                     ),
+                                                   ),
+                                                   SizedBox(
+                                                     height: 20,
+                                                   ),
+                                                   InkWell(
+                                                     onTap: () {
+                                                       setState(() {
+                                                         tapped = false;
+                                                       });
+                                                     },
+                                                     child: Image(
+                                                       image: AssetImage(
+                                                           'assets/dropdown_btn.png'),
+                                                     ),
+                                                   )
+                                                 ],
+                                                  ),
                                               )
                                             ],
                                           ),
@@ -772,45 +772,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .snapshots(),
                                       builder: (context, snapshot) {
                                         if (!snapshot.hasData)
-                                          return Container();
+                                          return CircularProgressIndicator();
 
                                         return IndexedListView.builder(
-                                            controller: controller,
-                                            //  return ListView.builder(
-                                            physics: ClampingScrollPhysics(),
-                                            minItemCount: 0,
-                                            maxItemCount: snapshot.data == null
-                                                ? 0
-                                                : snapshot.data.docs.length - 1,
-                                            // itemCount: snapshot.data.docs.length,
-                                            scrollDirection: Axis.horizontal,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              print(snapshot
-                                                      .data
-                                                      .docs[index]
-                                                          ["TotalPoints"]
-                                                      .toString() +
-                                                  " data from stuff from day " +
-                                                  index.toString());
-                                              return Dayswid(
-                                                document:
-                                                    snapshot.data.docs[index],
-                                                index_of_day: index,
-                                                total_hour_point_of_the_day:
-                                                    snapshot.data.docs[index]
-                                                        ["HourPoints"],
-                                                total_point_of_the_day: snapshot
-                                                    .data
-                                                    .docs[index]["TotalPoints"],
-                                                document_id: snapshot.data
-                                                    .docs[index].documentID,
-                                                Date_from_database: userdata
-                                                        .Start_date.toDate()
-                                                    .add(Duration(days: index)),
-                                                Context: my_context,
-                                              );
-                                            });
+                                        controller: controller,
+                                        //  return ListView.builder(
+                                        physics: ClampingScrollPhysics(),
+                                         minItemCount: 0,
+                                        maxItemCount: snapshot.data == null
+                                        ? 0
+                                            : snapshot.data.docs.length - 1,
+                                        // itemCount: snapshot.data.docs.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (BuildContext context,
+                                        int index) {
+                                        print(snapshot
+                                            .data
+                                            .docs[index]
+                                        ["TotalPoints"]
+                                            .toString() +
+                                        " data from stuff from day " +
+                                        index.toString());
+                                        return Dayswid(
+                                        document:
+                                        snapshot.data.docs[index],
+                                        index_of_day: index,
+                                        total_hour_point_of_the_day:
+                                        snapshot.data.docs[index]
+                                        ["HourPoints"],
+                                        total_point_of_the_day: snapshot
+                                            .data
+                                            .docs[index]["TotalPoints"],
+                                        document_id: snapshot.data
+                                            .docs[index].documentID,
+                                        Date_from_database: userdata
+                                            .Start_date.toDate()
+                                            .add(Duration(days: index)),
+                                        Context: my_context,
+                                        );
+                                        });
+
                                       }),
                                   /*Stack(
                          children: [
@@ -883,3 +884,10 @@ class _HomeScreenState extends State<HomeScreen> {
     //}
   }
 }
+  Future _asyncawaitfun()async{
+
+    SnapShot_warpper= await FirebaseFirestore.instance
+        .collection('UserData')
+        .doc(uid_constant).collection('Points').get();
+    return SnapShot_warpper;
+  }

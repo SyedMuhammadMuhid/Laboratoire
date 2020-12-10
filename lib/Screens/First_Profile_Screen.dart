@@ -16,6 +16,7 @@ import 'package:sample_screen/Screens/Home.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:path/path.dart' as Path;
+import 'package:sample_screen/widgets/Please_wait.dart';
 import 'Login_Screen.dart';
 
 class FirstProfileScreen extends StatefulWidget {
@@ -124,6 +125,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                 backgroundColor: Colors.transparent,
                 body: ModalProgressHUD(
                   inAsyncCall: asyncpressed,
+                   progressIndicator: PleaseWait(),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -1251,58 +1253,102 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                               setState(() {
                                                 asyncpressed=true;
                                               });
-                                              dynamic result =
-                                                  await DatabaseService(
-                                                          uid: uid_constant)
-                                                      .UpdateUserData(
-                                                          F_Name,
-                                                          L_Name,
-                                                          Age,
-                                                          Sex,
-                                                          Device,
-                                                          Allergies,
-                                                          Doctor_address,
-                                                          Dentist_address,
-                                                          Blood_type,
-                                                          Frequency,
-                                                          Total_duration,
-                                                          Instructions,
-                                                          Image_url);
 
-    final snapShot = await FirebaseFirestore.instance
-        .collection('UserData')
-        .doc(uid_constant).collection('Points').get();
-    final snapShot2 = await FirebaseFirestore.instance
-        .collection('UserData')
-        .doc(uid_constant).collection('CheckPoints').get();
+    if(userdata.Total_duration!=Total_duration) {
+      dynamic result =
+      await DatabaseService(
+          uid: uid_constant)
+          .UpdateUserData(
+          F_Name,
+          L_Name,
+          Age,
+          Sex,
+          Device,
+          Allergies,
+          Doctor_address,
+          Dentist_address,
+          Blood_type,
+          Frequency,
+          Total_duration,
+          Instructions,
+          Image_url);
 
-    if(snapShot.docs.length!=0 && snapShot2.docs.length!=0) {
-      FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-          .collection('Points').get()
-          .then((snapshot) {
-        for (DocumentSnapshot ds in snapshot.docs) {
-          ds.reference.delete();
-        }
-      });
 
-      FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-          .collection('CheckPoints').get()
-          .then((snapshot) {
-        for (DocumentSnapshot ds in snapshot.docs) {
-          ds.reference.delete();
-        }
-      });
+      final snapShot = await FirebaseFirestore.instance
+          .collection('UserData')
+          .doc(uid_constant).collection('Points').get();
+      final snapShot2 = await FirebaseFirestore.instance
+          .collection('UserData')
+          .doc(uid_constant).collection('CheckPoints').get();
+      final snapShot3 = await FirebaseFirestore.instance
+          .collection('ImageGrid')
+          .doc(uid_constant).collection('CheckPoints').get();
+
+      if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
+        FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+            .collection('Points').get()
+            .then((snapshot) {
+          for (DocumentSnapshot ds in snapshot.docs) {
+            ds.reference.delete();
+          }
+        });
+
+        FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+            .collection('CheckPoints').get()
+            .then((snapshot) {
+          for (DocumentSnapshot ds in snapshot.docs) {
+            ds.reference.delete();
+          }
+        });
+      }
+// one for removed and made into one
+      for (int i = 1; i <= Total_duration; i++) {
+        await DatabaseService(uid: uid_constant).UpdatePoints(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0);
+
+        // this command was in an other for loop
+        await DatabaseService(uid: uid_constant).UpdateCheckPoint(
+            ' ', ' ', ' ', ' ', ' ');
+      }
+
+      if (snapShot3.docs.length == 0) {
+        await DatabaseService(uid: uid_constant).UpdateImageList(image);
+      }
     }
+//-------------------------------------------
 
-                                              for(int i=1; i<=Total_duration;i++){
-                                                await DatabaseService(uid: uid_constant).UpdatePoints(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                                             else if(userdata.Total_duration==Total_duration) {
+                                                dynamic result =
+                                                await DatabaseService(
+                                                    uid: uid_constant)
+                                                    .UpdateUserData(
+                                                    F_Name,
+                                                    L_Name,
+                                                    Age,
+                                                    Sex,
+                                                    Device,
+                                                    Allergies,
+                                                    Doctor_address,
+                                                    Dentist_address,
+                                                    Blood_type,
+                                                    Frequency,
+                                                    Total_duration,
+                                                    Instructions,
+                                                    Image_url);
+
                                               }
-                                              for(int i=1; i<=Total_duration;i++){
-                                                await DatabaseService(uid: uid_constant).UpdateCheckPoint(' ', ' ', ' ', ' ', ' ');
 
-                                              }
-                                             await DatabaseService(uid: uid_constant).UpdateImageList(image);
 
+                                              //------------------------------------------------
                                               setState(() {
                                                 asyncpressed=false;
                                               });

@@ -20,7 +20,7 @@ class _Checkbox_mechanismState extends State<Checkbox_mechanism> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('UserData').doc(uid_constant).collection('CheckPoints').snapshots(),
     builder: (context, snapshot) {
-    if(!snapshot.hasData)return Container();
+    if(!snapshot.hasData)return Center(child: CircularProgressIndicator());
     if(snapshot.data.docs[index_of_the_day_constant]["Mechanisc"]== value)
     {
       check=true;
