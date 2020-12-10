@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //AuthServices _authServices = AuthServices();
     // _authServices.signOutGoogle();
 //    _authServices.FBLogout();
-//    _authServices.Sign_Out();
+    //_authServices.Sign_Out();
     my_context = context;
     final user = Provider.of<User>(context, listen: false);
 

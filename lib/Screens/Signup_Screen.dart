@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
+import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
@@ -311,12 +312,20 @@ final AuthServices _authServices=AuthServices();
                                     if (_key.currentState.validate()) {
 
                                         if(Pass==Con_Pass){
+
                                       dynamic result=  await _authServices.SignUpWithEmailPass(Email, Pass, F_Name, L_Name);
+                                    //  print(result+ 'this is the result after signup as emial and pass');
                                       if(result==null){
                                         print('error signing up');
 
                                       }
-                                      else if(result!= null){
+                                      else if(result==0){
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) => LoadingScreen()));
+                                      }
+                                      else {
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder:

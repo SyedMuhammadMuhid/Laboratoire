@@ -89,8 +89,17 @@ class AuthServices {
       UserCredential result =
           await auth.signInWithEmailAndPassword(email: email, password: pass);
       User user = result.user;
-      uid_constant = await user.uid;
-      return user;
+      uid_constant =  user.uid;
+
+      final snapShot = await FirebaseFirestore.instance
+          .collection('UserData')
+          .doc(uid_constant).collection('Points').get();
+      if(snapShot.docs.length!=0){
+        return user;
+      }
+      else {
+        return null;
+      }
     } catch (e) {
       return null;
     }
@@ -103,23 +112,32 @@ class AuthServices {
           email: Email, password: Pass);
       User user = result.user;
       // setting a constant variable as the uid at the sign up stage
-      uid_constant = user.uid;
+      uid_constant =  user.uid;
       //create an instance of the user data in the database
-      DatabaseService(uid: user.uid).UpdateUserData(
-          F_Name,
-          L_Name,
-          ' ',
-          ' ',
-          'Choose a Device',
-          ' ',
-          ' ',
-          ' ',
-          'Blood Type',
-          'Choose Frequency',
-          0,
-          ' ',
-          'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
-      return user;
+      final snapShot = await FirebaseFirestore.instance
+          .collection('UserData')
+          .doc(uid_constant)
+          .get();
+      if(snapShot.exists){
+        return 0;
+      }
+      else {
+        DatabaseService(uid: user.uid).UpdateUserData(
+            F_Name,
+            L_Name,
+            ' ',
+            ' ',
+            'Choose a Device',
+            ' ',
+            ' ',
+            ' ',
+            'Blood Type',
+            'Choose Frequency',
+            0,
+            ' ',
+            'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
+        return user;
+      }
     } catch (e) {
       return null;
     }

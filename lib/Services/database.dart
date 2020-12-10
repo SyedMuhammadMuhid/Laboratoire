@@ -74,6 +74,7 @@ UserData _userDatafromSnapshot(DocumentSnapshot snapshot) {
   Future UpdatePoints(int todo1,int todo2,int todo3,int todo4,int todo5,int todo6,int todo7,int todo8,int total_points, int hour_points)async{
 
     try{
+
       return await _collectionReference_points.doc().set({
         "ToDo1":todo1,
         "ToDo2":todo2,
@@ -131,6 +132,8 @@ index_of_todo=index_of_todo+1;
 
 Future UpdateCheckPoint(String pain, String self_confidence, String sleep, String locution, String mechanism)async{
   try{
+
+
     return await _collectionReference_checkpoints.doc().set({
       'Pain':pain,
       'Self_confidence':self_confidence,

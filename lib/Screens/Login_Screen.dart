@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
 import 'package:sample_screen/Loading/loading.dart';
+import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Wrapper.dart';
@@ -140,9 +141,11 @@ Row(children: [
                           dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
 
                           if(result==null){
-                            print('error signing in');
-                          }
-                          else if(result!=null) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder:
+                                        (BuildContext context) => StartScreen()));                          }
+                          else if(result!=null){
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder:
