@@ -1303,7 +1303,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
       }
 // one for removed and made into one
       for (int i = 1; i <= Total_duration; i++) {
-        await DatabaseService(uid: uid_constant).UpdatePoints(
+         DatabaseService(uid: uid_constant).UpdatePoints(
             0,
             0,
             0,
@@ -1316,7 +1316,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
             0);
 
         // this command was in an other for loop
-        await DatabaseService(uid: uid_constant).UpdateCheckPoint(
+         DatabaseService(uid: uid_constant).UpdateCheckPoint(
             ' ', ' ', ' ', ' ', ' ');
       }
 
