@@ -1295,9 +1295,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         ],
                                       ),
                                       TextFormField(
-                                          validator: (val) => val.isEmpty
-                                              ? 'Please Fill This Field'
-                                              : null,
+                                          validator: (val) => val=='0'
+                                              ? 'Duration Should Be Greater than 0'
+                                             :null,
                                           obscureText: false,
                                           keyboardType: TextInputType.number,
                                           onChanged: (val) {

@@ -8,8 +8,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height= MediaQuery.of(context).size.height/30;
     double width= MediaQuery.of(context).size.width/10;
-    return MaterialApp(
-      home: Container(
+    return Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/login_back.png"), fit: BoxFit.cover)),
@@ -72,7 +71,7 @@ class StartScreen extends StatelessWidget {
               ),
             )
 
-      ),
-    );
+      );
+
   }
 }

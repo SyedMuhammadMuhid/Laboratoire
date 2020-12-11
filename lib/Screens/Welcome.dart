@@ -8,8 +8,7 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     double height= MediaQuery.of(context).size.height/30;
     double width= MediaQuery.of(context).size.width/10;
-    return MaterialApp(
-      home: Container(
+    return  Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/welcome_bg.png"), fit: BoxFit.cover)),
@@ -58,7 +57,7 @@ class Welcome extends StatelessWidget {
 
           ),
         ),
-      ),
-    );
+      );
+
   }
 }

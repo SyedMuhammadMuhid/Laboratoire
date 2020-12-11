@@ -95,10 +95,13 @@ class AuthServices {
           .collection('UserData')
           .doc(uid_constant).collection('Points').get();
       if(snapShot.docs.length!=0){
-        return user;
+        return 1;
       }
-      else {
+      else if(snapShot.docs.length==0) {
         return null;
+      }
+      else{
+        return 0;
       }
     } catch (e) {
       return 0;
