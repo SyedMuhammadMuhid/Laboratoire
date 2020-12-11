@@ -35,6 +35,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(onTap:(){
                     index_nav=0;
+                    color_changer_home=true;
+                    color_changer_per=false;
+                    color_changer_cal=false;
+                    color_changer_stat=false;
+
                     Navigator.of(context).push(
                         MaterialPageRoute(
                             builder:
@@ -58,7 +63,43 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 // itemCount: _categories.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index){
-                  return NotificationCard(data: notification_list[index]);
+                  return Container(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.transparent,
+                    child: Column(children: [
+                      Row(
+                        children: [
+                          CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                          SizedBox(width: 20,),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              child: Text(notification_list[index], style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),
+
+                              ),
+                            ),
+                          ),
+
+
+                        ],
+
+                      ),
+                      Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                        InkWell(onTap: (){
+                          setState(() {
+                            notification_list.removeAt(index);
+                          });
+                        },child: Image.asset('assets/oui.png')),
+                        InkWell(onTap: (){
+                          setState(() {
+                            notification_list.removeAt(index);
+                          });
+                        },child: Image.asset('assets/non.png'))
+                      ],),
+                      Container(height: 2,width: 300,color: Colors.white,),
+                    ],),
+                  );
                 },
               ),
             ),

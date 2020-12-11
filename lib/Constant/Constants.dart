@@ -29,8 +29,15 @@ int number_of_Jours=0;
 int One_time_only=0;
 int index_of_the_day_constant=0;
 
+int badge_contant;
+
 var SnapShot_warpper;
 
 int Init=1;
 int Mid=0;
 int Init2=0;
+
+bool color_changer_home=true;
+bool color_changer_cal=false;
+bool color_changer_stat=false;
+bool color_changer_per=false;

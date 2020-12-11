@@ -49,39 +49,39 @@ class Subscribe extends StatelessWidget {
                 SizedBox(
                   height: height * 2,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.pinkAccent,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.0),
-                          topRight: Radius.circular(15.0),
-                          bottomRight: Radius.circular(15.0),
-                          bottomLeft: Radius.circular(15.0))),
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image(
-                          image: AssetImage("assets/insta.png"),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text('Instagram',
-                            style: GoogleFonts.heebo(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: height,
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       color: Colors.pinkAccent,
+                //       shape: BoxShape.rectangle,
+                //       borderRadius: BorderRadius.only(
+                //           topLeft: Radius.circular(15.0),
+                //           topRight: Radius.circular(15.0),
+                //           bottomRight: Radius.circular(15.0),
+                //           bottomLeft: Radius.circular(15.0))),
+                //   height: 60,
+                //   width: MediaQuery.of(context).size.width,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: Row(
+                //       children: [
+                //         Image(
+                //           image: AssetImage("assets/insta.png"),
+                //         ),
+                //         SizedBox(
+                //           width: 15,
+                //         ),
+                //         Text('Instagram',
+                //             style: GoogleFonts.heebo(
+                //                 color: Colors.white,
+                //                 fontSize: 18,
+                //                 fontWeight: FontWeight.bold))
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: height,
+                // ),
                 InkWell(
                   onTap: () async {
                     UserCredential user = await _authServices.signInFB();

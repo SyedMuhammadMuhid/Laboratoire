@@ -13,10 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool color_changer_home=true;
-  bool color_changer_cal=false;
-  bool color_changer_stat=false;
-  bool color_changer_per=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

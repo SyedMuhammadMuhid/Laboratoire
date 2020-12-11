@@ -106,12 +106,19 @@ class _StatScreenState extends State<StatScreen> {
                                                     BuildContext context) =>
                                                     NotificationScreen()));
                                       },
-                                      child: CircleAvatar(
+                                      child: notification_list.length==0?CircleAvatar(
+                                        child: Icon(
+                                          Icons.notifications_none,
+                                          color: Colors.white,
+                                          size: 35,
+                                        ),
+                                        backgroundColor: Color(0xffFF999A),
+                                        radius: 25,
+                                      ):CircleAvatar(
                                         child: Badge(
                                             badgeContent: Text(
-                                              '2',
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                              notification_list.length.toString(),
+                                              style: TextStyle(color: Colors.white),
                                             ),
                                             child: Icon(
                                               Icons.notifications_none,
@@ -120,7 +127,8 @@ class _StatScreenState extends State<StatScreen> {
                                             )),
                                         backgroundColor: Color(0xffFF999A),
                                         radius: 25,
-                                      )),
+                                      )
+                                  ),
                                 )
                               ]),
                           Row(

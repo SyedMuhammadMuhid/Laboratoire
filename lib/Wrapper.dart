@@ -25,6 +25,12 @@ class _WrapperState extends State<Wrapper> {
   }
   @override
   Widget build(BuildContext context) {
+    color_changer_home=true;
+    color_changer_per=false;
+    color_changer_cal=false;
+    color_changer_stat=false;
+    index_nav=0;
+
     final user = Provider.of<User>(context);
     final googleUser = Provider.of<GoogleSignInAccount>(context);
     if(user!=null){

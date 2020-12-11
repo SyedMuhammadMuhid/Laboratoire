@@ -7,6 +7,7 @@ import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Popups/Logout_popup.dart';
 import 'package:sample_screen/Screens/First_Profile_Screen.dart';
 import 'package:sample_screen/Screens/Home.dart';
+import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/Wrapper.dart';
@@ -36,6 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.all(10.0),
                           child: GestureDetector(onTap: () {
                             index_nav = 0;
+                            color_changer_home=true;
+                            color_changer_per=false;
+                            color_changer_cal=false;
+                            color_changer_stat=false;
+
                             Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder:
@@ -45,15 +51,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Icons.arrow_back, color: Color(0xffF5FBFC),
                                 size: 55,)),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: CircleAvatar(child: Badge(
-                              badgeContent: Text('2',
-                                style: TextStyle(color: Colors.white),),
-                              child: Icon(Icons.notifications_none,
-                                color: Colors.white, size: 35,)),
-                            backgroundColor: Color(0xffFF999A),
-                            radius: 25,),
+                        InkWell(
+                          onTap: (){
+
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    NotificationScreen()));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: notification_list.length==0?CircleAvatar(
+                              child: Icon(
+                                Icons.notifications_none,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                              backgroundColor: Color(0xffFF999A),
+                              radius: 25,
+                            ):CircleAvatar(
+                              child: Badge(
+                                  badgeContent: Text(
+                                    notification_list.length.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  child: Icon(
+                                    Icons.notifications_none,
+                                    color: Colors.white,
+                                    size: 35,
+                                  )),
+                              backgroundColor: Color(0xffFF999A),
+                              radius: 25,
+                            ),
+                          ),
                         )
                       ]),
                   Container(

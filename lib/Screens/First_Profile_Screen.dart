@@ -235,7 +235,123 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black87),
                                       ),
-                                      Image.asset('assets/first_pro_btn.png'),
+                                      InkWell(onTap: () async {
+                                        if (_key.currentState.validate()) {
+
+                                          setState(() {
+                                            asyncpressed=true;
+                                          });
+
+                                          if(userdata.Total_duration!=Total_duration) {
+                                            dynamic result =
+                                            await DatabaseService(
+                                                uid: uid_constant)
+                                                .UpdateUserData(
+                                                F_Name,
+                                                L_Name,
+                                                Age,
+                                                Sex,
+                                                Device,
+                                                Allergies,
+                                                Doctor_address,
+                                                Dentist_address,
+                                                Blood_type,
+                                                Frequency,
+                                                Total_duration,
+                                                Instructions,
+                                                Image_url);
+
+
+                                            final snapShot = await FirebaseFirestore.instance
+                                                .collection('UserData')
+                                                .doc(uid_constant).collection('Points').get();
+                                            final snapShot2 = await FirebaseFirestore.instance
+                                                .collection('UserData')
+                                                .doc(uid_constant).collection('CheckPoints').get();
+                                            final snapShot3 = await FirebaseFirestore.instance
+                                                .collection('ImageGrid')
+                                                .doc(uid_constant).collection('CheckPoints').get();
+
+                                            if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
+                                              FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+                                                  .collection('Points').get()
+                                                  .then((snapshot) {
+                                                for (DocumentSnapshot ds in snapshot.docs) {
+                                                  ds.reference.delete();
+                                                }
+                                              });
+
+                                              FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+                                                  .collection('CheckPoints').get()
+                                                  .then((snapshot) {
+                                                for (DocumentSnapshot ds in snapshot.docs) {
+                                                  ds.reference.delete();
+                                                }
+                                              });
+                                            }
+// one for removed and made into one
+                                            for (int i = 1; i <= Total_duration; i++) {
+                                              DatabaseService(uid: uid_constant).UpdatePoints(
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0);
+
+                                              // this command was in an other for loop
+                                              DatabaseService(uid: uid_constant).UpdateCheckPoint(
+                                                  ' ', ' ', ' ', ' ', ' ');
+                                            }
+
+                                            if (snapShot3.docs.length == 0) {
+                                              await DatabaseService(uid: uid_constant).UpdateImageList(image);
+                                            }
+                                          }
+//-------------------------------------------
+
+                                          else if(userdata.Total_duration==Total_duration) {
+                                            dynamic result =
+                                            await DatabaseService(
+                                                uid: uid_constant)
+                                                .UpdateUserData(
+                                                F_Name,
+                                                L_Name,
+                                                Age,
+                                                Sex,
+                                                Device,
+                                                Allergies,
+                                                Doctor_address,
+                                                Dentist_address,
+                                                Blood_type,
+                                                Frequency,
+                                                Total_duration,
+                                                Instructions,
+                                                Image_url);
+
+                                          }
+
+
+                                          //------------------------------------------------
+                                          setState(() {
+                                            asyncpressed=false;
+                                          });
+
+                                          Navigator.of(context)
+                                              .pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                  context) =>
+                                                      LoadingScreen()));
+
+
+                                        }
+                                      },
+                                          child: Image.asset('assets/first_pro_btn.png')),
                                       Row(
                                         children: [
                                           Text('First Name',
@@ -385,195 +501,189 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                     Radius.circular(15.0),
                                                 bottomLeft:
                                                     Radius.circular(15.0))),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      child: Text(
-                                                        Device,
-                                                        style: GoogleFonts.heebo(
-                                                            color:
-                                                                Color(0xff41B4C7),
-                                                            fontSize: 25),
-                                                      ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      Device,
+                                                      style: GoogleFonts.heebo(
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          fontSize: 25),
                                                     ),
-                                                    GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            _isExpanded =
-                                                                !_isExpanded;
-                                                          });
-                                                        },
-                                                        child: Icon(
-                                                          _isExpanded == false
-                                                              ? Icons.expand_more
-                                                              : Icons.expand_less,
-                                                          color: Colors.black54,
-                                                        ))
-                                                  ],
-                                                ),
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          _isExpanded =
+                                                              !_isExpanded;
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        _isExpanded == false
+                                                            ? Icons.expand_more
+                                                            : Icons.expand_less,
+                                                        color: Colors.black54,
+                                                      ))
+                                                ],
                                               ),
-                                              Container(
-                                                height: _isExpanded == false
-                                                    ? 0
-                                                    : 332,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                            ),
+                                            Container(
+                                              height: _isExpanded == false
+                                                  ? 0
+                                                  : 277,
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Device = 'Sagittal';
+                                                        _isExpanded = false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              Device = 'Sagittal';
-                                                              _isExpanded = false;
-                                                            });
-                                                          },
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                'Sagittal',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff5fc9ed),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            'Sagittal',
+                                                            style: GoogleFonts.heebo(
+                                                                color: Color(0xff41B4C7),
+                                                                fontSize: 25),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Device = 'Schwartz';
+                                                        _isExpanded = false;
+                                                      });
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            'Schwartz',
+                                                            style:
+                                                                GoogleFonts.heebo(
+                                                                    color:  Color(0xff41B4C7),
                                                                     fontSize: 25),
-                                                              )
-                                                            ],
-                                                          )),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Device = 'Split Plate';
+                                                        _isExpanded = false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Device = 'Schwartz';
-                                                          _isExpanded = false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              'Schwartz',
-                                                              style:
-                                                                  GoogleFonts.heebo(
-                                                                      color: Color(
-                                                                          0xff5fc9ed),
-                                                                      fontSize: 25),
-                                                            )
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('Split Plate',
+                                                              style: GoogleFonts.heebo(
+                                                                  color:  Color(0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(onTap: (){
+                                                    setState(() {
+                                                      Device = 'Bionator';
+                                                      _isExpanded = false;
+                                                    });
+                                                  },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Device = 'Split Plate';
-                                                          _isExpanded = false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('Split Plate',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff5fc9ed),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('Bionator',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(onTap: (){
+                                                    setState(() {
+                                                      Device = 'Twin Block';
+                                                      _isExpanded = false;
+                                                    });
+                                                  },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Device = 'Bionator';
-                                                          _isExpanded = false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('Bionator',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('Twin Block',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Device = 'Twin Block';
-                                                          _isExpanded = false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('Twin Block',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                                  ),
+
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                       SizedBox(
@@ -682,7 +792,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         height: 20,
                                       ),
                                       Container(
-                                        height: _isExpanded2 == false ? 60 : 550,
+                                        height: _isExpanded2 == false ? 60 : 554,
                                         width: 371,
                                         decoration: BoxDecoration(
                                             border: Border.all(
@@ -695,300 +805,303 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                     Radius.circular(15.0),
                                                 bottomLeft:
                                                     Radius.circular(15.0))),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      child: Text(
-                                                        Blood_type,
-                                                        style: GoogleFonts.heebo(
-                                                            color:
-                                                                Color(0xff41B4C7),
-                                                            fontSize: 25),
-                                                      ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      Blood_type,
+                                                      style: GoogleFonts.heebo(
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          fontSize: 25),
                                                     ),
-                                                    GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            _isExpanded2 =
-                                                                !_isExpanded2;
-                                                          });
-                                                        },
-                                                        child: Icon(
-                                                          _isExpanded2 == false
-                                                              ? Icons.expand_more
-                                                              : Icons.expand_less,
-                                                          color: Colors.black54,
-                                                        ))
-                                                  ],
-                                                ),
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          _isExpanded2 =
+                                                              !_isExpanded2;
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        _isExpanded2 == false
+                                                            ? Icons.expand_more
+                                                            : Icons.expand_less,
+                                                        color: Colors.black54,
+                                                      ))
+                                                ],
                                               ),
-                                              Container(
-                                                height: _isExpanded2 == false
-                                                    ? 0
-                                                    : 550,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                            ),
+                                            Container(
+                                              height: _isExpanded2 == false
+                                                  ? 0
+                                                  : 499,
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='O-';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='O-';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              'O-',
-                                                              style:
-                                                                  GoogleFonts.heebo(
-                                                                      color: Color(
-                                                                          0xff41B4C7),
-                                                                      fontSize: 25),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='O+';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              'O+',
-                                                              style:
-                                                                  GoogleFonts.heebo(
-                                                                      color: Color(
-                                                                          0xff41B4C7),
-                                                                      fontSize: 25),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='A-';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('A-',
-                                                                style: GoogleFonts.heebo(
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            'O-',
+                                                            style:
+                                                                GoogleFonts.heebo(
                                                                     color: Color(
                                                                         0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                                    fontSize: 25),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='O+';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='A+';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('A+',
-                                                                style: GoogleFonts.heebo(
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            'O+',
+                                                            style:
+                                                                GoogleFonts.heebo(
                                                                     color: Color(
                                                                         0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                                    fontSize: 25),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='A-';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='B-';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('B-',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('A-',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='A+';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='B+';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('B+',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('A+',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='B-';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='AB-';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('AB-',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('B-',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='B+';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Blood_type='AB+';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('AB+',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('B+',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='AB-';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
+                                                      child: Row(
+                                                        children: [
+                                                          Text('AB-',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Blood_type='AB+';
+                                                        _isExpanded2=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('AB+',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                      onTap: (){
                                                         setState(() {
                                                           Blood_type='Unknown';
                                                           _isExpanded2=false;
                                                         });
                                                       },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('UnKnown',
-                                                                style: GoogleFonts.heebo(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('UnKnown',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       SizedBox(
@@ -1008,170 +1121,165 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                     Radius.circular(15.0),
                                                 bottomLeft:
                                                     Radius.circular(15.0))),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      child: Text(
-                                                        Frequency,
-                                                        style: GoogleFonts.heebo(
-                                                            color:
-                                                                Color(0xff41B4C7),
-                                                            fontSize: 25),
-                                                      ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      Frequency,
+                                                      style: GoogleFonts.heebo(
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          fontSize: 25),
                                                     ),
-                                                    GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            _isExpanded3 =
-                                                                !_isExpanded3;
-                                                          });
-                                                        },
-                                                        child: Icon(
-                                                          _isExpanded3 == false
-                                                              ? Icons.expand_more
-                                                              : Icons.expand_less,
-                                                          color: Colors.black54,
-                                                        ))
-                                                  ],
-                                                ),
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          _isExpanded3 =
+                                                              !_isExpanded3;
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        _isExpanded3 == false
+                                                            ? Icons.expand_more
+                                                            : Icons.expand_less,
+                                                        color: Colors.black54,
+                                                      ))
+                                                ],
                                               ),
-                                              Container(
-                                                height: _isExpanded3 == false
-                                                    ? 0
-                                                    : 332,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                            ),
+                                            Container(
+                                              height: _isExpanded3 == false
+                                                  ? 0
+                                                  : 222,
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Frequency='1x /Day';
+                                                        _isExpanded3=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Frequency='1x /Day';
-                                                          _isExpanded3=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              '1x /Day',
-                                                              style:
-                                                                  GoogleFonts.heebo(
-                                                                      color: Color(
-                                                                          0xff41B4C7),
-                                                                      fontSize: 25),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Frequency='3x /Day';
-                                                          _isExpanded3=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              '3x /Day',
-                                                              style:
-                                                                  GoogleFonts.heebo(
-                                                                      color: Color(
-                                                                          0xff41B4C7),
-                                                                      fontSize: 25),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Frequency='1x /Week';
-                                                          _isExpanded3=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('1x /Week',
-                                                                style: GoogleFonts.heebo(
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            '1x /Day',
+                                                            style:
+                                                                GoogleFonts.heebo(
                                                                     color: Color(
                                                                         0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                                    fontSize: 25),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
-                                                    ),
-                                                    Padding(
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        Frequency='3x /Day';
+                                                        _isExpanded3=false;
+                                                      });
+                                                    },
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8.0),
-                                                      child: GestureDetector(onTap: (){
-                                                        setState(() {
-                                                          Frequency='2x /Week';
-                                                          _isExpanded3=false;
-                                                        });
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Text('2x /Week',
-                                                                style: GoogleFonts.heebo(
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            '3x /Day',
+                                                            style:
+                                                                GoogleFonts.heebo(
                                                                     color: Color(
                                                                         0xff41B4C7),
-                                                                    fontSize: 25))
-                                                          ],
-                                                        ),
+                                                                    fontSize: 25),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Container(
-                                                      height: 2,
-                                                      width: 400,
-                                                      color: Color(0xff41B4C7),
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){ setState(() {
+                                                      Frequency='1x /Week';
+                                                      _isExpanded3=false;
+                                                    });},
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('1x /Week',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                                  ),
+                                                  Container(
+                                                    height: 2,
+                                                    width: 400,
+                                                    color: Color(0xff41B4C7),
+                                                  ),
+                                                  InkWell(onTap: (){
+                                                    setState(() {
+                                                      Frequency='2x /Week';
+                                                      _isExpanded3=false;
+                                                    });
+                                                  },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text('2x /Week',
+                                                              style: GoogleFonts.heebo(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25))
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                       SizedBox(

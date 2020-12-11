@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:intl/intl.dart';
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool locution_check = false;
   bool mechanism_check = false;
   BuildContext my_context;
+
+  String formattedTime = DateFormat.jm().format( DateTime.now());           //5:08 PM
 
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> userPoints;
@@ -164,20 +166,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               context) =>
                                                           NotificationScreen()));
                                             },
-                                            child: CircleAvatar(
+                                            child: notification_list.length==0?CircleAvatar(
+                                              child: Icon(
+                                                Icons.notifications_none,
+                                                color: Colors.white,
+                                                size: 35,
+                                              ),
+                                              backgroundColor: Color(0xffFF999A),
+                                              radius: 25,
+                                            ):CircleAvatar(
                                               child: Badge(
                                                   badgeContent: Text(
-                                                    '2',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
+                                                    notification_list.length.toString(),
+                                                    style: TextStyle(color: Colors.white),
                                                   ),
                                                   child: Icon(
                                                     Icons.notifications_none,
                                                     color: Colors.white,
                                                     size: 35,
                                                   )),
-                                              backgroundColor:
-                                                  Color(0xffFF999A),
+                                              backgroundColor: Color(0xffFF999A),
                                               radius: 25,
                                             )),
                                       )
