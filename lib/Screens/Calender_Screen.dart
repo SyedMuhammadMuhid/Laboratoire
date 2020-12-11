@@ -92,7 +92,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             )),
                       ),
                       Text(
-                        'Actions',
+                        Actions_Data,
                         style: GoogleFonts.heebo(
                             color: Colors.white, fontSize: 30),
                       ),
@@ -193,7 +193,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                             fontSize: 20,
                                           ),
                                           decoration: InputDecoration(
-                                            labelText: 'Name of Event',
+                                            labelText: Name_of_the_event_data,
                                             fillColor: Color(0xffF5FBFC),
                                             filled: true,
                                             enabledBorder:
@@ -221,7 +221,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                           ),
                                           controller: _clear_controler2,
                                           decoration: InputDecoration(
-                                            labelText: 'Place',
+                                            labelText: Place_data,
                                             fillColor: Color(0xffF5FBFC),
                                             filled: true,
                                             enabledBorder:
@@ -241,7 +241,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                           padding: const EdgeInsets.only(
                                               left: 15, top: 5, bottom: 5),
                                           child: Text(
-                                            'All Day Event',
+                                            All_day_event_data,
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 color: Color(0xff41B4C7)),
@@ -270,7 +270,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                           padding: const EdgeInsets.only(
                                               left: 15, top: 5, bottom: 5),
                                           child: Text(
-                                            'Start Date:' +
+                                            Start_date_data +
                                                 '  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}',
                                             style: TextStyle(
                                                 fontSize: 25,
@@ -316,7 +316,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                           padding: const EdgeInsets.only(
                                               left: 15, top: 5, bottom: 5),
                                           child: Text(
-                                            'End Date:' +
+                                            End_date_data +
                                                 '    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}',
                                             style: TextStyle(
                                                 fontSize: 25,
@@ -429,7 +429,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Events',
+                      Event_data,
                       style:
                           GoogleFonts.heebo(fontSize: 30, color: Colors.white),
                     )

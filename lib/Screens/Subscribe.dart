@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Constant/Constants.dart';
+import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Signup_Screen.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
@@ -33,18 +34,27 @@ class Subscribe extends StatelessWidget {
                   height: height * 2,
                 ),
                 Text(
-                  'First time?',
+                  First_time_data,
                   style: GoogleFonts.heebo(
                       color: Color(0xff41B4C7),
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '      Subscribe via your Facebook \n account or your Instagram account',
+                  Login_with_this_or_that,
                   style: GoogleFonts.heebo(
                     color: Color(0xff41B4C7),
                     fontSize: 18,
                   ),
+
+                ),
+                Text(
+                  Login_with_this_or_that2,
+                  style: GoogleFonts.heebo(
+                    color: Color(0xff41B4C7),
+                    fontSize: 18,
+                  ),
+
                 ),
                 SizedBox(
                   height: height * 2,
@@ -108,12 +118,12 @@ class Subscribe extends StatelessWidget {
                             ' ',
                             ' ',
                             ' ',
-                            'Choose a Device',
+                            'Choisissez un appareil',
                             ' ',
                             ' ',
                             ' ',
-                            'Blood Type',
-                            'Choose Frequency',
+                            'Groupe sanguin',
+                            'Choisissez la fréquence',
                             0,
                             ' ',
                             'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
@@ -192,12 +202,12 @@ class Subscribe extends StatelessWidget {
                             ' ',
                             ' ',
                             ' ',
-                            'Choose a Device',
+                            'Choisissez un appareil',
                             ' ',
                             ' ',
                             ' ',
-                            'Blood Type',
-                            'Choose Frequency',
+                            'Groupe sanguin',
+                            'Choisissez la fréquence',
                             0,
                             ' ',
                             'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/propic.png?alt=media&token=d854a8bd-baf0-4082-84d4-4e3f8b7b423c');
@@ -308,7 +318,7 @@ class Subscribe extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Email Registration',
+                          Text(Email_regristration_data,
                               style: GoogleFonts.heebo(
                                   color: Colors.white,
                                   fontSize: 18,

@@ -14,9 +14,9 @@ class ProfileCard extends StatelessWidget {
       onTap: (){
 
         if(name=='Actions'){index_nav=0;}
-        else if(name=='Calendar'){index_nav=1;}
-        else if(name=='Evolution'){index_nav=2;}
-        else if(name=='Performances'){index_nav=3;}
+        else if(name=='Calendrier'){index_nav=1;}
+        else if(name=='Évolution'){index_nav=2;}
+        else if(name=='Les performances'){index_nav=3;}
         Navigator.of(context).push(
             MaterialPageRoute(
                 builder:

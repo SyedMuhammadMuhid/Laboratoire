@@ -500,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             width: 20,
                                                           ),
                                                           Text(
-                                                            'Pain',
+                                                            Pain_data,
                                                             style: GoogleFonts
                                                                 .heebo(
                                                                     fontSize:
@@ -550,7 +550,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             width: 20,
                                                           ),
                                                           Text(
-                                                            'Self Confidence',
+                                                            Self_confidence_data,
                                                             style: GoogleFonts
                                                                 .heebo(
                                                                     fontSize:
@@ -601,7 +601,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             width: 20,
                                                           ),
                                                           Text(
-                                                            'Sleep',
+                                                            Sleep_data,
                                                             style: GoogleFonts
                                                                 .heebo(
                                                                     fontSize:
@@ -702,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             width: 20,
                                                           ),
                                                           Text(
-                                                            'Mechanism',
+                                                            Mechanism_data,
                                                             style: GoogleFonts
                                                                 .heebo(
                                                                     fontSize:

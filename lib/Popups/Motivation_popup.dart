@@ -11,13 +11,12 @@ void Motivation_popup( BuildContext context, int Points, String Cleaning, int In
 {
   List Motivation_Statements=[
 
-    "Congratulations! You are halfway through daily points! Keep it up!",
-    "Congratulations! You are the cleaning pro!",
-    //"Wow! You've been wearing your ${Device} machine for nights in a row!",
-    "Hello? Don't you want to collect your points today?",
-    "Hi! How's your mouth today?",
-    "Hi! How are you feeling today?",
-    "Congratulations! You are halfway through your treatment! Keep it up!"
+    "Toutes nos félicitations! Vous êtes à mi-chemin des points quotidiens! Continuez!",
+    "Toutes nos félicitations! Vous êtes le pro du nettoyage!",
+    "Salut? Vous ne voulez pas accumuler vos points aujourd'hui?",
+    "Salut! Comment va ta bouche aujourd'hui?",
+    "Salut! Comment vous sentez-vous aujourd'hui?",
+    "Toutes nos félicitations! Vous êtes à la moitié de votre traitement! Continuez!"
   ];
        //5:08 PM
 
@@ -56,7 +55,7 @@ void Motivation_popup( BuildContext context, int Points, String Cleaning, int In
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FlatButton(
-                  child: Text('Thanks', style: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 16 ),),
+                  child: Text('Merci', style: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 16 ),),
                   onPressed: (){
                     Navigator.pop(context);
                   },

@@ -8,6 +8,7 @@ import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
+import 'package:sample_screen/Constant/data.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -85,7 +86,7 @@ final AuthServices _authServices=AuthServices();
           elevation: 0,
           title: SafeArea(
               child: Text(
-                'Create an account',
+                Creat_an_account_data,
                 style: TextStyle(color: Color(0xff41B4C7), fontSize: 25),
               )),
           centerTitle: true,
@@ -117,7 +118,7 @@ final AuthServices _authServices=AuthServices();
                                 height: 60,
                                 child: TextFormField(
                                     validator: (val) =>
-                                    val.isEmpty ? 'Enter Email' : null,
+                                    val.isEmpty ? 'Entrez votre e-mail' : null,
                                     onChanged: (val) {
                                       setState(() {
                                         Email = val;
@@ -142,13 +143,13 @@ final AuthServices _authServices=AuthServices();
                                 height: 20,
                               ),
                               Row(children: [
-                                Text('Password',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                                Text('Mot de passe',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
                               ],),
                               Container(
                                 height: 60,
                                 child: TextFormField(
                                     validator: (val) =>
-                                    val.length < 6 ? 'Password Length' : null,
+                                    val.length < 6 ? 'Longueur du mot de passe' : null,
                                     obscureText: obscureText1,
                                     onChanged: (val) {
                                       setState(() {
@@ -185,14 +186,14 @@ final AuthServices _authServices=AuthServices();
                                 height: 20,
                               ),
                               Row(children: [
-                                Text('Confirm Password',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                                Text("Confirmez le mot de passe",style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
                               ],),
                               Container(
                                 height: 60,
                                 child: TextFormField(
                                     validator: (val) =>
                                     val.length < 6 && Pass == Con_Pass
-                                        ? 'Password Dont Match'
+                                        ? 'Le mot de passe ne correspond pas'
                                         : null,
                                     obscureText: obscureText2,
                                     onChanged: (val) {
@@ -230,13 +231,13 @@ final AuthServices _authServices=AuthServices();
                                 height: 20,
                               ),
                               Row(children: [
-                                Text('First Name',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                                Text('Prénom',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
                               ],),
                               Container(
                                 height: 60,
                                 child: TextFormField(
                                     validator: (val) =>
-                                    val.length <3 ? 'First Name Length' : null,
+                                    val.length <3 ? 'Longueur du prénom' : null,
                                     obscureText: false,
                                     onChanged: (val) {
                                       setState(() {
@@ -263,13 +264,13 @@ final AuthServices _authServices=AuthServices();
                                 height: 20,
                               ),
                               Row(children: [
-                                Text('Last Name',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
+                                Text('Nom de famille',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
                               ],),
                               Container(
                                 height: 60,
                                 child: TextFormField(
                                     validator: (val) =>
-                                    val.length < 3 ? 'Last Name Length' : null,
+                                    val.length < 3 ? 'Longueur du nom' : null,
                                     obscureText: false,
                                     onChanged: (val) {
                                       setState(() {
@@ -306,7 +307,7 @@ final AuthServices _authServices=AuthServices();
                                 child: FlatButton(
 
                                     child: Text(
-                                      'Create',
+                                      'Créer',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),
@@ -346,7 +347,7 @@ final AuthServices _authServices=AuthServices();
                                           }
 
                                           else if(Pass != Con_Pass){
-                                            float_toast("Passwords Don't Match");
+                                            float_toast(Toast_pass_dont_match_data);
                                           }
                                        setState(() {
 

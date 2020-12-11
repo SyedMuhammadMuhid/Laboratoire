@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sample_screen/Constant/data.dart';
+
 
 class PleaseWait extends StatelessWidget {
   @override
@@ -18,7 +20,7 @@ class PleaseWait extends StatelessWidget {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 10,),
-            Text('We Are Creating Your Package, Please Wait')
+            Text(Please_wait_data)
           ],
         ),
 

@@ -15,11 +15,11 @@ void logout_popup(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            'Logout',
+            'Se déconnecter',
             style: TextStyle(color: Colors.red, fontSize: 18),
           ),
           content: Text(
-            'By clicking Logout you exit this application and the session',
+            "En cliquant sur Déconnexion, vous quittez cette application et la session",
             style: TextStyle(color: Color(0xff41B4C7), fontSize: 14),
           ),
           actions: <Widget>[
@@ -28,7 +28,7 @@ void logout_popup(BuildContext context) {
               children: <Widget>[
                 FlatButton(
                   child: Text(
-                    'Cancel',
+                    'Annuler',
                     style: GoogleFonts.heebo(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
@@ -38,7 +38,7 @@ void logout_popup(BuildContext context) {
                 ),
                 FlatButton(
                   child: Text(
-                    'Logout',
+                    'Se déconnecter',
                     style: GoogleFonts.heebo(
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),

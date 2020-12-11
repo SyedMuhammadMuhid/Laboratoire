@@ -264,7 +264,7 @@ class _DayswidState extends State<Dayswid> {
                               child: Column(
                                 children: [
                                   Text(
-                                    'Accumulation of points',
+                                    'Accumulation de points',
                                     style: GoogleFonts.heebo(
                                         fontSize: 18, color: Color(0xffF5FBFC)),
                                   ),

@@ -92,7 +92,7 @@ class _StatScreenState extends State<StatScreen> {
                                       )),
                                 ),
                                 Text(
-                                  'Evolution',
+                                  'Évolution',
                                   style: GoogleFonts.heebo(
                                       color: Colors.white, fontSize: 30),
                                 ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/First_Profile_Screen.dart';
+import 'package:sample_screen/Constant/data.dart';
+
 
 class StartScreen extends StatelessWidget {
   @override
@@ -27,7 +29,7 @@ class StartScreen extends StatelessWidget {
                          Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
-                             Text('''Laboratoire\nBellomo & Lambert''', style: GoogleFonts.heebo(fontSize: 20,color: Color(0xff41B4C7), ),),
+                             Text(App_name_data, style: GoogleFonts.heebo(fontSize: 20,color: Color(0xff41B4C7), ),),
                            ],
                          )
                        ],),
@@ -41,9 +43,9 @@ class StartScreen extends StatelessWidget {
 
                              Column(
                                children: [
-                                 Text('Perfect Smile', style: GoogleFonts.heebo(fontSize: 35, color: Colors.black87 ),),
-                                 Text('Welcome, you are now ', style: GoogleFonts.heebo(fontSize: 18, color: Colors.black54),),
-                                 Text('ready to start ! ', style: GoogleFonts.heebo(fontSize: 18, color: Colors.black54 ),),
+                                 Text('Sourire parfait', style: GoogleFonts.heebo(fontSize: 35, color: Colors.black87 ),),
+                                 Text('Bienvenue, vous êtes maintenant ', style: GoogleFonts.heebo(fontSize: 18, color: Colors.black54),),
+                                 Text('prêt à commencer ! ', style: GoogleFonts.heebo(fontSize: 18, color: Colors.black54 ),),
 
                                ],
                              )

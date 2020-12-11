@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Screens/Login_Screen.dart';
 import 'package:sample_screen/Screens/Signup_Screen.dart';
 import 'package:sample_screen/Screens/Subscribe.dart';
@@ -23,9 +24,9 @@ class Welcome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     Column(children: [
-                      Text('Welcome', style: GoogleFonts.heebo(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.lightBlue[50]),),
-                    Text('Do you have an account?',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
-                    Text('Sign up or log in!',style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
+                      Text(Welcome_data, style: GoogleFonts.heebo(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.lightBlue[50]),),
+                    Text(Do_have_account,style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
+                    Text(Sign_up_login_data,style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
                     ],)],),
                 SizedBox(height: 25,),
                   Image(image: AssetImage('assets/faces.png'),height: height*14,width: width*9,),

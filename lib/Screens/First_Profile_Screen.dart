@@ -354,7 +354,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                           child: Image.asset('assets/first_pro_btn.png')),
                                       Row(
                                         children: [
-                                          Text('First Name',
+                                          Text(First_name_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -363,7 +363,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 1
-                                              ? 'Please Fill this Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -388,7 +388,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text('Last Name',
+                                          Text(Last_name_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -397,7 +397,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 1
-                                              ? 'Please Fill this Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -420,7 +420,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       SizedBox(height: 20,),
                                       Row(
                                         children: [
-                                          Text('Age',
+                                          Text(Age_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -429,7 +429,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.isEmpty
-                                              ? 'Please Fill This Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           keyboardType: TextInputType.number,
                                           obscureText: false,
@@ -455,7 +455,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text('Sex',
+                                          Text(Sex_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -464,7 +464,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 2
-                                              ? 'Please Fill the Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -691,7 +691,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text("Dentist's Address",
+                                          Text(Dentist_address_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -700,7 +700,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 2
-                                              ? 'Please Fill This Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -725,7 +725,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text("Doctor's Address",
+                                          Text(Doctor_address_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -734,7 +734,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 2
-                                              ? 'Please Fill This Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -759,7 +759,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text('Allergies',
+                                          Text(Allergies_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -768,7 +768,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 2
-                                              ? 'Please Fill This Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {
@@ -1172,7 +1172,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   InkWell(
                                                     onTap: (){
                                                       setState(() {
-                                                        Frequency='1x /Day';
+                                                        Frequency='1x / jour';
                                                         _isExpanded3=false;
                                                       });
                                                     },
@@ -1183,7 +1183,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text(
-                                                            '1x /Day',
+                                                            '1x / jour',
                                                             style:
                                                                 GoogleFonts.heebo(
                                                                     color: Color(
@@ -1202,7 +1202,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   InkWell(
                                                     onTap: (){
                                                       setState(() {
-                                                        Frequency='3x /Day';
+                                                        Frequency='3x /Jour';
                                                         _isExpanded3=false;
                                                       });
                                                     },
@@ -1213,7 +1213,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text(
-                                                            '3x /Day',
+                                                            '3x /Jour',
                                                             style:
                                                                 GoogleFonts.heebo(
                                                                     color: Color(
@@ -1231,7 +1231,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   ),
                                                   InkWell(
                                                     onTap: (){ setState(() {
-                                                      Frequency='1x /Week';
+                                                      Frequency='1x /Semaine';
                                                       _isExpanded3=false;
                                                     });},
                                                     child: Padding(
@@ -1240,7 +1240,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                               8.0),
                                                       child: Row(
                                                         children: [
-                                                          Text('1x /Week',
+                                                          Text('x /Semaine',
                                                               style: GoogleFonts.heebo(
                                                                   color: Color(
                                                                       0xff41B4C7),
@@ -1256,7 +1256,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   ),
                                                   InkWell(onTap: (){
                                                     setState(() {
-                                                      Frequency='2x /Week';
+                                                      Frequency='2x /Semaine';
                                                       _isExpanded3=false;
                                                     });
                                                   },
@@ -1266,7 +1266,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                               8.0),
                                                       child: Row(
                                                         children: [
-                                                          Text('2x /Week',
+                                                          Text('2x /Semaine',
                                                               style: GoogleFonts.heebo(
                                                                   color: Color(
                                                                       0xff41B4C7),
@@ -1287,7 +1287,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text('Total Duration of Treatment',
+                                          Text(Total_duration_data,
                                               style: GoogleFonts.heebo(
                                                   color: Colors.black54,
                                                   fontSize: 18,
@@ -1296,7 +1296,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val=='0'
-                                              ? 'Duration Should Be Greater than 0'
+                                              ? 'La durée doit être supérieure à 0'
                                              :null,
                                           obscureText: false,
                                           keyboardType: TextInputType.number,
@@ -1331,7 +1331,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       TextFormField(
                                           validator: (val) => val.length < 2
-                                              ? 'Please Fill This Field'
+                                              ? 'Veuillez remplir ce champ'
                                               : null,
                                           obscureText: false,
                                           onChanged: (val) {

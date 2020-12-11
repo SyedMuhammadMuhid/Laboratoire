@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:sample_screen/Constant/Constants.dart';
+import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 60,
                               child: TextFormField(
                                   validator: (val) =>
-                                      val.length < 6 ? 'email incorrect' : null,
+                                      val.length < 6 ? 'Adresse Email incorrecte' : null,
                                   obscureText: false,
                                   onChanged: (val) {
                                     setState(() {
@@ -161,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 60,
                               child: TextFormField(
                                   validator: (val) =>
-                                      val.length < 6 ? 'Password Length' : null,
+                                      val.length < 6 ? 'Longueur du mot de passe' : null,
                                   obscureText: obscureText1,
                                   onChanged: (val) {
                                     setState(() {
@@ -244,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             LoadingScreen()));
                               } else if (result == 0) {
                                 float_toast(
-                                    "Email/Password Don't Match");
+                                    Toast_wrong_data);
                               }
                             }
                           }),
