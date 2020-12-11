@@ -321,7 +321,7 @@ final AuthServices _authServices=AuthServices();
                                               asyncpressed=true;
                                             });
 
-                                        dynamic result=  await _authServices.SignUpWithEmailPass(Email, Pass, F_Name, L_Name);
+                                        dynamic result=  await _authServices.SignUpWithEmailPass(Email.trim(), Pass, F_Name, L_Name);
                                       //  print(result+ 'this is the result after signup as emial and pass');
 
                                             setState(() {

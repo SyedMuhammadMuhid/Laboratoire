@@ -1244,7 +1244,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                               style: GoogleFonts.heebo(
                                                                   color: Color(
                                                                       0xff41B4C7),
-                                                                  fontSize: 25))
+                                                                    fontSize: 25))
                                                         ],
                                                       ),
                                                     ),

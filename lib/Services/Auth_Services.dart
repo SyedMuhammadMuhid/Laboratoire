@@ -101,7 +101,7 @@ class AuthServices {
         return null;
       }
     } catch (e) {
-      return null;
+      return 0;
     }
   }
 

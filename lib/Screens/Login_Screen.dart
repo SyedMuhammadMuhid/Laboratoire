@@ -6,6 +6,8 @@ import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:sample_screen/Wrapper.dart';
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,14 +15,70 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+
   bool obscureText1=true;
   final _key = GlobalKey<FormState>();
   String Email;
   String Pass;
   bool _asynccaller=false;
   final AuthServices _authServices=AuthServices();
+  FToast fToast;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    //--------------------------------------
+
+
+    void float_toast(String message) async {
+
+    Widget toast = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(25.0),
+    color: Colors.redAccent,
+    ),
+    child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    Text(
+    message,
+    style: TextStyle(color: Colors.white, fontSize: 20),
+    ),
+    ],
+    ),
+    );
+
+    fToast.showToast(
+    child: toast,
+    gravity: ToastGravity.BOTTOM,
+    toastDuration: Duration(seconds: 2),
+    /* positionedToastBuilder: (context, child) {
+            return Positioned(
+              child: child,
+              top: MediaQuery.of(context).size.height-10,
+
+            );
+          }*/);
+    }
+
+
+
+    //--------------------------
+
+
     return  Container(
         decoration: BoxDecoration(
         image: DecorationImage(
@@ -144,7 +202,7 @@ Row(children: [
                               _asynccaller=true;
                             });
 
-                            dynamic result= await _authServices.SignInWithEmailPass(Email, Pass);
+                            dynamic result= await _authServices.SignInWithEmailPass(Email.trim(), Pass);
 
                             setState(() {
                               _asynccaller=false;
@@ -160,6 +218,9 @@ Row(children: [
                                   MaterialPageRoute(
                                       builder:
                                           (BuildContext context) => LoadingScreen()));
+                            }
+                            else if(result==0){
+                              float_toast('Please Very Your Email and Try Again');
                             }
 
 
