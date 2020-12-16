@@ -46,6 +46,20 @@ class _CalenderScreenState extends State<CalenderScreen> {
     'Nov',
     'Dec'
   ];
+  List months_full = [
+    'January',
+    'Febuary',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
 
   @override
   void initState() {
@@ -74,6 +88,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
+
+                Stack(
+            children: [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -92,7 +109,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             )),
                       ),
                       Text(
-                        Actions_Data,
+                        "Calendrier",
                         style: GoogleFonts.heebo(
                             color: Colors.white, fontSize: 30),
                       ),
@@ -132,10 +149,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      formatted,
+                      DateTime.now().day.toString()+" "+months_full[DateTime.now().month-1]+" "+DateTime.now().year.toString(),
                       style: GoogleFonts.heebo(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold),
                     )
                   ],
@@ -572,7 +589,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         })),
               ],
             ),
-          ),
-        )));
+          ]),
+        ))));
   }
 }
