@@ -182,9 +182,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             logout_popup(context);
 
                                           },
-                                          child: Icon(
-                                            Icons.exit_to_app, size: 30,
-                                            color: Color(0xff41B4C7),)),
+                                          // child: Icon(
+                                          //   Icons.exit_to_app, size: 30,
+                                          //   color: Color(0xff41B4C7),)
+
+                                        child: ImageIcon(
+                                          AssetImage('assets/edit_log.png')
+                                              ,color: Color(0xff41B4C7),
+                                        ),
+
+                                      ),
                                     )
                                   ],),
                                 Stack(children: [
@@ -208,9 +215,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       backgroundColor: Color(0xffFF999A),),
                                   ),
                                 ]),
-                                Text(F_Name+" "+L_Name, style: GoogleFonts.heebo(
+                                // Text(F_Name+" "+L_Name, style: GoogleFonts.dMSerifText(
+                                //     fontSize: 28,
+                                //     fontWeight: FontWeight.bold,
+                                //     color: Colors.black87),)
+                                Text("Mon Profil", style: GoogleFonts.dMSerifText(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
                                     color: Colors.black87),)
                               ],
                             ),

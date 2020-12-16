@@ -108,12 +108,13 @@ class _DayswidState extends State<Dayswid> {
                         children: [
                           Text(
                             Date_from_database.day.toString()+' '+months[current_mon]+" "+Date_from_database.year.toString(),
-                            style: GoogleFonts.heebo(
+                            style: GoogleFonts.dMSerifText(
+                              letterSpacing: 1,
                                 fontSize: 15, color: Color(0xff41B4C7)),
                           ),
                           Text(
                             "Jour ${index_of_day+1}",
-                            style: GoogleFonts.heebo(
+                            style: GoogleFonts.dMSerifText(
                                 fontSize: 35, color: Color(0xff41B4C7)),
                           ),
                         ],
@@ -140,7 +141,7 @@ class _DayswidState extends State<Dayswid> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              height: MediaQuery.of(context).size.width<400?1100:1000,
+                              height: MediaQuery.of(context).size.width<400?1120:1020,
                               child: StreamBuilder(
                                   stream: FirebaseFirestore.instance
                                       .collection('UserData')
@@ -210,7 +211,7 @@ class _DayswidState extends State<Dayswid> {
                                   child: Center(
                                       child: Text(
                                     '${total_hour_point_of_the_day}h',
-                                    style: GoogleFonts.heebo(
+                                    style: GoogleFonts.dMSerifText(
                                         color: Colors.white, fontSize: 30),
                                   )),
                                   color: Color(0xff41B4C7),
@@ -265,12 +266,12 @@ class _DayswidState extends State<Dayswid> {
                                 children: [
                                   Text(
                                     'Accumulation de points',
-                                    style: GoogleFonts.heebo(
+                                    style: GoogleFonts.dMSerifText(
                                         fontSize: 18, color: Color(0xffF5FBFC)),
                                   ),
                                   Text(
                                     total_point_of_the_day.toString(),
-                                    style: GoogleFonts.heebo(
+                                    style: GoogleFonts.dMSerifText(
                                         fontSize: 30, color: Color(0xffF5FBFC)),
                                   )
                                 ],

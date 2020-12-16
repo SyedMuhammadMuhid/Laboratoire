@@ -32,7 +32,7 @@ class ProfileCard extends StatelessWidget {
               Row(children: [
                 Image(image: AssetImage(image_path),height: 40,width: 40,),
                 SizedBox(width: 30,),
-                Text(name, style: GoogleFonts.heebo(fontSize: 22, fontWeight: FontWeight.bold),)
+                Text(name, style: GoogleFonts.dMSerifText(fontSize: 22, fontWeight: FontWeight.bold),)
               ],),
               SizedBox(height: 5,),
               Container(

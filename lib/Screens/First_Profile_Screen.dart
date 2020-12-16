@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as StorageReference;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -13,6 +15,7 @@ import 'package:sample_screen/Constant/data.dart';
 import 'package:sample_screen/Loading/loading.dart';
 import 'package:sample_screen/Models/User_Data_Model.dart';
 import 'package:sample_screen/Screens/Home.dart';
+import 'package:sample_screen/Screens/Notification_Screen.dart';
 import 'package:sample_screen/Screens/Start_Screen.dart';
 import 'package:sample_screen/Services/database.dart';
 import 'package:path/path.dart' as Path;
@@ -34,6 +37,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   bool _isExpanded = false;
   bool _isExpanded2 = false;
   bool _isExpanded3 = false;
+  FToast fToast;
 
   bool asyncpressed=false;
   String Allergies;
@@ -47,7 +51,13 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   int times=0;
   List image=['https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/plus_btn.png?alt=media&token=d2463c61-e318-4d16-9002-c5634f09b6e8'];
   // a choose file function--------------
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
   void chooseFile() async {
     File selected = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -90,6 +100,45 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
 
   }
   // end of function-------------
+
+
+  //---------------------------------toast function
+  void float_toast(String message) async {
+
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.redAccent,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            message,
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ],
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 2),
+      /* positionedToastBuilder: (context, child) {
+            return Positioned(
+              child: child,
+              top: MediaQuery.of(context).size.height-10,
+
+            );
+          }*/);
+  }
+
+  //________________________________
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -148,6 +197,155 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       size: 55,
                                     )),
                               ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: GestureDetector(
+                                    onTap: () async{
+                                      //-----------------------------------------------
+                                      if (_key.currentState.validate()) {
+
+                                        setState(() {
+                                          asyncpressed=true;
+                                        });
+
+                                        if(userdata.Total_duration!=Total_duration) {
+                                          dynamic result =
+                                              await DatabaseService(
+                                              uid: uid_constant)
+                                              .UpdateUserData(
+                                              F_Name,
+                                              L_Name,
+                                              Age,
+                                              Sex,
+                                              Device,
+                                              Allergies,
+                                              Doctor_address,
+                                              Dentist_address,
+                                              Blood_type,
+                                              Frequency,
+                                              Total_duration,
+                                              Instructions,
+                                              Image_url);
+
+
+                                          final snapShot = await FirebaseFirestore.instance
+                                              .collection('UserData')
+                                              .doc(uid_constant).collection('Points').get();
+                                          final snapShot2 = await FirebaseFirestore.instance
+                                              .collection('UserData')
+                                              .doc(uid_constant).collection('CheckPoints').get();
+                                          final snapShot3 = await FirebaseFirestore.instance
+                                              .collection('ImageGrid')
+                                              .doc(uid_constant).collection('CheckPoints').get();
+
+                                          if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
+                                            FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+                                                .collection('Points').get()
+                                                .then((snapshot) {
+                                              for (DocumentSnapshot ds in snapshot.docs) {
+                                                ds.reference.delete();
+                                              }
+                                            });
+
+                                            FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
+                                                .collection('CheckPoints').get()
+                                                .then((snapshot) {
+                                              for (DocumentSnapshot ds in snapshot.docs) {
+                                                ds.reference.delete();
+                                              }
+                                            });
+                                          }
+// one for removed and made into one
+                                          for (int i = 1; i <= Total_duration; i++) {
+                                            DatabaseService(uid: uid_constant).UpdatePoints(
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0);
+
+                                            // this command was in an other for loop
+                                            DatabaseService(uid: uid_constant).UpdateCheckPoint(
+                                                ' ', ' ', ' ', ' ', ' ');
+                                          }
+
+                                          if (snapShot3.docs.length == 0) {
+                                            await DatabaseService(uid: uid_constant).UpdateImageList(image);
+                                          }
+                                        }
+//-------------------------------------------
+
+                                        else if(userdata.Total_duration==Total_duration) {
+                                          dynamic result =
+                                              await DatabaseService(
+                                              uid: uid_constant)
+                                              .UpdateUserData(
+                                              F_Name,
+                                              L_Name,
+                                              Age,
+                                              Sex,
+                                              Device,
+                                              Allergies,
+                                              Doctor_address,
+                                              Dentist_address,
+                                              Blood_type,
+                                              Frequency,
+                                              Total_duration,
+                                              Instructions,
+                                              Image_url);
+
+                                        }
+
+
+                                        //------------------------------------------------
+                                        setState(() {
+                                          asyncpressed=false;
+                                        });
+
+
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (BuildContext
+                                                context) =>
+                                                    NotificationScreen()));
+
+                                      }
+                                      //-----------------------------------------------
+
+else{
+  float_toast('créer un profil en premier');
+                                      }
+
+                                    },
+                                    child: notification_list.length==0?CircleAvatar(
+                                      child: Icon(
+                                        Icons.notifications_none,
+                                        color: Colors.white,
+                                        size: 35,
+                                      ),
+                                      backgroundColor: Color(0xffFF999A),
+                                      radius: 25,
+                                    ):CircleAvatar(
+                                      child: Badge(
+                                          badgeContent: Text(
+                                            notification_list.length.toString(),
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          child: Icon(
+                                            Icons.notifications_none,
+                                            color: Colors.white,
+                                            size: 35,
+                                          )),
+                                      backgroundColor: Color(0xffFF999A),
+                                      radius: 25,
+                                    )),
+                              )
                             ]),
                         Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -230,10 +428,10 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ]),
                                       Text(
                                         'Mon Profil',
-                                        style: GoogleFonts.heebo(
+                                        style: GoogleFonts.dMSerifText(
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black87),
+                                            color: Colors.black87,letterSpacing: 1),
                                       ),
                                       InkWell(onTap: () async {
                                         if (_key.currentState.validate()) {
@@ -355,7 +553,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(First_name_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -389,7 +587,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Last_name_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -421,7 +619,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Age_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -456,7 +654,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Sex_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -484,6 +682,18 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                 fontSize: 25,
                                                 color: Color(0xff41B4C7)),
                                           )),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Type d'appareil sélectionné",
+                                              style: GoogleFonts.dMSerifText(
+                                                  color: Colors.black54,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -516,7 +726,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   Container(
                                                     child: Text(
                                                       Device,
-                                                      style: GoogleFonts.heebo(
+                                                      style: GoogleFonts.dMSerifText(
                                                           color:
                                                               Color(0xff41B4C7),
                                                           fontSize: 25),
@@ -531,9 +741,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       },
                                                       child: Icon(
                                                         _isExpanded == false
-                                                            ? Icons.expand_more
-                                                            : Icons.expand_less,
-                                                        color: Colors.black54,
+                                                            ? Icons.arrow_downward
+                                                            : Icons.arrow_upward,
+                                                        color: Color(0xff41B4C7),
                                                       ))
                                                 ],
                                               ),
@@ -564,7 +774,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                         children: [
                                                           Text(
                                                             'Sagittal',
-                                                            style: GoogleFonts.heebo(
+                                                            style: GoogleFonts.dMSerifText(
                                                                 color: Color(0xff41B4C7),
                                                                 fontSize: 25),
                                                           )
@@ -593,7 +803,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                           Text(
                                                             'Schwartz',
                                                             style:
-                                                                GoogleFonts.heebo(
+                                                                GoogleFonts.dMSerifText(
                                                                     color:  Color(0xff41B4C7),
                                                                     fontSize: 25),
                                                           )
@@ -620,7 +830,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('Split Plate',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color:  Color(0xff41B4C7),
                                                                   fontSize: 25))
                                                         ],
@@ -645,7 +855,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('Bionator',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -671,7 +881,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('Twin Block',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -692,7 +902,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Dentist_address_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -726,7 +936,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Doctor_address_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -760,7 +970,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Allergies_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -820,7 +1030,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   Container(
                                                     child: Text(
                                                       Blood_type,
-                                                      style: GoogleFonts.heebo(
+                                                      style: GoogleFonts.dMSerifText(
                                                           color:
                                                               Color(0xff41B4C7),
                                                           fontSize: 25),
@@ -835,9 +1045,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       },
                                                       child: Icon(
                                                         _isExpanded2 == false
-                                                            ? Icons.expand_more
-                                                            : Icons.expand_less,
-                                                        color: Colors.black54,
+                                                            ? Icons.arrow_downward
+                                                            : Icons.arrow_upward,
+                                                        color: Color(0xff41B4C7),
                                                       ))
                                                 ],
                                               ),
@@ -869,7 +1079,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                           Text(
                                                             'O-',
                                                             style:
-                                                                GoogleFonts.heebo(
+                                                                GoogleFonts.dMSerifText(
                                                                     color: Color(
                                                                         0xff41B4C7),
                                                                     fontSize: 25),
@@ -899,7 +1109,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                           Text(
                                                             'O+',
                                                             style:
-                                                                GoogleFonts.heebo(
+                                                                GoogleFonts.dMSerifText(
                                                                     color: Color(
                                                                         0xff41B4C7),
                                                                     fontSize: 25),
@@ -927,7 +1137,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('A-',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -954,7 +1164,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('A+',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -981,7 +1191,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('B-',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1008,7 +1218,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('B+',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1035,7 +1245,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('AB-',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1062,7 +1272,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('AB+',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1089,7 +1299,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('UnKnown',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1136,7 +1346,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   Container(
                                                     child: Text(
                                                       Frequency,
-                                                      style: GoogleFonts.heebo(
+                                                      style: GoogleFonts.dMSerifText(
                                                           color:
                                                               Color(0xff41B4C7),
                                                           fontSize: 25),
@@ -1151,9 +1361,9 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       },
                                                       child: Icon(
                                                         _isExpanded3 == false
-                                                            ? Icons.expand_more
-                                                            : Icons.expand_less,
-                                                        color: Colors.black54,
+                                                            ? Icons.arrow_downward
+                                                            : Icons.arrow_upward,
+                                                        color: Color(0xff41B4C7),
                                                       ))
                                                 ],
                                               ),
@@ -1185,7 +1395,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                           Text(
                                                             '1x / jour',
                                                             style:
-                                                                GoogleFonts.heebo(
+                                                                GoogleFonts.dMSerifText(
                                                                     color: Color(
                                                                         0xff41B4C7),
                                                                     fontSize: 25),
@@ -1215,7 +1425,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                           Text(
                                                             '3x /Jour',
                                                             style:
-                                                                GoogleFonts.heebo(
+                                                                GoogleFonts.dMSerifText(
                                                                     color: Color(
                                                                         0xff41B4C7),
                                                                     fontSize: 25),
@@ -1241,7 +1451,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('x /Semaine',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                     fontSize: 25))
@@ -1267,7 +1477,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                       child: Row(
                                                         children: [
                                                           Text('2x /Semaine',
-                                                              style: GoogleFonts.heebo(
+                                                              style: GoogleFonts.dMSerifText(
                                                                   color: Color(
                                                                       0xff41B4C7),
                                                                   fontSize: 25))
@@ -1288,7 +1498,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       Row(
                                         children: [
                                           Text(Total_duration_data,
-                                              style: GoogleFonts.heebo(
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))
@@ -1322,8 +1532,8 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          Text('Instruction from Dentist',
-                                              style: GoogleFonts.heebo(
+                                          Text('Instructions spéciales du dentiste',
+                                              style: GoogleFonts.dMSerifText(
                                                   color: Colors.black54,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold))

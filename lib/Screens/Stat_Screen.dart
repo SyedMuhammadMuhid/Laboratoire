@@ -217,8 +217,7 @@ class _StatScreenState extends State<StatScreen> {
                                                     ),
                                                     Center(
                                                         child: Text(
-                                                            "$percentage" +
-                                                                " %",
+                                                            "$percentage",
                                                             style: GoogleFonts
                                                                 .heebo(
                                                                 fontSize: 15,
@@ -288,7 +287,7 @@ class _StatScreenState extends State<StatScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  "Une fois par mois, prend une photo\nde ton sourier afin de voir l'evolution.",
+                                  "Une fois par mois, prend une photo\nde ton sourire afin de voir l'evolution.",
                                   style: GoogleFonts.heebo(
                                       fontSize: 20, color: Colors.white))
                             ],

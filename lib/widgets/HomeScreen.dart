@@ -261,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         children: [
                                                           Text(
                                                             'POINTS',
-                                                            style: GoogleFonts.heebo(
+                                                            style: GoogleFonts.dMSerifText(
                                                                 fontSize: 18,
                                                                 color: Color(
                                                                     0xffF5FBFC)),
@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     [
                                                                     "TotalPoints"]
                                                                 .toString(),
-                                                            style: GoogleFonts.heebo(
+                                                            style: GoogleFonts.dMSerifText(
                                                                 fontSize: 30,
                                                                 color: Color(
                                                                     0xffF5FBFC)),
@@ -282,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               child: Text(
                                                                   "$percentage" +
                                                                       " %",
-                                                                  style: GoogleFonts.heebo(
+                                                                  style: GoogleFonts.dMSerifText(
                                                                       fontSize:
                                                                           11,
                                                                       color: Color(
@@ -368,7 +368,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         children: [
                                                           Text(
                                                             'JOURS',
-                                                            style: GoogleFonts.heebo(
+                                                            style: GoogleFonts.dMSerifText(
                                                                 fontSize: 18,
                                                                 color: Color(
                                                                     0xffF5FBFC)),
@@ -376,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           Text(
                                                             userdata.Total_duration
                                                                 .toString(),
-                                                            style: GoogleFonts.heebo(
+                                                            style: GoogleFonts.dMSerifText(
                                                                 fontSize: 30,
                                                                 color: Color(
                                                                     0xffF5FBFC)),
@@ -385,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               child: Text(
                                                                   "$percentage" +
                                                                       " %",
-                                                                  style: GoogleFonts.heebo(
+                                                                  style: GoogleFonts.dMSerifText(
                                                                       fontSize:
                                                                           11,
                                                                       color: Color(
@@ -439,8 +439,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Center(
                                                   child: Text(
-                                                'Comment ca Va?',
-                                                style: GoogleFonts.heebo(
+                                                'Comment ca va?',
+                                                style: GoogleFonts.dMSerifText(
                                                     fontSize: 20,
                                                     color: Color(0xff41B4C7)),
                                               )),
@@ -455,8 +455,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     child: Image(
                                                       image: AssetImage(
                                                           'assets/happy1.png'),
-                                                      height: 70,
-                                                      width: 70,
+                                                      height: MediaQuery.of(context).size.width<400?58:70,
+                                                      width: MediaQuery.of(context).size.width<400?58:70,
                                                     ),
                                                   ),
                                                   Padding(
@@ -466,8 +466,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     child: Image(
                                                       image: AssetImage(
                                                           'assets/happy2.png'),
-                                                      height: 70,
-                                                      width: 140,
+                                                      height: MediaQuery.of(context).size.width<400?58:70,
+                                                      width: MediaQuery.of(context).size.width<400?116:140,
                                                     ),
                                                   ),
                                                   SizedBox(

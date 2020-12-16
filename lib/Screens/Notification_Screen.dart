@@ -64,18 +64,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index){
                   return Container(
-                    height: 150,
+                    height: 170,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.transparent,
                     child: Column(children: [
                       Row(
                         children: [
-                          CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Colors.pink[200],radius: 25,),
+                          CircleAvatar(child: Icon(Icons.notifications_none, color: Color(0xffF5FBFC),size: 35,),backgroundColor: Color(0xffFF999A),radius: 25,),
                           SizedBox(width: 20,),
                           Expanded(
                             flex: 1,
                             child: Container(
-                              child: Text(notification_list[index], style: GoogleFonts.heebo(color:Colors.white,fontSize: 18),
+                              child: Text(notification_list[index], style: GoogleFonts.heebo(color:Colors.white,fontSize: 16),
 
                               ),
                             ),
@@ -85,6 +85,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ],
 
                       ),
+                      SizedBox(height: 20,),
                       Row(mainAxisAlignment: MainAxisAlignment.center,children: [
                         InkWell(onTap: (){
                           setState(() {
@@ -97,7 +98,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           });
                         },child: Image.asset('assets/non.png'))
                       ],),
-                      Container(height: 2,width: 300,color: Colors.white,),
+                      Container(height: 2,width: 300,color: Colors.black45,),
                     ],),
                   );
                 },

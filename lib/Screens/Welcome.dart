@@ -24,7 +24,7 @@ class Welcome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     Column(children: [
-                      Text(Welcome_data, style: GoogleFonts.heebo(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.lightBlue[50]),),
+                      Text(Welcome_data, style: GoogleFonts.heebo(fontSize: 35, color: Colors.lightBlue[50]),),
                     Text(Do_have_account,style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50])),
                     Text(Sign_up_login_data,style: GoogleFonts.heebo(fontSize: 20,  color: Colors.lightBlue[50]))
                     ],)],),

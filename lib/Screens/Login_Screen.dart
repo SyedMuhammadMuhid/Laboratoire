@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Se connector',
+                          'Se connecter',
                           style: GoogleFonts.heebo(
                               color: Color(0xff41B4C7),
                               fontSize: 30,
@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: FlatButton(
                           child: Text(
-                            'Se connector',
+                            'Se connecter',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
