@@ -184,7 +184,7 @@ class _PerforScreenState extends State<PerforScreen> {
                                                   ),
                                                   Center(
                                                       child: Text(
-                                                          "$percentage" + " %",
+                                                          "$percentage",
                                                           style: GoogleFonts.heebo(
                                                               fontSize: 15,
                                                               color: Color(

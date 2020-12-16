@@ -87,357 +87,650 @@ class _CalenderScreenState extends State<CalenderScreen> {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    Stack(
+                      children:[
+
+                        Column(
+                        children:[
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ProfileScreen()));
+                                  },
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                    size: 55,
+                                  )),
+                            ),
+                            Text(
+                              "Calendrier",
+                              style: GoogleFonts.heebo(
+                                  color: Colors.white, fontSize: 30),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            NotificationScreen()));
+                                  },
+                                  child: notification_list.length==0?CircleAvatar(
+                                    child: Icon(
+                                      Icons.notifications_none,
+                                      color: Colors.white,
+                                      size: 35,
+                                    ),
+                                    backgroundColor: Color(0xffFF999A),
+                                    radius: 25,
+                                  ):CircleAvatar(
+                                    child: Badge(
+                                        badgeContent: Text(
+                                          notification_list.length.toString(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        child: Icon(
+                                          Icons.notifications_none,
+                                          color: Colors.white,
+                                          size: 35,
+                                        )),
+                                    backgroundColor: Color(0xffFF999A),
+                                    radius: 25,
+                                  )),
+                            )
+                          ]),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            DateTime.now().day.toString()+" "+months_full[DateTime.now().month-1]+" "+DateTime.now().year.toString(),
+                            style: GoogleFonts.heebo(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      Stack(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ProfileScreen()));
-                                },
-                                child: Icon(
-                                  Icons.menu,
-                                  color: Colors.white,
-                                  size: 55,
-                                )),
-                          ),
-                          Text(
-                            "calendrier",
-                            style: GoogleFonts.heebo(
-                                color: Colors.white, fontSize: 30),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          NotificationScreen()));
-                                },
-                                child: notification_list.length==0?CircleAvatar(
-                                  child: Icon(
-                                    Icons.notifications_none,
-                                    color: Colors.white,
-                                    size: 35,
+                            padding: const EdgeInsets.all(30.0),
+                            child: Container(
+                              height: 400,
+                              decoration: BoxDecoration(
+                                color: Color(0xffF5FBFC),
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30.0),
+                                    topRight: Radius.circular(30.0),
+                                    bottomRight: Radius.circular(30.0),
+                                    bottomLeft: Radius.circular(30.0)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0.0, 1.0), //(x,y)
+                                    blurRadius: 6.0,
                                   ),
-                                  backgroundColor: Color(0xffFF999A),
-                                  radius: 25,
-                                ):CircleAvatar(
-                                  child: Badge(
-                                      badgeContent: Text(
-                                        notification_list.length.toString(),
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      child: Icon(
-                                        Icons.notifications_none,
-                                        color: Colors.white,
-                                        size: 35,
-                                      )),
-                                  backgroundColor: Color(0xffFF999A),
-                                  radius: 25,
-                                )),
-                          )
-                        ]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateTime.now().day.toString()+" "+months_full[DateTime.now().month-1]+" "+DateTime.now().year.toString(),
-                          style: GoogleFonts.heebo(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: Container(
-                            height: 400,
-                            decoration: BoxDecoration(
-                              color: Color(0xffF5FBFC),
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30.0),
-                                  topRight: Radius.circular(30.0),
-                                  bottomRight: Radius.circular(30.0),
-                                  bottomLeft: Radius.circular(30.0)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0.0, 1.0), //(x,y)
-                                  blurRadius: 6.0,
-                                ),
-                              ],
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Container(
-                                      height: clicked_check == false ? 410 : 0,
-                                      child: TableCalendar(
-                                        calendarController: _controller,
-                                      )),
-                                  Container(
-                                    height: clicked_check == false ? 0 : 370,
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15, bottom: 10),
-                                          child: TextFormField(
-                                              obscureText: false,
-                                              onChanged: (val) {
-                                                setState(() {
-                                                  Name_of_the_Event = val;
-                                                });
-                                              },
-                                              controller: _clear_controler,
-                                              style: TextStyle(
-                                                color: Color(0xff41B4C7),
-                                                fontSize: 20,
-                                              ),
-                                              decoration: InputDecoration(
-                                                labelText: Name_of_the_event_data,
-                                                fillColor: Color(0xffF5FBFC),
-                                                filled: true,
-                                                enabledBorder:
-                                                input_text_decoration_variable_for_focus,
-                                                focusedBorder:
-                                                input_text_decoration_variable_for_focus,
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Color(0xff41B4C7)),
-                                              )),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: TextFormField(
-                                              obscureText: false,
-                                              onChanged: (val) {
-                                                setState(() {
-                                                  Place = val;
-                                                });
-                                              },
-                                              style: TextStyle(
-                                                color: Color(0xff41B4C7),
-                                                fontSize: 20,
-                                              ),
-                                              controller: _clear_controler2,
-                                              decoration: InputDecoration(
-                                                labelText: Place_data,
-                                                fillColor: Color(0xffF5FBFC),
-                                                filled: true,
-                                                enabledBorder:
-                                                input_text_decoration_variable_for_focus,
-                                                focusedBorder:
-                                                input_text_decoration_variable_for_focus,
-                                                labelStyle: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Color(0xff41B4C7)),
-                                              )),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, top: 5, bottom: 5),
-                                              child: Text(
-                                                All_day_event_data,
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Color(0xff41B4C7)),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 15, top: 5, bottom: 5),
-                                              child: Switch(
-                                                value: switch_val,
+                                ],
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Container(
+                                        height: clicked_check == false ? 410 : 0,
+                                        child: TableCalendar(
+                                          calendarController: _controller,
+                                        )),
+                                    Container(
+                                      height: clicked_check == false ? 0 : 370,
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 15, bottom: 10),
+                                            child: TextFormField(
+                                                obscureText: false,
                                                 onChanged: (val) {
                                                   setState(() {
-                                                    switch_val = !switch_val;
+                                                    Name_of_the_Event = val;
                                                   });
                                                 },
-                                                activeColor: Color(0xff41B4C7),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, top: 5, bottom: 5),
-                                              child: Text(
-                                                Start_date_data +
-                                                    '  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}',
+                                                controller: _clear_controler,
                                                 style: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Color(0xff41B4C7)),
+                                                  color: Color(0xff41B4C7),
+                                                  fontSize: 20,
+                                                ),
+                                                decoration: InputDecoration(
+                                                  labelText: Name_of_the_event_data,
+                                                  fillColor: Color(0xffF5FBFC),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                  input_text_decoration_variable_for_focus,
+                                                  focusedBorder:
+                                                  input_text_decoration_variable_for_focus,
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Color(0xff41B4C7)),
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 15),
+                                            child: TextFormField(
+                                                obscureText: false,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    Place = val;
+                                                  });
+                                                },
+                                                style: TextStyle(
+                                                  color: Color(0xff41B4C7),
+                                                  fontSize: 20,
+                                                ),
+                                                controller: _clear_controler2,
+                                                decoration: InputDecoration(
+                                                  labelText: Place_data,
+                                                  fillColor: Color(0xffF5FBFC),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                  input_text_decoration_variable_for_focus,
+                                                  focusedBorder:
+                                                  input_text_decoration_variable_for_focus,
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Color(0xff41B4C7)),
+                                                )),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, top: 5, bottom: 5),
+                                                child: Text(
+                                                  All_day_event_data,
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Color(0xff41B4C7)),
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 15, top: 5, bottom: 5),
-                                              child: GestureDetector(
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 15, top: 5, bottom: 5),
+                                                child: Switch(
+                                                  value: switch_val,
+                                                  onChanged: (val) {
+                                                    setState(() {
+                                                      switch_val = !switch_val;
+                                                    });
+                                                  },
+                                                  activeColor: Color(0xff41B4C7),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, top: 5, bottom: 5),
+                                                child: Text(
+                                                  Start_date_data +
+                                                      '  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}',
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Color(0xff41B4C7)),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 15, top: 5, bottom: 5),
+                                                child: GestureDetector(
+                                                    onTap: () async {
+                                                      _dateTime_start =
+                                                      await showDatePicker(
+                                                          context: context,
+                                                          initialDate:
+                                                          _dateTime_start,
+                                                          firstDate: DateTime(
+                                                              DateTime.now()
+                                                                  .year -
+                                                                  1),
+                                                          lastDate: DateTime(
+                                                              DateTime.now()
+                                                                  .year +
+                                                                  1));
+                                                      if (_dateTime_start == null)
+                                                        _dateTime_start =
+                                                            DateTime.now();
+                                                      setState(() {});
+                                                    },
+                                                    child: Icon(
+                                                      Icons.expand_more,
+                                                      color: Colors.black54,
+                                                      size: 30,
+                                                    )),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, top: 5, bottom: 5),
+                                                child: Text(
+                                                  End_date_data +
+                                                      '    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}',
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Color(0xff41B4C7)),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 15, top: 5, bottom: 5),
+                                                child: GestureDetector(
+                                                    onTap: () async {
+                                                      _dateTime_end =
+                                                      await showDatePicker(
+                                                          context: context,
+                                                          initialDate:
+                                                          _dateTime_end,
+                                                          firstDate: DateTime(
+                                                              DateTime.now()
+                                                                  .year -
+                                                                  1),
+                                                          lastDate: DateTime(
+                                                              DateTime.now()
+                                                                  .year +
+                                                                  1));
+                                                      if (_dateTime_end == null)
+                                                        _dateTime_end =
+                                                            DateTime.now();
+                                                      setState(() {});
+                                                    },
+                                                    child: Icon(
+                                                      Icons.expand_more,
+                                                      color: Colors.black54,
+                                                      size: 30,
+                                                    )),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 7,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            children: [
+                                              InkWell(
                                                   onTap: () async {
-                                                    _dateTime_start =
-                                                    await showDatePicker(
-                                                        context: context,
-                                                        initialDate:
+                                                    await DatabaseService(
+                                                        uid: uid_constant)
+                                                        .UpdateEvents(
+                                                        Name_of_the_Event,
+                                                        Place,
+                                                        switch_val,
                                                         _dateTime_start,
-                                                        firstDate: DateTime(
-                                                            DateTime.now()
-                                                                .year -
-                                                                1),
-                                                        lastDate: DateTime(
-                                                            DateTime.now()
-                                                                .year +
-                                                                1));
-                                                    if (_dateTime_start == null)
+                                                        _dateTime_end);
+                                                    _clear_controler.clear();
+                                                    _clear_controler2.clear();
+                                                    setState(() {
+                                                      Name_of_the_Event = ' ';
+                                                      Place = ' ';
+                                                      _dateTime_end = DateTime.now();
                                                       _dateTime_start =
                                                           DateTime.now();
-                                                    setState(() {});
+                                                      clicked_check = false;
+                                                    });
                                                   },
-                                                  child: Icon(
-                                                    Icons.expand_more,
-                                                    color: Colors.black54,
-                                                    size: 30,
-                                                  )),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, top: 5, bottom: 5),
-                                              child: Text(
-                                                End_date_data +
-                                                    '    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}',
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Color(0xff41B4C7)),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 15, top: 5, bottom: 5),
-                                              child: GestureDetector(
-                                                  onTap: () async {
-                                                    _dateTime_end =
-                                                    await showDatePicker(
-                                                        context: context,
-                                                        initialDate:
-                                                        _dateTime_end,
-                                                        firstDate: DateTime(
-                                                            DateTime.now()
-                                                                .year -
-                                                                1),
-                                                        lastDate: DateTime(
-                                                            DateTime.now()
-                                                                .year +
-                                                                1));
-                                                    if (_dateTime_end == null)
-                                                      _dateTime_end =
-                                                          DateTime.now();
-                                                    setState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.expand_more,
-                                                    color: Colors.black54,
-                                                    size: 30,
-                                                  )),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 7,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                                onTap: () async {
-                                                  await DatabaseService(
-                                                      uid: uid_constant)
-                                                      .UpdateEvents(
-                                                      Name_of_the_Event,
-                                                      Place,
-                                                      switch_val,
-                                                      _dateTime_start,
-                                                      _dateTime_end);
-                                                  _clear_controler.clear();
-                                                  _clear_controler2.clear();
-                                                  setState(() {
-                                                    Name_of_the_Event = ' ';
-                                                    Place = ' ';
-                                                    _dateTime_end = DateTime.now();
-                                                    _dateTime_start =
-                                                        DateTime.now();
-                                                    clicked_check = false;
-                                                  });
-                                                },
-                                                child: CircleAvatar(
-                                                  radius: 40,
-                                                  backgroundColor:
-                                                  Color(0xff41B4C7),
-                                                  child: Icon(
-                                                    Icons.check,
-                                                    color: Colors.white,
-                                                    size: 50,
-                                                  ),
-                                                ))
-                                          ],
-                                        )
-                                      ],
+                                                  child: CircleAvatar(
+                                                    radius: 40,
+                                                    backgroundColor:
+                                                    Color(0xff41B4C7),
+                                                    child: Icon(
+                                                      Icons.check,
+                                                      color: Colors.white,
+                                                      size: 50,
+                                                    ),
+                                                  ))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              left: 290,
+                              child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      clicked_check = !clicked_check;
+                                      Motivation_popup(context, -1, " ", Init);
+                                      Init++;
+                                    });
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Color(0xff41B4C7),
+                                    child: Icon(
+                                      clicked_check == false
+                                          ? Icons.add
+                                          : Icons.clear,
+                                      color: Colors.white,
+                                      size: 50,
+                                    ),
+                                  ))),
+                        ],
+                      ),
+                      ]),
+
+
+                        Container(
+                          height: clicked_check==true? (MediaQuery.of(context).size.height/3)*2.3:0,
+                          width: MediaQuery.of(context).size.width,
+                          color: Color(0xffA3D5D9),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                  onTap:(){
+                        setState(() {
+                        clicked_check = !clicked_check;
+                        Motivation_popup(context, -1, " ", Init);
+                        Init++;
+                        });
+                        },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Icon(Icons.clear,color: Colors.white,size: 50,),
+                                    ),
+                                  ),
+                                  Text('Nouvel événement', style: GoogleFonts.dMSerifText(color: Colors.white, fontSize: 25),),
+                                  InkWell(
+                                      onTap: () async {
+                                        await DatabaseService(
+                                            uid: uid_constant)
+                                            .UpdateEvents(
+                                            Name_of_the_Event,
+                                            Place,
+                                            switch_val,
+                                            _dateTime_start,
+                                            _dateTime_end);
+                                        _clear_controler.clear();
+                                        _clear_controler2.clear();
+                                        setState(() {
+                                          Name_of_the_Event = ' ';
+                                          Place = ' ';
+                                          _dateTime_end = DateTime.now();
+                                          _dateTime_start =
+                                              DateTime.now();
+                                          clicked_check = false;
+                                        });
+                                      },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Icon(Icons.check_circle_outline, color: Colors.white,size: 50,),
                                     ),
                                   )
                                 ],
                               ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                            left: 290,
-                            child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    clicked_check = !clicked_check;
-                                    Motivation_popup(context, -1, " ", Init);
-                                    Init++;
-                                  });
-                                },
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Color(0xff41B4C7),
-                                  child: Icon(
-                                    clicked_check == false
-                                        ? Icons.add
-                                        : Icons.clear,
-                                    color: Colors.white,
-                                    size: 50,
+                              SizedBox(height: 30,),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  height:  460,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 1,
+                                        width:380,
+                                        color: Colors.white
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 15, bottom: 10),
+                                        child: TextFormField(
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Name_of_the_Event = val;
+                                              });
+                                            },
+                                            controller: _clear_controler,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
+                                            decoration: InputDecoration(
+                                              labelText: Name_of_the_event_data,
+                                              fillColor: Color(0xffA3D5D9),
+                                              filled: true,
+                                              enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                              ),
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                              ),
+                                              labelStyle: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 15),
+                                        child: TextFormField(
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Place = val;
+                                              });
+                                            },
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
+                                            controller: _clear_controler2,
+                                            decoration: InputDecoration(
+                                              labelText: Place_data,
+                                              fillColor: Color(0xffA3D5D9),
+                                              filled: true,
+                                              enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                              ),
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                              ),
+                                              labelStyle: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, top: 5, bottom: 5),
+                                            child: Text(
+                                              All_day_event_data,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 15, top: 5, bottom: 5),
+                                            child: Switch(
+                                              value: switch_val,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  switch_val = !switch_val;
+                                                });
+                                              },
+                                              activeColor: Colors.white,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height:15),
+                                      Container(
+                                          height: 1,
+                                          width:380,
+                                          color: Colors.white
+                                      ),
+                                      SizedBox(height:20),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, top: 5, bottom: 5),
+                                            child: Text(
+                                              Start_date_data +
+                                                  '  ${_dateTime_start.day}-${_dateTime_start.month}-${_dateTime_start.year}',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 15, top: 5, bottom: 5),
+                                            child: GestureDetector(
+                                                onTap: () async {
+                                                  _dateTime_start =
+                                                  await showDatePicker(
+                                                      context: context,
+                                                      initialDate:
+                                                      _dateTime_start,
+                                                      firstDate: DateTime(
+                                                          DateTime.now()
+                                                              .year -
+                                                              1),
+                                                      lastDate: DateTime(
+                                                          DateTime.now()
+                                                              .year +
+                                                              1));
+                                                  if (_dateTime_start == null)
+                                                    _dateTime_start =
+                                                        DateTime.now();
+                                                  setState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.expand_more,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                )),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height:20),
+                                      Container(
+                                          height: 1,
+                                          width:380,
+                                          color: Colors.white
+                                      ),
+                                      SizedBox(height:20),
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, top: 5, bottom: 5),
+                                            child: Text(
+                                              End_date_data +
+                                                  '    ${_dateTime_end.day}-${_dateTime_end.month}-${_dateTime_end.year}',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 15, top: 5, bottom: 5),
+                                            child: GestureDetector(
+                                                onTap: () async {
+                                                  _dateTime_end =
+                                                  await showDatePicker(
+                                                      context: context,
+                                                      initialDate:
+                                                      _dateTime_end,
+                                                      firstDate: DateTime(
+                                                          DateTime.now()
+                                                              .year -
+                                                              1),
+                                                      lastDate: DateTime(
+                                                          DateTime.now()
+                                                              .year +
+                                                              1));
+                                                  if (_dateTime_end == null)
+                                                    _dateTime_end =
+                                                        DateTime.now();
+                                                  setState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.expand_more,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                )),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height:20),
+                                      Container(
+                                          height: 1,
+                                          width:380,
+                                          color: Colors.white
+                                      ),
+                                      SizedBox(
+                                        height: 7,
+                                      ),
+
+                                    ],
                                   ),
-                                ))),
-                      ],
-                    ),
+                                ),
+                              )
+
+
+                            ],
+                          ),
+                        )
+                    ]),
+                    //---------------------------------------------------
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

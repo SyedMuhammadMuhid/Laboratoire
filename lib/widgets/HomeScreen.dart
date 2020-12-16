@@ -280,8 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                           Center(
                                                               child: Text(
-                                                                  "$percentage" +
-                                                                      " %",
+                                                                  "$percentage",
                                                                   style: GoogleFonts.dMSerifText(
                                                                       fontSize:
                                                                           11,
@@ -383,8 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                           Center(
                                                               child: Text(
-                                                                  "$percentage" +
-                                                                      " %",
+                                                                  "$percentage",
                                                                   style: GoogleFonts.dMSerifText(
                                                                       fontSize:
                                                                           11,
