@@ -74,7 +74,7 @@ class _FaireCardState extends State<FaireCard> {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Container(
-        height: MediaQuery.of(context).size.width<400?142:121,
+        height: MediaQuery.of(context).size.width<400?142:135,
         width: 30,
         child: Card(
           shape: RoundedRectangleBorder(
@@ -171,7 +171,7 @@ class _FaireCardState extends State<FaireCard> {
                                   ? Oops_Statement
                                   : Todo_Statement,
                       style: GoogleFonts.heebo(
-                          fontSize: 15, color: Color(0xff1C191B)),
+                          fontSize: 14, color: Color(0xff1C191B)),
                     ),
                   ),
                   Container(
@@ -182,7 +182,7 @@ class _FaireCardState extends State<FaireCard> {
                          child: Text(
                           Data,
                           style:
-                              GoogleFonts.heebo(fontSize: 15, color: Color(0xff1C191B),
+                              GoogleFonts.heebo(fontSize: 14, color: Color(0xff1C191B),
                               fontWeight: FontWeight.bold),
 
                         ),

@@ -97,10 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           'Se connecter',
-                          style: GoogleFonts.heebo(
+                          style: GoogleFonts.dMSerifText(
                               color: Color(0xff41B4C7),
                               fontSize: 30,
-                              fontWeight: FontWeight.bold),
+                          ),
                         )
                       ],
                     ),
@@ -110,10 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         Text('Courriel',
-                            style: GoogleFonts.heebo(
+                            style: GoogleFonts.dMSerifText(
                                 color: Color(0xff41B4C7),
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold))
+                              ))
                       ],
                     ),
                     Form(
@@ -152,10 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               children: [
                                 Text('Mot de passe',
-                                    style: GoogleFonts.heebo(
+                                    style: GoogleFonts.dMSerifText(
                                         color: Color(0xff41B4C7),
                                         fontSize: 18,
-                                        fontWeight: FontWeight.bold))
+                                       ))
                               ],
                             ),
                             Container(
@@ -213,10 +213,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: FlatButton(
                           child: Text(
                             'Se connecter',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                             style: GoogleFonts.dMSerifText(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                           ),
                           onPressed: () async {
                             if (_key.currentState.validate()) {

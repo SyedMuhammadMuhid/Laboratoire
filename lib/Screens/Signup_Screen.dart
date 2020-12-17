@@ -10,7 +10,6 @@ import 'package:sample_screen/Screens/Welcome.dart';
 import 'package:sample_screen/Services/Auth_Services.dart';
 import 'package:sample_screen/Constant/data.dart';
 
-
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -18,7 +17,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _key = GlobalKey<FormState>();
-final AuthServices _authServices=AuthServices();
+  final AuthServices _authServices = AuthServices();
   String Email;
   String Pass;
   String Con_Pass;
@@ -28,7 +27,7 @@ final AuthServices _authServices=AuthServices();
   bool obscureText2 = true;
   //-----------------
   FToast fToast;
-  bool asyncpressed=false;
+  bool asyncpressed = false;
 
   //-----------------------
   @override
@@ -41,10 +40,8 @@ final AuthServices _authServices=AuthServices();
 
   @override
   Widget build(BuildContext context) {
-
     //---------------------------------toast function
     void float_toast(String message) async {
-
       Widget toast = Container(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
         decoration: BoxDecoration(
@@ -72,11 +69,11 @@ final AuthServices _authServices=AuthServices();
               top: MediaQuery.of(context).size.height-10,
 
             );
-          }*/);
+          }*/
+      );
     }
 
     //________________________________
-
 
     return ModalProgressHUD(
       inAsyncCall: asyncpressed,
@@ -86,9 +83,12 @@ final AuthServices _authServices=AuthServices();
           elevation: 0,
           title: SafeArea(
               child: Text(
-                Creat_an_account_data,
-                style: TextStyle(color: Color(0xff41B4C7), fontSize: 25),
-              )),
+            Creat_an_account_data,
+            style: GoogleFonts.dMSerifText(
+                  color: Color(0xff41B4C7),
+            fontSize: 30,
+          ),
+          )),
           centerTitle: true,
         ),
         backgroundColor: Color(0xffF5FBFC),
@@ -111,14 +111,21 @@ final AuthServices _authServices=AuthServices();
                               SizedBox(
                                 height: 5,
                               ),
-                              Row(children: [
-                                Text('Email',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-                              ],),
+                              Row(
+                                children: [
+                                  Text('Email',
+                                      style: GoogleFonts.dMSerifText(
+                                          color: Color(0xff41B4C7),
+                                          fontSize: 18,
+                                          ))
+                                ],
+                              ),
                               Container(
                                 height: 60,
                                 child: TextFormField(
-                                    validator: (val) =>
-                                    val.isEmpty ? 'Entrez votre e-mail' : null,
+                                    validator: (val) => val.isEmpty
+                                        ? 'Entrez votre e-mail'
+                                        : null,
                                     onChanged: (val) {
                                       setState(() {
                                         Email = val;
@@ -132,24 +139,32 @@ final AuthServices _authServices=AuthServices();
                                       fillColor: Color(0xffF5FBFC),
                                       filled: true,
                                       enabledBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff41B4C7)),
+                                          fontSize: 25,
+                                          color: Color(0xff41B4C7)),
                                     )),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Row(children: [
-                                Text('Mot de passe',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-                              ],),
+                              Row(
+                                children: [
+                                  Text('Mot de passe',
+                                      style: GoogleFonts.dMSerifText(
+                                          color: Color(0xff41B4C7),
+                                          fontSize: 18,
+                                          ))
+                                ],
+                              ),
                               Container(
                                 height: 60,
                                 child: TextFormField(
-                                    validator: (val) =>
-                                    val.length < 6 ? 'Longueur du mot de passe' : null,
+                                    validator: (val) => val.length < 6
+                                        ? 'Longueur du mot de passe'
+                                        : null,
                                     obscureText: obscureText1,
                                     onChanged: (val) {
                                       setState(() {
@@ -171,28 +186,34 @@ final AuthServices _authServices=AuthServices();
                                             ? Icons.visibility_off
                                             : Icons.visibility),
                                       ),
-
                                       fillColor: Color(0xffF5FBFC),
                                       filled: true,
                                       enabledBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff41B4C7)),
+                                          fontSize: 25,
+                                          color: Color(0xff41B4C7)),
                                     )),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Row(children: [
-                                Text("Confirmez le mot de passe",style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-                              ],),
+                              Row(
+                                children: [
+                                  Text("Confirmez le mot de passe",
+                                      style: GoogleFonts.dMSerifText(
+                                          color: Color(0xff41B4C7),
+                                          fontSize: 18,
+                                          ))
+                                ],
+                              ),
                               Container(
                                 height: 60,
                                 child: TextFormField(
-                                    validator: (val) =>
-                                    val.length < 6 && Pass == Con_Pass
+                                    validator: (val) => val.length < 6 &&
+                                            Pass == Con_Pass
                                         ? 'Le mot de passe ne correspond pas'
                                         : null,
                                     obscureText: obscureText2,
@@ -202,7 +223,7 @@ final AuthServices _authServices=AuthServices();
                                       });
                                     },
                                     style: TextStyle(
-                                      color:Color(0xff41B4C7),
+                                      color: Color(0xff41B4C7),
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
@@ -216,28 +237,35 @@ final AuthServices _authServices=AuthServices();
                                             ? Icons.visibility_off
                                             : Icons.visibility),
                                       ),
-
                                       fillColor: Color(0xffF5FBFC),
                                       filled: true,
                                       enabledBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color:Color(0xff41B4C7)),
+                                          fontSize: 25,
+                                          color: Color(0xff41B4C7)),
                                     )),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Row(children: [
-                                Text('Prénom',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-                              ],),
+                              Row(
+                                children: [
+                                  Text('Prénom',
+                                      style: GoogleFonts.dMSerifText(
+                                          color: Color(0xff41B4C7),
+                                          fontSize: 18,
+                                          ))
+                                ],
+                              ),
                               Container(
                                 height: 60,
                                 child: TextFormField(
-                                    validator: (val) =>
-                                    val.length <3 ? 'Longueur du prénom' : null,
+                                    validator: (val) => val.length < 3
+                                        ? 'Longueur du prénom'
+                                        : null,
                                     obscureText: false,
                                     onChanged: (val) {
                                       setState(() {
@@ -249,28 +277,35 @@ final AuthServices _authServices=AuthServices();
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
-
                                       fillColor: Color(0xffF5FBFC),
                                       filled: true,
                                       enabledBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff41B4C7)),
+                                          fontSize: 25,
+                                          color: Color(0xff41B4C7)),
                                     )),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Row(children: [
-                                Text('Nom de famille',style: GoogleFonts.heebo(color: Color(0xff41B4C7), fontSize: 18, fontWeight: FontWeight.bold))
-                              ],),
+                              Row(
+                                children: [
+                                  Text('Nom de famille',
+                                      style: GoogleFonts.dMSerifText(
+                                          color: Color(0xff41B4C7),
+                                          fontSize: 18,
+                                          ))
+                                ],
+                              ),
                               Container(
                                 height: 60,
                                 child: TextFormField(
-                                    validator: (val) =>
-                                    val.length < 3 ? 'Longueur du nom' : null,
+                                    validator: (val) => val.length < 3
+                                        ? 'Longueur du nom'
+                                        : null,
                                     obscureText: false,
                                     onChanged: (val) {
                                       setState(() {
@@ -282,15 +317,15 @@ final AuthServices _authServices=AuthServices();
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
-
                                       fillColor: Color(0xffF5FBFC),
                                       filled: true,
                                       enabledBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       focusedBorder:
-                                      input_text_decoration_variable_for_focus,
+                                          input_text_decoration_variable_for_focus,
                                       labelStyle: TextStyle(
-                                          fontSize: 25, color: Color(0xff41B4C7)),
+                                          fontSize: 25,
+                                          color: Color(0xff41B4C7)),
                                     )),
                               ),
                               SizedBox(
@@ -298,73 +333,86 @@ final AuthServices _authServices=AuthServices();
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color:Color(0xff41B4C7),
+                                    color: Color(0xff41B4C7),
                                     shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0), bottomLeft: Radius.circular(15.0) )
-                                ),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15.0),
+                                        topRight: Radius.circular(15.0),
+                                        bottomRight: Radius.circular(15.0),
+                                        bottomLeft: Radius.circular(15.0))),
                                 height: 60,
                                 width: MediaQuery.of(context).size.width,
                                 child: FlatButton(
-
                                     child: Text(
                                       'Créer',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18),
+                                      style: GoogleFonts.dMSerifText(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                    onPressed: ()async{
-
-
+                                    onPressed: () async {
                                       if (_key.currentState.validate()) {
+                                        if (Pass == Con_Pass) {
+                                          setState(() {
+                                            asyncpressed = true;
+                                          });
 
-                                          if(Pass==Con_Pass){
+                                          dynamic result = await _authServices
+                                              .SignUpWithEmailPass(Email.trim(),
+                                                  Pass, F_Name, L_Name);
+                                          //  print(result+ 'this is the result after signup as emial and pass');
 
-                                            setState(() {
-                                              asyncpressed=true;
-                                            });
-
-                                        dynamic result=  await _authServices.SignUpWithEmailPass(Email.trim(), Pass, F_Name, L_Name);
-                                      //  print(result+ 'this is the result after signup as emial and pass');
-
-                                            setState(() {
-                                              asyncpressed=false;
-                                            });
-                                        if(result==null){
-                                          print('error signing up');
-
-                                        }
-                                        else if(result==0){
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) => LoadingScreen()));
-                                        }
-                                        else {
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) => StartScreen()));
-                                        }
+                                          setState(() {
+                                            asyncpressed = false;
+                                          });
+                                          if (result == null) {
+                                            print('error signing up');
+                                          } else if (result == 0) {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            LoadingScreen()));
+                                          } else {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            StartScreen()));
                                           }
-
-                                          else if(Pass != Con_Pass){
-                                            float_toast(Toast_pass_dont_match_data);
-                                          }
-                                       setState(() {
-
-                                       });
+                                        } else if (Pass != Con_Pass) {
+                                          float_toast(
+                                              Toast_pass_dont_match_data);
+                                        }
+                                        setState(() {});
                                       }
                                     }),
                               ),
-                              SizedBox(height: MediaQuery.of(context).size.height/30,),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 30,
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  GestureDetector(onTap: (){
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder:
-                                                (BuildContext context) => Welcome()));
-                                  },child: CircleAvatar(child: Icon(Icons.arrow_back, size: 40, color: Colors.white,),backgroundColor:Color(0xff41B4C7), radius: 40,))
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Welcome()));
+                                      },
+                                      child: CircleAvatar(
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          size: 40,
+                                          color: Colors.white,
+                                        ),
+                                        backgroundColor: Color(0xff41B4C7),
+                                        radius: 40,
+                                      ))
                                 ],
                               )
                             ],

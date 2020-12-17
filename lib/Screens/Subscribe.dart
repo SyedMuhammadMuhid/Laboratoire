@@ -38,21 +38,21 @@ class Subscribe extends StatelessWidget {
                   style: GoogleFonts.dMSerifText(
                       color: Color(0xff41B4C7),
                       fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                   ),
                 ),
                 Text(
                   Login_with_this_or_that,
-                  style: GoogleFonts.dMSerifText(
+                  style: GoogleFonts.heebo(
                     color: Color(0xff41B4C7),
-                    fontSize: 18,
+                    fontSize: 17,
                   ),
 
                 ),
                 Text(
                   Login_with_this_or_that2,
-                  style: GoogleFonts.dMSerifText(
+                  style: GoogleFonts.heebo(
                     color: Color(0xff41B4C7),
-                    fontSize: 18,
+                    fontSize: 17,
                   ),
 
                 ),
@@ -157,7 +157,7 @@ class Subscribe extends StatelessWidget {
                             width: 15,
                           ),
                           Text('Facebook',
-                              style: GoogleFonts.dMSerifText(
+                              style: GoogleFonts.heebo(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))
@@ -238,7 +238,7 @@ class Subscribe extends StatelessWidget {
                             width: 15,
                           ),
                           Text('Google',
-                              style: GoogleFonts.dMSerifText(
+                              style: GoogleFonts.heebo(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))
@@ -272,7 +272,7 @@ class Subscribe extends StatelessWidget {
                           width: 15,
                         ),
                         Text('Apple',
-                            style: GoogleFonts.dMSerifText(
+                            style: GoogleFonts.heebo(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold))
@@ -322,7 +322,7 @@ class Subscribe extends StatelessWidget {
                               style: GoogleFonts.dMSerifText(
                                   color: Colors.white,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.bold)),
+                                  )),
                         ],
                       ),
                     ),
