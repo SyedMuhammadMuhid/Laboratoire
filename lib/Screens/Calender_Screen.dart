@@ -448,7 +448,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
 
                         Container(
-                          height: clicked_check==true? (MediaQuery.of(context).size.height/3)*2.3:0,
+                          height: clicked_check==true? (MediaQuery.of(context).size.height/3)*2.75:0,
                           width: MediaQuery.of(context).size.width,
                           color: Color(0xffA3D5D9),
                           child: Column(
