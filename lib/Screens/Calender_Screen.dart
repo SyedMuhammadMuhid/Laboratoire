@@ -92,6 +92,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       children:[
 
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children:[
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,7 +115,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             Text(
                               "Calendrier",
                               style: GoogleFonts.heebo(
-                                  color: Colors.white, fontSize: 30),
+                                  color: Colors.white, fontSize: 20),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -147,20 +149,29 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   )),
                             )
                           ]),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+
+                      Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text('AUJOURD’HUI',
+                            style: GoogleFonts.heebo(
+                              color: Colors.white,
+                              fontSize:17,
+                            ),),
                           Text(
                             DateTime.now().day.toString()+" "+months_full[DateTime.now().month-1]+" "+DateTime.now().year.toString(),
-                            style: GoogleFonts.heebo(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold),
+                            style: GoogleFonts.dMSerifText(
+                              color: Colors.white,
+                              fontSize: 40,
+                            ),
                           )
                         ],
                       ),
+
+
                       Stack(
                         children: [
+
                           Padding(
                             padding: const EdgeInsets.all(30.0),
                             child: Container(
@@ -419,6 +430,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   ],
                                 ),
                               ),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Container(
+
+                              height: 70,
+                              color: Color(0xffF5FBFC),
                             ),
                           ),
                           Positioned(

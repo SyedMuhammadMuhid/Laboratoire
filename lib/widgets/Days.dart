@@ -12,35 +12,33 @@ import 'package:sample_screen/Services/database.dart';
 import 'package:sample_screen/widgets/FaireCard.dart';
 
 class Dayswid extends StatefulWidget {
-
-
   QueryDocumentSnapshot document;
   int index_of_day;
   int total_point_of_the_day;
   int total_hour_point_of_the_day;
   String document_id;
-  DateTime  Date_from_database;
+  DateTime Date_from_database;
   BuildContext Context;
   Dayswid(
-      {
-      this.document,
+      {this.document,
       this.index_of_day,
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
-      this.document_id,this.Date_from_database,this.Context});
+      this.document_id,
+      this.Date_from_database,
+      this.Context});
   @override
   _DayswidState createState() => _DayswidState(
-
       document: document,
       index_of_day: index_of_day,
       total_point_of_the_day: total_point_of_the_day,
       total_hour_point_of_the_day: total_hour_point_of_the_day,
-      document_id: document_id,Date_from_database: Date_from_database,
-  Context: Context);
+      document_id: document_id,
+      Date_from_database: Date_from_database,
+      Context: Context);
 }
 
 class _DayswidState extends State<Dayswid> {
-
   int index_of_day;
   QueryDocumentSnapshot document;
   int total_point_of_the_day;
@@ -49,22 +47,35 @@ class _DayswidState extends State<Dayswid> {
   DateTime Date_from_database;
   BuildContext Context;
 
-  int Init=0;
+  int Init = 0;
 
   _DayswidState(
-      {
-      this.document,
+      {this.document,
       this.index_of_day,
       this.total_point_of_the_day,
       this.total_hour_point_of_the_day,
       this.document_id,
-      this.Date_from_database,this.Context});
+      this.Date_from_database,
+      this.Context});
 
   @override
   Widget build(BuildContext context) {
-    List months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    List months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
     DateTime now = Date_from_database;
-    int current_mon = now.month-1;
+    int current_mon = now.month - 1;
 
     final user = Provider.of<User>(context);
     // Motivation_popup(Context, total_point_of_the_day, ' ' , Init);
@@ -85,7 +96,8 @@ class _DayswidState extends State<Dayswid> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return Container();
-          total_point_of_the_day=snapshot.data.docs[index_of_day]["TotalPoints"];
+          total_point_of_the_day =
+              snapshot.data.docs[index_of_day]["TotalPoints"];
           return Container(
             child: Stack(children: [
               Padding(
@@ -107,13 +119,16 @@ class _DayswidState extends State<Dayswid> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            Date_from_database.day.toString()+' '+months[current_mon]+" "+Date_from_database.year.toString(),
-                            style: GoogleFonts.dMSerifText(
-                              letterSpacing: 1,
+                            Date_from_database.day.toString() +
+                                ' ' +
+                                months[current_mon] +
+                                " " +
+                                Date_from_database.year.toString(),
+                            style: GoogleFonts.heebo(
                                 fontSize: 15, color: Color(0xff41B4C7)),
                           ),
                           Text(
-                            "Jour ${index_of_day+1}",
+                            "Jour ${index_of_day + 1}",
                             style: GoogleFonts.dMSerifText(
                                 fontSize: 35, color: Color(0xff41B4C7)),
                           ),
@@ -127,7 +142,7 @@ class _DayswidState extends State<Dayswid> {
                 padding: const EdgeInsets.only(
                     left: 25.0, bottom: 25.0, right: 25.0, top: 80),
                 child: Container(
-                    height: tapped == false ? 1330 : 0,
+                    height: tapped == false ? 1340 : 0,
                     width: tapped == false
                         ? ((MediaQuery.of(context).size.width / 3) * 2.3)
                         : 0,
@@ -141,7 +156,9 @@ class _DayswidState extends State<Dayswid> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              height: MediaQuery.of(context).size.width<400?1120:1020,
+                              height: MediaQuery.of(context).size.width < 400
+                                  ? 1160
+                                  : 1060,
                               child: StreamBuilder(
                                   stream: FirebaseFirestore.instance
                                       .collection('UserData')
@@ -162,15 +179,14 @@ class _DayswidState extends State<Dayswid> {
                                           Data: To_do[index],
                                           index_of_day: index_of_day,
                                           index_of_todo: index,
-                                          total_point_of_the_day: total_point_of_the_day,
+                                          total_point_of_the_day:
+                                              total_point_of_the_day,
                                           document_id: document_id,
-
                                         );
                                       },
                                     );
                                   }),
                             ),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -190,8 +206,8 @@ class _DayswidState extends State<Dayswid> {
                                                   "TotalPoints",
                                                   document_id,
                                                   total_point_of_the_day);
-                                          Motivation_popup(context, total_point_of_the_day ,'' , -1);
-
+                                          Motivation_popup(context,
+                                              total_point_of_the_day, '', -1);
                                         }
                                       });
                                     },
@@ -236,7 +252,8 @@ class _DayswidState extends State<Dayswid> {
                                                   document_id,
                                                   total_point_of_the_day);
                                         }
-                                        Motivation_popup(Context, total_point_of_the_day, ' ', -1);
+                                        Motivation_popup(Context,
+                                            total_point_of_the_day, ' ', -1);
                                       });
                                     },
                                     child: Container(

@@ -39,17 +39,19 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
   bool _isExpanded3 = false;
   FToast fToast;
 
-  bool asyncpressed=false;
+  bool asyncpressed = false;
   String Allergies;
   String Doctor_address;
   String Dentist_address;
-  String Blood_type ;
-  String Frequency ;
+  String Blood_type;
+  String Frequency;
   int Total_duration;
   String Instructions;
-  String Image_url='gs://laboratoire-bellomo.appspot.com/propic.png';
-  int times=0;
-  List image=['https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/plus_btn.png?alt=media&token=d2463c61-e318-4d16-9002-c5634f09b6e8'];
+  String Image_url = 'gs://laboratoire-bellomo.appspot.com/propic.png';
+  int times = 0;
+  List image = [
+    'https://firebasestorage.googleapis.com/v0/b/laboratoire-bellomo.appspot.com/o/plus_btn.png?alt=media&token=d2463c61-e318-4d16-9002-c5634f09b6e8'
+  ];
   // a choose file function--------------
   @override
   void initState() {
@@ -58,6 +60,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
     fToast = FToast();
     fToast.init(context);
   }
+
   void chooseFile() async {
     File selected = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -71,18 +74,18 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
     //   showSpinner = true;
     // });
 
-  StorageReference.Reference storageReference = StorageReference.FirebaseStorage.instance
+    StorageReference.Reference storageReference = StorageReference
+        .FirebaseStorage.instance
         .ref()
         .child('Recent/${Path.basename(selected.path)}}');
-   StorageReference.UploadTask  uploadTask = storageReference.putFile(selected);
+    StorageReference.UploadTask uploadTask = storageReference.putFile(selected);
     await uploadTask.whenComplete(() => print('File Uploaded'));
-    storageReference.getDownloadURL().then((fileURL) async{
+    storageReference.getDownloadURL().then((fileURL) async {
       setState(() {
         //  _uploadedFileURL = fileURL;
         // print(fileURL);
 
-        Image_url =  fileURL;
-
+        Image_url = fileURL;
       });
 
 //print(CRUD.imgUrl);
@@ -92,19 +95,12 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
       //
       // print(CRUD.imgUrl);
       // CRUD.updateProfileData();
-
-
     });
-
-
-
   }
   // end of function-------------
 
-
   //---------------------------------toast function
   void float_toast(String message) async {
-
     Widget toast = Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       decoration: BoxDecoration(
@@ -132,37 +128,37 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
               top: MediaQuery.of(context).size.height-10,
 
             );
-          }*/);
+          }*/
+    );
   }
 
   //________________________________
 
-
-
   @override
   Widget build(BuildContext context) {
-
-    final user=Provider.of<User>(context,listen: false);
-     uid_constant=user.uid;
+    final user = Provider.of<User>(context, listen: false);
+    uid_constant = user.uid;
     return StreamBuilder<UserData>(
-        stream: DatabaseService(uid:user.uid ).userData,
+        stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          if(!snapshot.hasData) return Center(child: CircularProgressIndicator());
+          if (!snapshot.hasData)
+            return Center(child: CircularProgressIndicator());
           UserData userdata = snapshot.data;
-          if(times<1){
-            F_Name=userdata.F_Name;
-            L_Name=userdata.L_Name;
-           Age=userdata.Age;
-           Sex=userdata.Sex;
-           Device=userdata.Device;
-           Allergies=userdata.Allergies;
-           Doctor_address=userdata.Doctor_address;
-           Dentist_address=userdata.Dentist_address;
-           Frequency=userdata.Frequency;
-           Total_duration=userdata.Total_duration;
-           Blood_type=userdata.Blood_type;
-           Instructions=userdata.Instructions;
-           Image_url=userdata.Image_url;}
+          if (times < 1) {
+            F_Name = userdata.F_Name;
+            L_Name = userdata.L_Name;
+            Age = userdata.Age;
+            Sex = userdata.Sex;
+            Device = userdata.Device;
+            Allergies = userdata.Allergies;
+            Doctor_address = userdata.Doctor_address;
+            Dentist_address = userdata.Dentist_address;
+            Frequency = userdata.Frequency;
+            Total_duration = userdata.Total_duration;
+            Blood_type = userdata.Blood_type;
+            Instructions = userdata.Instructions;
+            Image_url = userdata.Image_url;
+          }
           times++;
           return Container(
               decoration: BoxDecoration(
@@ -174,7 +170,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                 backgroundColor: Colors.transparent,
                 body: ModalProgressHUD(
                   inAsyncCall: asyncpressed,
-                   progressIndicator: PleaseWait(),
+                  progressIndicator: PleaseWait(),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -197,154 +193,168 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                       size: 55,
                                     )),
                               ),
-
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: GestureDetector(
-                                    onTap: () async{
+                                    onTap: () async {
                                       //-----------------------------------------------
                                       if (_key.currentState.validate()) {
-
                                         setState(() {
-                                          asyncpressed=true;
+                                          asyncpressed = true;
                                         });
 
-                                        if(userdata.Total_duration!=Total_duration) {
+                                        if (userdata.Total_duration !=
+                                            Total_duration) {
                                           dynamic result =
                                               await DatabaseService(
-                                              uid: uid_constant)
-                                              .UpdateUserData(
-                                              F_Name,
-                                              L_Name,
-                                              Age,
-                                              Sex,
-                                              Device,
-                                              Allergies,
-                                              Doctor_address,
-                                              Dentist_address,
-                                              Blood_type,
-                                              Frequency,
-                                              Total_duration,
-                                              Instructions,
-                                              Image_url);
+                                                      uid: uid_constant)
+                                                  .UpdateUserData(
+                                                      F_Name,
+                                                      L_Name,
+                                                      Age,
+                                                      Sex,
+                                                      Device,
+                                                      Allergies,
+                                                      Doctor_address,
+                                                      Dentist_address,
+                                                      Blood_type,
+                                                      Frequency,
+                                                      Total_duration,
+                                                      Instructions,
+                                                      Image_url);
 
+                                          final snapShot =
+                                              await FirebaseFirestore.instance
+                                                  .collection('UserData')
+                                                  .doc(uid_constant)
+                                                  .collection('Points')
+                                                  .get();
+                                          final snapShot2 =
+                                              await FirebaseFirestore.instance
+                                                  .collection('UserData')
+                                                  .doc(uid_constant)
+                                                  .collection('CheckPoints')
+                                                  .get();
+                                          final snapShot3 =
+                                              await FirebaseFirestore.instance
+                                                  .collection('ImageGrid')
+                                                  .doc(uid_constant)
+                                                  .collection('CheckPoints')
+                                                  .get();
 
-                                          final snapShot = await FirebaseFirestore.instance
-                                              .collection('UserData')
-                                              .doc(uid_constant).collection('Points').get();
-                                          final snapShot2 = await FirebaseFirestore.instance
-                                              .collection('UserData')
-                                              .doc(uid_constant).collection('CheckPoints').get();
-                                          final snapShot3 = await FirebaseFirestore.instance
-                                              .collection('ImageGrid')
-                                              .doc(uid_constant).collection('CheckPoints').get();
-
-                                          if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
-                                            FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-                                                .collection('Points').get()
+                                          if (snapShot.docs.length != 0 &&
+                                              snapShot2.docs.length != 0) {
+                                            FirebaseFirestore.instance
+                                                .collection('UserData')
+                                                .doc(uid_constant)
+                                                .collection('Points')
+                                                .get()
                                                 .then((snapshot) {
-                                              for (DocumentSnapshot ds in snapshot.docs) {
+                                              for (DocumentSnapshot ds
+                                                  in snapshot.docs) {
                                                 ds.reference.delete();
                                               }
                                             });
 
-                                            FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-                                                .collection('CheckPoints').get()
+                                            FirebaseFirestore.instance
+                                                .collection('UserData')
+                                                .doc(uid_constant)
+                                                .collection('CheckPoints')
+                                                .get()
                                                 .then((snapshot) {
-                                              for (DocumentSnapshot ds in snapshot.docs) {
+                                              for (DocumentSnapshot ds
+                                                  in snapshot.docs) {
                                                 ds.reference.delete();
                                               }
                                             });
                                           }
 // one for removed and made into one
-                                          for (int i = 1; i <= Total_duration; i++) {
-                                            DatabaseService(uid: uid_constant).UpdatePoints(
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0,
-                                                0);
+                                          for (int i = 1;
+                                              i <= Total_duration;
+                                              i++) {
+                                            DatabaseService(uid: uid_constant)
+                                                .UpdatePoints(0, 0, 0, 0, 0, 0,
+                                                    0, 0, 0, 0);
 
                                             // this command was in an other for loop
-                                            DatabaseService(uid: uid_constant).UpdateCheckPoint(
-                                                ' ', ' ', ' ', ' ', ' ');
+                                            DatabaseService(uid: uid_constant)
+                                                .UpdateCheckPoint(
+                                                    ' ', ' ', ' ', ' ', ' ');
                                           }
 
                                           if (snapShot3.docs.length == 0) {
-                                            await DatabaseService(uid: uid_constant).UpdateImageList(image);
+                                            await DatabaseService(
+                                                    uid: uid_constant)
+                                                .UpdateImageList(image);
                                           }
                                         }
 //-------------------------------------------
 
-                                        else if(userdata.Total_duration==Total_duration) {
+                                        else if (userdata.Total_duration ==
+                                            Total_duration) {
                                           dynamic result =
                                               await DatabaseService(
-                                              uid: uid_constant)
-                                              .UpdateUserData(
-                                              F_Name,
-                                              L_Name,
-                                              Age,
-                                              Sex,
-                                              Device,
-                                              Allergies,
-                                              Doctor_address,
-                                              Dentist_address,
-                                              Blood_type,
-                                              Frequency,
-                                              Total_duration,
-                                              Instructions,
-                                              Image_url);
-
+                                                      uid: uid_constant)
+                                                  .UpdateUserData(
+                                                      F_Name,
+                                                      L_Name,
+                                                      Age,
+                                                      Sex,
+                                                      Device,
+                                                      Allergies,
+                                                      Doctor_address,
+                                                      Dentist_address,
+                                                      Blood_type,
+                                                      Frequency,
+                                                      Total_duration,
+                                                      Instructions,
+                                                      Image_url);
                                         }
-
 
                                         //------------------------------------------------
                                         setState(() {
-                                          asyncpressed=false;
+                                          asyncpressed = false;
                                         });
-
 
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
-                                                builder: (BuildContext
-                                                context) =>
-                                                    NotificationScreen()));
-
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        NotificationScreen()));
                                       }
                                       //-----------------------------------------------
 
-else{
-  float_toast('créer un profil en premier');
+                                      else {
+                                        float_toast(
+                                            'créer un profil en premier');
                                       }
-
                                     },
-                                    child: notification_list.length==0?CircleAvatar(
-                                      child: Icon(
-                                        Icons.notifications_none,
-                                        color: Colors.white,
-                                        size: 35,
-                                      ),
-                                      backgroundColor: Color(0xffFF999A),
-                                      radius: 25,
-                                    ):CircleAvatar(
-                                      child: Badge(
-                                          badgeContent: Text(
-                                            notification_list.length.toString(),
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                          child: Icon(
-                                            Icons.notifications_none,
-                                            color: Colors.white,
-                                            size: 35,
+                                    child: notification_list.length == 0
+                                        ? CircleAvatar(
+                                            child: Icon(
+                                              Icons.notifications_none,
+                                              color: Colors.white,
+                                              size: 35,
+                                            ),
+                                            backgroundColor: Color(0xffFF999A),
+                                            radius: 25,
+                                          )
+                                        : CircleAvatar(
+                                            child: Badge(
+                                                badgeContent: Text(
+                                                  notification_list.length
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                child: Icon(
+                                                  Icons.notifications_none,
+                                                  color: Colors.white,
+                                                  size: 35,
+                                                )),
+                                            backgroundColor: Color(0xffFF999A),
+                                            radius: 25,
                                           )),
-                                      backgroundColor: Color(0xffFF999A),
-                                      radius: 25,
-                                    )),
                               )
                             ]),
                         Padding(
@@ -368,16 +378,19 @@ else{
                                   ),
                                 ],
                               ),
+                              // padding change
                               width: 370,
+
                               child: Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(25.0),
                                 child: Form(
                                   key: _key,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -390,8 +403,6 @@ else{
                                         ],
                                       ),
                                       Stack(children: [
-
-
                                         ClipOval(
                                           child: Image.network(
                                             Image_url,
@@ -414,7 +425,7 @@ else{
                                             top: 60,
                                             left: 60,
                                             child: InkWell(
-                                              onTap: (){
+                                              onTap: () {
                                                 chooseFile();
                                               },
                                               child: CircleAvatar(
@@ -422,7 +433,8 @@ else{
                                                   Icons.add,
                                                   color: Colors.white,
                                                 ),
-                                                backgroundColor: Color(0xff41B4C7),
+                                                backgroundColor:
+                                                    Color(0xff41B4C7),
                                               ),
                                             )),
                                       ]),
@@ -430,1245 +442,137 @@ else{
                                         'Mon Profil',
                                         style: GoogleFonts.dMSerifText(
                                             fontSize: 28,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black87,letterSpacing: 1),
+                                            color: Color(0xff1C191B),
+                                            letterSpacing: 1),
                                       ),
-                                      InkWell(onTap: () async {
-                                        if (_key.currentState.validate()) {
-
-                                          setState(() {
-                                            asyncpressed=true;
-                                          });
-
-                                          if(userdata.Total_duration!=Total_duration) {
-                                            dynamic result =
-                                            await DatabaseService(
-                                                uid: uid_constant)
-                                                .UpdateUserData(
-                                                F_Name,
-                                                L_Name,
-                                                Age,
-                                                Sex,
-                                                Device,
-                                                Allergies,
-                                                Doctor_address,
-                                                Dentist_address,
-                                                Blood_type,
-                                                Frequency,
-                                                Total_duration,
-                                                Instructions,
-                                                Image_url);
-
-
-                                            final snapShot = await FirebaseFirestore.instance
-                                                .collection('UserData')
-                                                .doc(uid_constant).collection('Points').get();
-                                            final snapShot2 = await FirebaseFirestore.instance
-                                                .collection('UserData')
-                                                .doc(uid_constant).collection('CheckPoints').get();
-                                            final snapShot3 = await FirebaseFirestore.instance
-                                                .collection('ImageGrid')
-                                                .doc(uid_constant).collection('CheckPoints').get();
-
-                                            if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
-                                              FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-                                                  .collection('Points').get()
-                                                  .then((snapshot) {
-                                                for (DocumentSnapshot ds in snapshot.docs) {
-                                                  ds.reference.delete();
-                                                }
-                                              });
-
-                                              FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-                                                  .collection('CheckPoints').get()
-                                                  .then((snapshot) {
-                                                for (DocumentSnapshot ds in snapshot.docs) {
-                                                  ds.reference.delete();
-                                                }
-                                              });
-                                            }
-// one for removed and made into one
-                                            for (int i = 1; i <= Total_duration; i++) {
-                                              DatabaseService(uid: uid_constant).UpdatePoints(
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0,
-                                                  0);
-
-                                              // this command was in an other for loop
-                                              DatabaseService(uid: uid_constant).UpdateCheckPoint(
-                                                  ' ', ' ', ' ', ' ', ' ');
-                                            }
-
-                                            if (snapShot3.docs.length == 0) {
-                                              await DatabaseService(uid: uid_constant).UpdateImageList(image);
-                                            }
-                                          }
-//-------------------------------------------
-
-                                          else if(userdata.Total_duration==Total_duration) {
-                                            dynamic result =
-                                            await DatabaseService(
-                                                uid: uid_constant)
-                                                .UpdateUserData(
-                                                F_Name,
-                                                L_Name,
-                                                Age,
-                                                Sex,
-                                                Device,
-                                                Allergies,
-                                                Doctor_address,
-                                                Dentist_address,
-                                                Blood_type,
-                                                Frequency,
-                                                Total_duration,
-                                                Instructions,
-                                                Image_url);
-
-                                          }
-
-
-                                          //------------------------------------------------
-                                          setState(() {
-                                            asyncpressed=false;
-                                          });
-
-                                          Navigator.of(context)
-                                              .pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                  context) =>
-                                                      LoadingScreen()));
-
-
-                                        }
-                                      },
-                                          child: Image.asset('assets/first_pro_btn.png')),
-                                      Row(
-                                        children: [
-                                          Text(First_name_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 1
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              F_Name= val;
-                                            });
-                                          },
-                                          initialValue: userdata.F_Name,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Last_name_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 1
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              L_Name = val;
-                                            });
-                                          },
-                                          initialValue: userdata.L_Name,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(height: 20,),
-                                      Row(
-                                        children: [
-                                          Text(Age_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.isEmpty
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          keyboardType: TextInputType.number,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Age = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Age,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Sex_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 2
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Sex = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Sex,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text("Type d'appareil sélectionné",
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Container(
-                                        height: _isExpanded == false ? 60 : 332,
-                                        width: 371,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color(0xff41B4C7)),
-                                            shape: BoxShape.rectangle,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15.0),
-                                                topRight: Radius.circular(15.0),
-                                                bottomRight:
-                                                    Radius.circular(15.0),
-                                                bottomLeft:
-                                                    Radius.circular(15.0))),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      Device,
-                                                      style: GoogleFonts.dMSerifText(
-                                                          color:
-                                                              Color(0xff41B4C7),
-                                                          fontSize: 25),
-                                                    ),
-                                                  ),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          _isExpanded =
-                                                              !_isExpanded;
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        _isExpanded == false
-                                                            ? Icons.arrow_downward
-                                                            : Icons.arrow_upward,
-                                                        color: Color(0xff41B4C7),
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              height: _isExpanded == false
-                                                  ? 0
-                                                  : 277,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Device = 'Sagittal';
-                                                        _isExpanded = false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            'Sagittal',
-                                                            style: GoogleFonts.dMSerifText(
-                                                                color: Color(0xff41B4C7),
-                                                                fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Device = 'Schwartz';
-                                                        _isExpanded = false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            'Schwartz',
-                                                            style:
-                                                                GoogleFonts.dMSerifText(
-                                                                    color:  Color(0xff41B4C7),
-                                                                    fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Device = 'Split Plate';
-                                                        _isExpanded = false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('Split Plate',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color:  Color(0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(onTap: (){
-                                                    setState(() {
-                                                      Device = 'Bionator';
-                                                      _isExpanded = false;
-                                                    });
-                                                  },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('Bionator',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(onTap: (){
-                                                    setState(() {
-                                                      Device = 'Twin Block';
-                                                      _isExpanded = false;
-                                                    });
-                                                  },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('Twin Block',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Dentist_address_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 2
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Dentist_address = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Dentist_address,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Doctor_address_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 2
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Doctor_address = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Doctor_address,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Allergies_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 2
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Allergies = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Allergies,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Container(
-                                        height: _isExpanded2 == false ? 60 : 554,
-                                        width: 371,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color(0xff41B4C7)),
-                                            shape: BoxShape.rectangle,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15.0),
-                                                topRight: Radius.circular(15.0),
-                                                bottomRight:
-                                                    Radius.circular(15.0),
-                                                bottomLeft:
-                                                    Radius.circular(15.0))),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      Blood_type,
-                                                      style: GoogleFonts.dMSerifText(
-                                                          color:
-                                                              Color(0xff41B4C7),
-                                                          fontSize: 25),
-                                                    ),
-                                                  ),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          _isExpanded2 =
-                                                              !_isExpanded2;
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        _isExpanded2 == false
-                                                            ? Icons.arrow_downward
-                                                            : Icons.arrow_upward,
-                                                        color: Color(0xff41B4C7),
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              height: _isExpanded2 == false
-                                                  ? 0
-                                                  : 499,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='O-';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            'O-',
-                                                            style:
-                                                                GoogleFonts.dMSerifText(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='O+';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            'O+',
-                                                            style:
-                                                                GoogleFonts.dMSerifText(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='A-';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('A-',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='A+';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('A+',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='B-';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('B-',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='B+';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('B+',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='AB-';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('AB-',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Blood_type='AB+';
-                                                        _isExpanded2=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('AB+',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                      onTap: (){
-                                                        setState(() {
-                                                          Blood_type='Unknown';
-                                                          _isExpanded2=false;
-                                                        });
-                                                      },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('UnKnown',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Container(
-                                        height: _isExpanded3 == false ? 60 : 277,
-                                        width: 371,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Color(0xff41B4C7)),
-                                            shape: BoxShape.rectangle,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15.0),
-                                                topRight: Radius.circular(15.0),
-                                                bottomRight:
-                                                    Radius.circular(15.0),
-                                                bottomLeft:
-                                                    Radius.circular(15.0))),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    child: Text(
-                                                      Frequency,
-                                                      style: GoogleFonts.dMSerifText(
-                                                          color:
-                                                              Color(0xff41B4C7),
-                                                          fontSize: 25),
-                                                    ),
-                                                  ),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          _isExpanded3 =
-                                                              !_isExpanded3;
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        _isExpanded3 == false
-                                                            ? Icons.arrow_downward
-                                                            : Icons.arrow_upward,
-                                                        color: Color(0xff41B4C7),
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              height: _isExpanded3 == false
-                                                  ? 0
-                                                  : 222,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Frequency='1x / jour';
-                                                        _isExpanded3=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            '1x / jour',
-                                                            style:
-                                                                GoogleFonts.dMSerifText(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){
-                                                      setState(() {
-                                                        Frequency='3x /Jour';
-                                                        _isExpanded3=false;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            '3x /Jour',
-                                                            style:
-                                                                GoogleFonts.dMSerifText(
-                                                                    color: Color(
-                                                                        0xff41B4C7),
-                                                                    fontSize: 25),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: (){ setState(() {
-                                                      Frequency='1x /Semaine';
-                                                      _isExpanded3=false;
-                                                    });},
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('x /Semaine',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                    fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 2,
-                                                    width: 400,
-                                                    color: Color(0xff41B4C7),
-                                                  ),
-                                                  InkWell(onTap: (){
-                                                    setState(() {
-                                                      Frequency='2x /Semaine';
-                                                      _isExpanded3=false;
-                                                    });
-                                                  },
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Row(
-                                                        children: [
-                                                          Text('2x /Semaine',
-                                                              style: GoogleFonts.dMSerifText(
-                                                                  color: Color(
-                                                                      0xff41B4C7),
-                                                                  fontSize: 25))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(Total_duration_data,
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val=='0'
-                                              ? 'La durée doit être supérieure à 0'
-                                             :null,
-                                          obscureText: false,
-                                          keyboardType: TextInputType.number,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Total_duration = int.parse(val);
-                                            });
-                                          },
-                                          initialValue: userdata.Total_duration.toString(),
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text('Instructions spéciales du dentiste',
-                                              style: GoogleFonts.dMSerifText(
-                                                  color: Colors.black54,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      ),
-                                      TextFormField(
-                                          validator: (val) => val.length < 2
-                                              ? 'Veuillez remplir ce champ'
-                                              : null,
-                                          obscureText: false,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              Instructions = val;
-                                            });
-                                          },
-                                          initialValue: userdata.Instructions,
-                                          style: TextStyle(
-                                            color: Color(0xff41B4C7),
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            fillColor: Color(0xffF5FBFC),
-                                            filled: true,
-                                            labelStyle: TextStyle(
-                                                fontSize: 25,
-                                                color: Color(0xff41B4C7)),
-                                          )),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      GestureDetector(
+                                      InkWell(
                                           onTap: () async {
                                             if (_key.currentState.validate()) {
-
                                               setState(() {
-                                                asyncpressed=true;
+                                                asyncpressed = true;
                                               });
 
-    if(userdata.Total_duration!=Total_duration) {
-      dynamic result =
-      await DatabaseService(
-          uid: uid_constant)
-          .UpdateUserData(
-          F_Name,
-          L_Name,
-          Age,
-          Sex,
-          Device,
-          Allergies,
-          Doctor_address,
-          Dentist_address,
-          Blood_type,
-          Frequency,
-          Total_duration,
-          Instructions,
-          Image_url);
+                                              if (userdata.Total_duration !=
+                                                  Total_duration) {
+                                                dynamic result =
+                                                    await DatabaseService(
+                                                            uid: uid_constant)
+                                                        .UpdateUserData(
+                                                            F_Name,
+                                                            L_Name,
+                                                            Age,
+                                                            Sex,
+                                                            Device,
+                                                            Allergies,
+                                                            Doctor_address,
+                                                            Dentist_address,
+                                                            Blood_type,
+                                                            Frequency,
+                                                            Total_duration,
+                                                            Instructions,
+                                                            Image_url);
 
+                                                final snapShot =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('UserData')
+                                                        .doc(uid_constant)
+                                                        .collection('Points')
+                                                        .get();
+                                                final snapShot2 =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('UserData')
+                                                        .doc(uid_constant)
+                                                        .collection(
+                                                            'CheckPoints')
+                                                        .get();
+                                                final snapShot3 =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('ImageGrid')
+                                                        .doc(uid_constant)
+                                                        .collection(
+                                                            'CheckPoints')
+                                                        .get();
 
-      final snapShot = await FirebaseFirestore.instance
-          .collection('UserData')
-          .doc(uid_constant).collection('Points').get();
-      final snapShot2 = await FirebaseFirestore.instance
-          .collection('UserData')
-          .doc(uid_constant).collection('CheckPoints').get();
-      final snapShot3 = await FirebaseFirestore.instance
-          .collection('ImageGrid')
-          .doc(uid_constant).collection('CheckPoints').get();
+                                                if (snapShot.docs.length != 0 &&
+                                                    snapShot2.docs.length !=
+                                                        0) {
+                                                  FirebaseFirestore.instance
+                                                      .collection('UserData')
+                                                      .doc(uid_constant)
+                                                      .collection('Points')
+                                                      .get()
+                                                      .then((snapshot) {
+                                                    for (DocumentSnapshot ds
+                                                        in snapshot.docs) {
+                                                      ds.reference.delete();
+                                                    }
+                                                  });
 
-      if (snapShot.docs.length != 0 && snapShot2.docs.length != 0) {
-        FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-            .collection('Points').get()
-            .then((snapshot) {
-          for (DocumentSnapshot ds in snapshot.docs) {
-            ds.reference.delete();
-          }
-        });
-
-        FirebaseFirestore.instance.collection('UserData').doc(uid_constant)
-            .collection('CheckPoints').get()
-            .then((snapshot) {
-          for (DocumentSnapshot ds in snapshot.docs) {
-            ds.reference.delete();
-          }
-        });
-      }
+                                                  FirebaseFirestore.instance
+                                                      .collection('UserData')
+                                                      .doc(uid_constant)
+                                                      .collection('CheckPoints')
+                                                      .get()
+                                                      .then((snapshot) {
+                                                    for (DocumentSnapshot ds
+                                                        in snapshot.docs) {
+                                                      ds.reference.delete();
+                                                    }
+                                                  });
+                                                }
 // one for removed and made into one
-      for (int i = 1; i <= Total_duration; i++) {
-         DatabaseService(uid: uid_constant).UpdatePoints(
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0);
+                                                for (int i = 1;
+                                                    i <= Total_duration;
+                                                    i++) {
+                                                  DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdatePoints(0, 0, 0, 0,
+                                                          0, 0, 0, 0, 0, 0);
 
-        // this command was in an other for loop
-         DatabaseService(uid: uid_constant).UpdateCheckPoint(
-            ' ', ' ', ' ', ' ', ' ');
-      }
+                                                  // this command was in an other for loop
+                                                  DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdateCheckPoint(' ',
+                                                          ' ', ' ', ' ', ' ');
+                                                }
 
-      if (snapShot3.docs.length == 0) {
-        await DatabaseService(uid: uid_constant).UpdateImageList(image);
-      }
-    }
+                                                if (snapShot3.docs.length ==
+                                                    0) {
+                                                  await DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdateImageList(image);
+                                                }
+                                              }
 //-------------------------------------------
 
-                                             else if(userdata.Total_duration==Total_duration) {
+                                              else if (userdata
+                                                      .Total_duration ==
+                                                  Total_duration) {
                                                 dynamic result =
-                                                await DatabaseService(
-                                                    uid: uid_constant)
-                                                    .UpdateUserData(
-                                                    F_Name,
-                                                    L_Name,
-                                                    Age,
-                                                    Sex,
-                                                    Device,
-                                                    Allergies,
-                                                    Doctor_address,
-                                                    Dentist_address,
-                                                    Blood_type,
-                                                    Frequency,
-                                                    Total_duration,
-                                                    Instructions,
-                                                    Image_url);
-
+                                                    await DatabaseService(
+                                                            uid: uid_constant)
+                                                        .UpdateUserData(
+                                                            F_Name,
+                                                            L_Name,
+                                                            Age,
+                                                            Sex,
+                                                            Device,
+                                                            Allergies,
+                                                            Doctor_address,
+                                                            Dentist_address,
+                                                            Blood_type,
+                                                            Frequency,
+                                                            Total_duration,
+                                                            Instructions,
+                                                            Image_url);
                                               }
-
 
                                               //------------------------------------------------
                                               setState(() {
-                                                asyncpressed=false;
+                                                asyncpressed = false;
                                               });
 
                                               Navigator.of(context)
@@ -1677,8 +581,1319 @@ else{
                                                           builder: (BuildContext
                                                                   context) =>
                                                               LoadingScreen()));
+                                            }
+                                          },
+                                          child: Image.asset(
+                                              'assets/first_pro_btn.png')),
+                                      Row(
+                                        children: [
+                                          Text("   " + First_name_data,
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 1
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                F_Name = val;
+                                              });
+                                            },
+                                            initialValue: userdata.F_Name.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Last_name_data,
+                                              style:GoogleFonts.heebo(
+                                          color: Color(0xff969696),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 1
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                L_Name = val;
+                                              });
+                                            },
+                                            initialValue: userdata.L_Name.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Age_data,
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.isEmpty
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            keyboardType: TextInputType.number,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Age = val;
+                                              });
+                                            },
+                                            initialValue: userdata.Age.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Sex_data,
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 2
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Sex = val;
+                                              });
+                                            },
+                                            initialValue: userdata.Sex.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +"Type d'appareil sélectionné",
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Container(
+                                          height:
+                                              _isExpanded == false ? 60 : 332,
+                                          width: 371,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color(0xff41B4C7)),
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(20.0),
+                                                  topRight:
+                                                      Radius.circular(20.0),
+                                                  bottomRight:
+                                                      Radius.circular(20.0),
+                                                  bottomLeft:
+                                                      Radius.circular(20.0))),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Container(
+                                                      child: Center(
+                                                        child: Text(
+                                                          Device,
+                                                          style: GoogleFonts
+                                                              .dMSerifText(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            _isExpanded =
+                                                                !_isExpanded;
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          _isExpanded == false
+                                                              ? Icons
+                                                                  .arrow_downward
+                                                              : Icons
+                                                                  .arrow_upward,
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          size: 30,
+                                                        ))
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: _isExpanded == false
+                                                    ? 0
+                                                    : 277,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Device = 'Sagittal';
+                                                          _isExpanded = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              'Sagittal',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Device = 'Schwartz';
+                                                          _isExpanded = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              'Schwartz',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Device =
+                                                              'Split Plate';
+                                                          _isExpanded = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('Split Plate',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Device = 'Bionator';
+                                                          _isExpanded = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text("   " +'Bionator',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Device = 'Twin Block';
+                                                          _isExpanded = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text("   " +'Twin Block',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Dentist_address_data,
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 2
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Dentist_address = val;
+                                              });
+                                            },
+                                            initialValue:
+                                                userdata.Dentist_address.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Doctor_address_data,
+                                            style: GoogleFonts.heebo(
+                                                color: Color(0xff969696),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 2
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Doctor_address = val;
+                                              });
+                                            },
+                                            initialValue: userdata.Doctor_address.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +Allergies_data,
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 2
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Allergies = val;
+                                              });
+                                            },
+                                            initialValue: userdata.Allergies.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("   " +"Groupe sanguin",
+                                              style: GoogleFonts.heebo(
+                                                  color: Color(0xff969696),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Container(
+                                          height:
+                                              _isExpanded2 == false ? 60 : 554,
+                                          width: 371,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color(0xff41B4C7)),
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(20.0),
+                                                  topRight:
+                                                      Radius.circular(20.0),
+                                                  bottomRight:
+                                                      Radius.circular(20.0),
+                                                  bottomLeft:
+                                                      Radius.circular(20.0))),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Container(
+                                                      child: Center(
+                                                        child: Text(
+                                                          Blood_type,
+                                                          style: GoogleFonts
+                                                              .dMSerifText(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            _isExpanded2 =
+                                                                !_isExpanded2;
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          _isExpanded2 == false
+                                                              ? Icons
+                                                                  .arrow_downward
+                                                              : Icons
+                                                                  .arrow_upward,
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          size: 30,
+                                                        ))
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: _isExpanded2 == false
+                                                    ? 0
+                                                    : 499,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'O-';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              'O-',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'O+';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              'O+',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'A-';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('A-',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'A+';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('A+',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'B-';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('B-',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'B+';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('B+',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'AB-';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('AB-',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type = 'AB+';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('AB+',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Blood_type =
+                                                              'Unknown';
+                                                          _isExpanded2 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('UnKnown',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                                "   " +"Choisir la fréquence de l’activation de la vis",
 
+                                                style: GoogleFonts.heebo(
+                                                    color: Color(0xff969696),
+                                                    fontSize: 15,
 
+                                                    fontWeight: FontWeight.bold)),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Container(
+                                          height:
+                                              _isExpanded3 == false ? 60 : 277,
+                                          width: 371,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color(0xff41B4C7)),
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(20.0),
+                                                  topRight:
+                                                      Radius.circular(20.0),
+                                                  bottomRight:
+                                                      Radius.circular(20.0),
+                                                  bottomLeft:
+                                                      Radius.circular(20.0))),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Container(
+                                                      child: Center(
+                                                        child: Text(
+                                                          Frequency,
+                                                          style: GoogleFonts
+                                                              .dMSerifText(
+                                                                  color: Color(
+                                                                      0xff41B4C7),
+                                                                  fontSize: 25),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            _isExpanded3 =
+                                                                !_isExpanded3;
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          _isExpanded3 == false
+                                                              ? Icons
+                                                                  .arrow_downward
+                                                              : Icons
+                                                                  .arrow_upward,
+                                                          color:
+                                                              Color(0xff41B4C7),
+                                                          size: 30,
+                                                        ))
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: _isExpanded3 == false
+                                                    ? 0
+                                                    : 222,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Frequency =
+                                                              '1x / jour';
+                                                          _isExpanded3 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              '1x / jour',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Frequency =
+                                                              '3x /Jour';
+                                                          _isExpanded3 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              '3x /Jour',
+                                                              style: GoogleFonts
+                                                                  .dMSerifText(
+                                                                      color: Color(
+                                                                          0xff41B4C7),
+                                                                      fontSize:
+                                                                          25),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Frequency =
+                                                              '1x /Semaine';
+                                                          _isExpanded3 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('x /Semaine',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 400,
+                                                      color: Color(0xff41B4C7),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          Frequency =
+                                                              '2x /Semaine';
+                                                          _isExpanded3 = false;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text('2x /Semaine',
+                                                                style: GoogleFonts
+                                                                    .dMSerifText(
+                                                                        color: Color(
+                                                                            0xff41B4C7),
+                                                                        fontSize:
+                                                                            25))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text("   " +Total_duration_data,
+
+                                                style: GoogleFonts.heebo(
+                                                    color: Color(0xff969696),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold)),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val == '0'
+                                                ? 'La durée doit être supérieure à 0'
+                                                : null,
+                                            obscureText: false,
+                                            keyboardType: TextInputType.number,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Total_duration = int.parse(val);
+                                              });
+                                            },
+                                            initialValue: userdata.Total_duration
+                                                .toString().trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text("   " +
+                                                'Instructions spéciales du dentiste',
+
+                                                style: GoogleFonts.heebo(
+                                                    color: Color(0xff969696),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold)),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        child: TextFormField(
+                                            validator: (val) => val.length < 2
+                                                ? 'Veuillez remplir ce champ'
+                                                : null,
+                                            obscureText: false,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                Instructions = val;
+                                              });
+                                            },
+                                            initialValue: userdata.Instructions.trim(),
+                                            style: GoogleFonts.dMSerifText(
+                                              color: Color(0xff41B4C7),
+                                              fontSize: 23,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Color(0xffF5FBFC),
+                                              filled: true,
+                                              labelStyle: TextStyle(
+                                                  fontSize: 25,
+                                                  color: Color(0xff41B4C7)),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      GestureDetector(
+                                          onTap: () async {
+                                            if (_key.currentState.validate()) {
+                                              setState(() {
+                                                asyncpressed = true;
+                                              });
+
+                                              if (userdata.Total_duration !=
+                                                  Total_duration) {
+                                                dynamic result =
+                                                    await DatabaseService(
+                                                            uid: uid_constant)
+                                                        .UpdateUserData(
+                                                            F_Name,
+                                                            L_Name,
+                                                            Age,
+                                                            Sex,
+                                                            Device,
+                                                            Allergies,
+                                                            Doctor_address,
+                                                            Dentist_address,
+                                                            Blood_type,
+                                                            Frequency,
+                                                            Total_duration,
+                                                            Instructions,
+                                                            Image_url);
+
+                                                final snapShot =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('UserData')
+                                                        .doc(uid_constant)
+                                                        .collection('Points')
+                                                        .get();
+                                                final snapShot2 =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('UserData')
+                                                        .doc(uid_constant)
+                                                        .collection(
+                                                            'CheckPoints')
+                                                        .get();
+                                                final snapShot3 =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('ImageGrid')
+                                                        .doc(uid_constant)
+                                                        .collection(
+                                                            'CheckPoints')
+                                                        .get();
+
+                                                if (snapShot.docs.length != 0 &&
+                                                    snapShot2.docs.length !=
+                                                        0) {
+                                                  FirebaseFirestore.instance
+                                                      .collection('UserData')
+                                                      .doc(uid_constant)
+                                                      .collection('Points')
+                                                      .get()
+                                                      .then((snapshot) {
+                                                    for (DocumentSnapshot ds
+                                                        in snapshot.docs) {
+                                                      ds.reference.delete();
+                                                    }
+                                                  });
+
+                                                  FirebaseFirestore.instance
+                                                      .collection('UserData')
+                                                      .doc(uid_constant)
+                                                      .collection('CheckPoints')
+                                                      .get()
+                                                      .then((snapshot) {
+                                                    for (DocumentSnapshot ds
+                                                        in snapshot.docs) {
+                                                      ds.reference.delete();
+                                                    }
+                                                  });
+                                                }
+// one for removed and made into one
+                                                for (int i = 1;
+                                                    i <= Total_duration;
+                                                    i++) {
+                                                  DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdatePoints(0, 0, 0, 0,
+                                                          0, 0, 0, 0, 0, 0);
+
+                                                  // this command was in an other for loop
+                                                  DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdateCheckPoint(' ',
+                                                          ' ', ' ', ' ', ' ');
+                                                }
+
+                                                if (snapShot3.docs.length ==
+                                                    0) {
+                                                  await DatabaseService(
+                                                          uid: uid_constant)
+                                                      .UpdateImageList(image);
+                                                }
+                                              }
+//-------------------------------------------
+
+                                              else if (userdata
+                                                      .Total_duration ==
+                                                  Total_duration) {
+                                                dynamic result =
+                                                    await DatabaseService(
+                                                            uid: uid_constant)
+                                                        .UpdateUserData(
+                                                            F_Name,
+                                                            L_Name,
+                                                            Age,
+                                                            Sex,
+                                                            Device,
+                                                            Allergies,
+                                                            Doctor_address,
+                                                            Dentist_address,
+                                                            Blood_type,
+                                                            Frequency,
+                                                            Total_duration,
+                                                            Instructions,
+                                                            Image_url);
+                                              }
+
+                                              //------------------------------------------------
+                                              setState(() {
+                                                asyncpressed = false;
+                                              });
+
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              LoadingScreen()));
                                             }
                                           },
                                           child: Image.asset(
@@ -1695,9 +1910,6 @@ else{
                   ),
                 ),
               )));
-        }
-
-
-        );
+        });
   }
 }

@@ -66,9 +66,9 @@ class _PerforScreenState extends State<PerforScreen> {
                                     )),
                               ),
                               Text(
-                                'Performance',
+                                'Performances',
                                 style: GoogleFonts.heebo(
-                                    color: Colors.white, fontSize: 30),
+                                    color: Colors.white, fontSize: 20),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -170,14 +170,14 @@ class _PerforScreenState extends State<PerforScreen> {
                                                 children: [
                                                   Text(
                                                     'POINTS',
-                                                    style: GoogleFonts.heebo(
+                                                    style: GoogleFonts.dMSerifText(
                                                         fontSize: 18,
                                                         color:
                                                             Color(0xffF5FBFC)),
                                                   ),
                                                   Text(
                                                     snapshot.data.docs[Day_index]["TotalPoints"].toString(),
-                                                    style: GoogleFonts.heebo(
+                                                    style: GoogleFonts.dMSerifText(
                                                         fontSize: 30,
                                                         color:
                                                             Color(0xffF5FBFC)),
@@ -203,7 +203,7 @@ class _PerforScreenState extends State<PerforScreen> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: Container(
                             height: MediaQuery.of(context).size.height / 2,
                             width: MediaQuery.of(context).size.width,

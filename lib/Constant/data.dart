@@ -55,7 +55,7 @@ List profile_items = [
       image_path: 'assets/evaluation_logo.png',
       screen: Home()),
   ProfileListModel(
-      name: 'Les performances',
+      name: 'Performances',
       image_path: 'assets/performance_logo.png',
       screen: Home()),
   ProfileListModel(
@@ -69,7 +69,7 @@ List profile_items = [
       image_path: 'assets/help_logo.png',
       screen: TipsScreen()),
   ProfileListModel(
-      name: "Évaluer l'application",
+      name: "Notez l’appli",
       image_path: 'assets/rate_logo.png',
       screen: TipsScreen())
 ];

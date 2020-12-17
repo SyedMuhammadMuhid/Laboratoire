@@ -261,8 +261,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         children: [
                                                           Text(
                                                             'POINTS',
-                                                            style: GoogleFonts.dMSerifText(
-                                                                fontSize: 18,
+                                                            style: GoogleFonts.heebo(
+                                                              fontWeight: FontWeight.bold,
+                                                                fontSize: 16,
+
                                                                 color: Color(
                                                                     0xffF5FBFC)),
                                                           ),
@@ -367,8 +369,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         children: [
                                                           Text(
                                                             'JOURS',
-                                                            style: GoogleFonts.dMSerifText(
-                                                                fontSize: 18,
+                                                            style: GoogleFonts.heebo(
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 16,
+
                                                                 color: Color(
                                                                     0xffF5FBFC)),
                                                           ),

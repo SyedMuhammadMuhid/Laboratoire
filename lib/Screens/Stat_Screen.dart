@@ -94,7 +94,7 @@ class _StatScreenState extends State<StatScreen> {
                                 Text(
                                   'Évolution',
                                   style: GoogleFonts.heebo(
-                                      color: Colors.white, fontSize: 30),
+                                      color: Colors.white, fontSize: 25),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -202,7 +202,7 @@ class _StatScreenState extends State<StatScreen> {
                                                   children: [
                                                     Text(
                                                       '   JOURS\n RESTANTS',
-                                                      style: GoogleFonts.heebo(
+                                                      style: GoogleFonts.dMSerifText(
                                                           fontSize: 18,
                                                           color: Color(
                                                               0xffF5FBFC)),
@@ -210,7 +210,7 @@ class _StatScreenState extends State<StatScreen> {
                                                     Text(
                                                       userdata.Total_duration
                                                           .toString(),
-                                                      style: GoogleFonts.heebo(
+                                                      style: GoogleFonts.dMSerifText(
                                                           fontSize: 30,
                                                           color: Color(
                                                               0xffF5FBFC)),
@@ -278,7 +278,7 @@ class _StatScreenState extends State<StatScreen> {
                             children: [
                               Text(
                                 "Ta Progression\n     en photos",
-                                style: GoogleFonts.heebo(
+                                style: GoogleFonts.dMSerifText(
                                     fontSize: 40, color: Colors.white),
                               ),
                             ],
