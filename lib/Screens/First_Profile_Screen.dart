@@ -443,7 +443,7 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                         style: GoogleFonts.dMSerifText(
                                             fontSize: 28,
                                             color: Color(0xff1C191B),
-                                            letterSpacing: 1),
+                                          ),
                                       ),
                                       InkWell(
                                           onTap: () async {
@@ -594,30 +594,27 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 1
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                F_Name = val;
-                                              });
-                                            },
-                                            initialValue: userdata.F_Name.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 1
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              F_Name = val;
+                                            });
+                                          },
+                                          initialValue: userdata.F_Name.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -630,31 +627,28 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                     fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 1
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                L_Name = val;
-                                              });
-                                            },
-                                            initialValue: userdata.L_Name.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 1
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              L_Name = val;
+                                            });
+                                          },
+                                          initialValue: userdata.L_Name.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -667,32 +661,29 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.isEmpty
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            keyboardType: TextInputType.number,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Age = val;
-                                              });
-                                            },
-                                            initialValue: userdata.Age.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.isEmpty
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          keyboardType: TextInputType.number,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Age = val;
+                                            });
+                                          },
+                                          initialValue: userdata.Age.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -705,31 +696,28 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 2
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Sex = val;
-                                              });
-                                            },
-                                            initialValue: userdata.Sex.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 2
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Sex = val;
+                                            });
+                                          },
+                                          initialValue: userdata.Sex.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -987,32 +975,29 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 2
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Dentist_address = val;
-                                              });
-                                            },
-                                            initialValue:
-                                                userdata.Dentist_address.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 2
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Dentist_address = val;
+                                            });
+                                          },
+                                          initialValue:
+                                              userdata.Dentist_address.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -1025,31 +1010,28 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                 fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 2
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Doctor_address = val;
-                                              });
-                                            },
-                                            initialValue: userdata.Doctor_address.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 2
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Doctor_address = val;
+                                            });
+                                          },
+                                          initialValue: userdata.Doctor_address.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -1062,31 +1044,28 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                                   fontWeight: FontWeight.bold))
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 2
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Allergies = val;
-                                              });
-                                            },
-                                            initialValue: userdata.Allergies.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val.length < 2
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Allergies = val;
+                                            });
+                                          },
+                                          initialValue: userdata.Allergies.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -1687,33 +1666,30 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val == '0'
-                                                ? 'La durée doit être supérieure à 0'
-                                                : null,
-                                            obscureText: false,
-                                            keyboardType: TextInputType.number,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Total_duration = int.parse(val);
-                                              });
-                                            },
-                                            initialValue: userdata.Total_duration
-                                                .toString().trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+                                          validator: (val) => val == '0'
+                                              ? 'La durée doit être supérieure à 0'
+                                              : null,
+                                          obscureText: false,
+                                          keyboardType: TextInputType.number,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Total_duration = int.parse(val);
+                                            });
+                                          },
+                                          initialValue: userdata.Total_duration
+                                              .toString().trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -1730,31 +1706,29 @@ class _FirstProfileScreenState extends State<FirstProfileScreen> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                            validator: (val) => val.length < 2
-                                                ? 'Veuillez remplir ce champ'
-                                                : null,
-                                            obscureText: false,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                Instructions = val;
-                                              });
-                                            },
-                                            initialValue: userdata.Instructions.trim(),
-                                            style: GoogleFonts.dMSerifText(
-                                              color: Color(0xff41B4C7),
-                                              fontSize: 23,
-                                            ),
-                                            decoration: InputDecoration(
-                                              fillColor: Color(0xffF5FBFC),
-                                              filled: true,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Color(0xff41B4C7)),
-                                            )),
-                                      ),
+                                      TextFormField(
+
+                                          validator: (val) => val.length < 2
+                                              ? 'Veuillez remplir ce champ'
+                                              : null,
+                                          obscureText: false,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              Instructions = val;
+                                            });
+                                          },
+                                          initialValue: userdata.Instructions.trim(),
+                                          style: GoogleFonts.dMSerifText(
+                                            color: Color(0xff41B4C7),
+                                            fontSize: 23,
+                                          ),
+                                          decoration: InputDecoration(
+                                            fillColor: Color(0xffF5FBFC),
+                                            filled: true,
+                                            labelStyle: TextStyle(
+                                                fontSize: 25,
+                                                color: Color(0xff41B4C7)),
+                                          )),
                                       SizedBox(
                                         height: 30,
                                       ),

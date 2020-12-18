@@ -168,13 +168,7 @@ class _PerforScreenState extends State<PerforScreen> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    'POINTS',
-                                                    style: GoogleFonts.dMSerifText(
-                                                        fontSize: 18,
-                                                        color:
-                                                            Color(0xffF5FBFC)),
-                                                  ),
+
                                                   Text(
                                                     snapshot.data.docs[Day_index]["TotalPoints"].toString(),
                                                     style: GoogleFonts.dMSerifText(
@@ -182,13 +176,24 @@ class _PerforScreenState extends State<PerforScreen> {
                                                         color:
                                                             Color(0xffF5FBFC)),
                                                   ),
-                                                  Center(
-                                                      child: Text(
-                                                          "$percentage",
-                                                          style: GoogleFonts.heebo(
-                                                              fontSize: 15,
-                                                              color: Color(
-                                                                  0xffF5FBFC)))),
+                                                  Text(
+                                                    'POINTS',
+                                                    style: GoogleFonts.heebo(
+                                                      fontWeight: FontWeight.bold,
+                                                        fontSize: 18,
+                                                        color:
+                                                        Color(0xffF5FBFC)),
+                                                  ),
+                                                  //percentage commented
+//                                                  Center(
+//                                                      child: Text(
+//                                                          "$percentage",
+//                                                          style: GoogleFonts.heebo(
+//                                                              fontSize: 15,
+//                                                              color: Color(
+//                                                                  0xffF5FBFC)))
+//
+//                                                  ),
                                                 ],
                                               ),
                                             ),

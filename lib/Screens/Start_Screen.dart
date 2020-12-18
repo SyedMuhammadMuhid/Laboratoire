@@ -45,7 +45,7 @@ class StartScreen extends StatelessWidget {
                                children: [
                                  Text('Sourire parfait', style: GoogleFonts.dMSerifText(fontSize: 35, color: Colors.black87 ),),
                                  Text('Bienvenue, vous êtes maintenant ', style: GoogleFonts.dMSerifText(fontSize: 18, color: Colors.black54),),
-                                 Text('prêt à commencer ! ', style: GoogleFonts.dMSerifText(fontSize: 18, color: Colors.black54 ),),
+                                 Text('prêt à débuter!', style: GoogleFonts.dMSerifText(fontSize: 18, color: Colors.black54 ),),
 
                                ],
                              )

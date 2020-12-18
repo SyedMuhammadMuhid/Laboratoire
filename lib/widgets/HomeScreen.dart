@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool mechanism_check = false;
   BuildContext my_context;
 
-  String formattedTime = DateFormat.jm().format( DateTime.now());           //5:08 PM
+  String formattedTime = DateFormat.jm().format(DateTime.now()); //5:08 PM
 
   StreamSubscription<QuerySnapshot> subscription;
   List<DocumentSnapshot> userPoints;
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    print(uid_constant+"meeri uid");
+    print(uid_constant + "meeri uid");
     // TODO: implement initState
     super.initState();
     subscription = collectionReference.snapshots().listen((datasnapshot) {
@@ -60,13 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
     print('I am init state of home screen, I was run');
   }
 
-
   @override
   void dispose() {
     // TODO: implement dispose
     subscription?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     // AuthServices _authServices = AuthServices();
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Text(
                                         'Actions',
                                         style: GoogleFonts.heebo(
-                                            color: Colors.white, fontSize: 30),
+                                            color: Colors.white, fontSize: 25),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(10.0),
@@ -166,28 +166,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               context) =>
                                                           NotificationScreen()));
                                             },
-                                            child: notification_list.length==0?CircleAvatar(
-                                              child: Icon(
-                                                Icons.notifications_none,
-                                                color: Colors.white,
-                                                size: 35,
-                                              ),
-                                              backgroundColor: Color(0xffFF999A),
-                                              radius: 25,
-                                            ):CircleAvatar(
-                                              child: Badge(
-                                                  badgeContent: Text(
-                                                    notification_list.length.toString(),
-                                                    style: TextStyle(color: Colors.white),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.notifications_none,
-                                                    color: Colors.white,
-                                                    size: 35,
+                                            child: notification_list.length == 0
+                                                ? CircleAvatar(
+                                                    child: Icon(
+                                                      Icons.notifications_none,
+                                                      color: Colors.white,
+                                                      size: 35,
+                                                    ),
+                                                    backgroundColor:
+                                                        Color(0xffFF999A),
+                                                    radius: 25,
+                                                  )
+                                                : CircleAvatar(
+                                                    child: Badge(
+                                                        badgeContent: Text(
+                                                          notification_list
+                                                              .length
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        child: Icon(
+                                                          Icons
+                                                              .notifications_none,
+                                                          color: Colors.white,
+                                                          size: 35,
+                                                        )),
+                                                    backgroundColor:
+                                                        Color(0xffFF999A),
+                                                    radius: 25,
                                                   )),
-                                              backgroundColor: Color(0xffFF999A),
-                                              radius: 25,
-                                            )),
                                       )
                                     ]),
                                 Row(
@@ -258,13 +267,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           const EdgeInsets.all(
                                                               15.0),
                                                       child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Text(
                                                             'POINTS',
                                                             style: GoogleFonts.heebo(
-                                                              fontWeight: FontWeight.bold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
                                                                 fontSize: 16,
-
                                                                 color: Color(
                                                                     0xffF5FBFC)),
                                                           ),
@@ -275,19 +286,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     [
                                                                     "TotalPoints"]
                                                                 .toString(),
-                                                            style: GoogleFonts.dMSerifText(
-                                                                fontSize: 30,
-                                                                color: Color(
-                                                                    0xffF5FBFC)),
+                                                            style: GoogleFonts
+                                                                .dMSerifText(
+                                                                    fontSize:
+                                                                        30,
+                                                                    color: Color(
+                                                                        0xffF5FBFC)),
                                                           ),
-                                                          Center(
-                                                              child: Text(
-                                                                  "$percentage",
-                                                                  style: GoogleFonts.dMSerifText(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Color(
-                                                                          0xffF5FBFC))))
+//progress bar removed
+
+//                                                          Center(
+//                                                              child: Text(
+//                                                                  "$percentage",
+//                                                                  style: GoogleFonts.dMSerifText(
+//                                                                      fontSize:
+//                                                                          11,
+//                                                                      color: Color(
+//                                                                          0xffF5FBFC))))
                                                         ],
                                                       ),
                                                     ),
@@ -366,32 +381,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           const EdgeInsets.all(
                                                               15.0),
                                                       child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Text(
                                                             'JOURS',
                                                             style: GoogleFonts.heebo(
-                                                                fontWeight: FontWeight.bold,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
                                                                 fontSize: 16,
-
                                                                 color: Color(
                                                                     0xffF5FBFC)),
                                                           ),
                                                           Text(
                                                             userdata.Total_duration
                                                                 .toString(),
-                                                            style: GoogleFonts.dMSerifText(
-                                                                fontSize: 30,
-                                                                color: Color(
-                                                                    0xffF5FBFC)),
+                                                            style: GoogleFonts
+                                                                .dMSerifText(
+                                                                    fontSize:
+                                                                        30,
+                                                                    color: Color(
+                                                                        0xffF5FBFC)),
                                                           ),
-                                                          Center(
-                                                              child: Text(
-                                                                  "$percentage",
-                                                                  style: GoogleFonts.dMSerifText(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Color(
-                                                                          0xffF5FBFC)))),
+//percentage commented
+
+//                                                          Center(
+//                                                              child: Text(
+//                                                                  "$percentage",
+//                                                                  style: GoogleFonts.dMSerifText(
+//                                                                      fontSize:
+//                                                                          11,
+//                                                                      color: Color(
+//                                                                          0xffF5FBFC)))),
                                                         ],
                                                       ),
                                                     ),
@@ -457,8 +478,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     child: Image(
                                                       image: AssetImage(
                                                           'assets/happy1.png'),
-                                                      height: MediaQuery.of(context).size.width<400?58:70,
-                                                      width: MediaQuery.of(context).size.width<400?58:70,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 58
+                                                              : 70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 58
+                                                              : 70,
                                                     ),
                                                   ),
                                                   Padding(
@@ -468,8 +501,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     child: Image(
                                                       image: AssetImage(
                                                           'assets/happy2.png'),
-                                                      height: MediaQuery.of(context).size.width<400?58:70,
-                                                      width: MediaQuery.of(context).size.width<400?116:140,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 58
+                                                              : 70,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width <
+                                                                  400
+                                                              ? 116
+                                                              : 140,
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -505,6 +550,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             Pain_data,
                                                             style: GoogleFonts
                                                                 .heebo(
+                                                              fontWeight: FontWeight.bold,
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -555,6 +601,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             Self_confidence_data,
                                                             style: GoogleFonts
                                                                 .heebo(
+                                                                fontWeight: FontWeight.bold,
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -606,6 +653,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             Sleep_data,
                                                             style: GoogleFonts
                                                                 .heebo(
+                                                                fontWeight: FontWeight.bold,
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -656,6 +704,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             'Locution',
                                                             style: GoogleFonts
                                                                 .heebo(
+                                                                fontWeight: FontWeight.bold,
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -707,6 +756,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             Mechanism_data,
                                                             style: GoogleFonts
                                                                 .heebo(
+                                                                fontWeight: FontWeight.bold,
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -809,58 +859,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ))),
                                 ]),
-                                userPoints!=null?
-                                Container(
-                                    height: tapped == false ? 1730 : 0,
-                                    child: IndexedListView.builder(
-                                         controller: controller,
-                                        //  return ListView.builder(
-                                        physics: ClampingScrollPhysics(),
-                                          minItemCount: 0,
+                                userPoints != null
+                                    ? Container(
+                                        height: tapped == false ? 1730 : 0,
+                                        child: IndexedListView.builder(
+                                            controller: controller,
+                                            //  return ListView.builder(
+                                            physics: ClampingScrollPhysics(),
+                                            minItemCount: 0,
                                             maxItemCount: userPoints == null
                                                 ? 0
                                                 : userPoints.length - 1,
-                                        // itemCount: snapshot.data.docs.length,
-                                        scrollDirection: Axis.horizontal,
-                                       // itemCount: userPoints.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-
-
-
+                                            // itemCount: snapshot.data.docs.length,
+                                            scrollDirection: Axis.horizontal,
+                                            // itemCount: userPoints.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
 //                                          print(snapshot.data
 //                                                  .docs[index]["TotalPoints"]
 //                                                  .toString() +
 //                                              " data from stuff from day " +
 //                                              index.toString());
 
-
-
-
-                                          return Dayswid(
-                                            document: userPoints[index],//snapshot.data.docs[index],
-                                            index_of_day: index,
-                                            total_hour_point_of_the_day:
+                                              return Dayswid(
+                                                document: userPoints[
+                                                    index], //snapshot.data.docs[index],
+                                                index_of_day: index,
+                                                total_hour_point_of_the_day:
 //                                                snapshot.data.docs[index]
 //                                                    ["HourPoints"],
-                                            userPoints[index].data()['HourPoints'],
-                                           total_point_of_the_day:
-                                           //snapshot
+                                                    userPoints[index]
+                                                        .data()['HourPoints'],
+                                                total_point_of_the_day:
+                                                    //snapshot
 //                                                .data
 //                                                .docs[index]["TotalPoints"],
-                                            userPoints[index].data()['TotalPoints'],
-                                            document_id:
+                                                    userPoints[index]
+                                                        .data()['TotalPoints'],
+                                                document_id:
 //                                            snapshot
 //                                                .data.docs[index].documentID,
-                                            userPoints[index].id,
-                                            Date_from_database:
-                                                userdata.Start_date.toDate()
+                                                    userPoints[index].id,
+                                                Date_from_database: userdata
+                                                        .Start_date.toDate()
                                                     .add(Duration(days: index)),
-                                            Context: my_context,
-                                          );
-                                        })
+                                                Context: my_context,
+                                              );
+                                            })
 
-                                    /*Stack(
+                                        /*Stack(
                          children: [
                            Padding(
                              padding: const EdgeInsets.only(left:25.0, top: 0.0),
@@ -917,8 +964,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                )),
                          ),
                        ]),*/
-                                    ):
-                                CircularProgressIndicator()
+                                        )
+                                    : CircularProgressIndicator()
                               ],
                             ),
                           ],

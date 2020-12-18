@@ -230,7 +230,7 @@ class _DayswidState extends State<Dayswid> {
                                     style: GoogleFonts.dMSerifText(
                                         color: Colors.white, fontSize: 30),
                                   )),
-                                  color: Color(0xff41B4C7),
+                                  color: Color(0xffA3D5D9),
                                 ),
                                 InkWell(
                                     onTap: () {
@@ -280,11 +280,15 @@ class _DayswidState extends State<Dayswid> {
                                       bottomLeft: Radius.circular(25.0))),
                               width: MediaQuery.of(context).size.width,
                               child: Column(
+
                                 children: [
+
+                               SizedBox(height: 10,),
                                   Text(
-                                    'Accumulation de points',
-                                    style: GoogleFonts.dMSerifText(
-                                        fontSize: 18, color: Color(0xffF5FBFC)),
+                                    'POINTS ACCUMULÉS AUJOURD’HUI',
+                                    style: GoogleFonts.heebo(
+                                      fontWeight: FontWeight.bold,
+                                        fontSize: 13, color: Color(0xffF5FBFC)),
                                   ),
                                   Text(
                                     total_point_of_the_day.toString(),

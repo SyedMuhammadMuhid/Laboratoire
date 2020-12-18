@@ -47,7 +47,7 @@ List ToDo_and_total_values=['ToDo1','ToDo2','ToDo3','ToDo4','ToDo5','ToDo6','ToD
 
 List profile_items = [
   ProfileListModel(
-      name: 'Actions', image_path: 'assets/actions_logo.png', screen: Home()),
+      name: 'Accueil', image_path: 'assets/actions_logo.png', screen: Home()),
   ProfileListModel(
       name: 'Calendrier', image_path: 'assets/calander_logo.png', screen: Home()),
   ProfileListModel(
@@ -141,7 +141,7 @@ String App_name_data='''Laboratoire\nBellomo & Lambert''';
 String First_time_data="Première fois ?";
 String Login_with_this_or_that='Abonnez-vous via votre compte Facebook';
 String Login_with_this_or_that2='ou votre compte Instagram';
-String Email_regristration_data="Inscription par e-mail";
+String Email_regristration_data="Inscription via courriel";
 String Welcome_data="Bienvenue";
 String Do_have_account="Avez-vous un compte?";
 String Sign_up_login_data="Inscrivez-vous ou connectez-vous!";

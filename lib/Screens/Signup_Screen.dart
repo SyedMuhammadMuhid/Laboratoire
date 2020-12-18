@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               Row(
                                 children: [
-                                  Text('Email',
+                                  Text('Prénom',
                                       style: GoogleFonts.dMSerifText(
                                           color: Color(0xff41B4C7),
                                           fontSize: 18,
@@ -152,7 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               Row(
                                 children: [
-                                  Text('Mot de passe',
+                                  Text('Nom de famille',
                                       style: GoogleFonts.dMSerifText(
                                           color: Color(0xff41B4C7),
                                           fontSize: 18,
@@ -202,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               Row(
                                 children: [
-                                  Text("Confirmez le mot de passe",
+                                  Text("Courriel",
                                       style: GoogleFonts.dMSerifText(
                                           color: Color(0xff41B4C7),
                                           fontSize: 18,
@@ -253,7 +253,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               Row(
                                 children: [
-                                  Text('Prénom',
+                                  Text('Mot de passe',
                                       style: GoogleFonts.dMSerifText(
                                           color: Color(0xff41B4C7),
                                           fontSize: 18,
@@ -293,7 +293,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               Row(
                                 children: [
-                                  Text('Nom de famille',
+                                  Text('Confirmer mot de passe',
                                       style: GoogleFonts.dMSerifText(
                                           color: Color(0xff41B4C7),
                                           fontSize: 18,

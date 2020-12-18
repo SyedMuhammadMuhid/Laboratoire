@@ -279,7 +279,7 @@ class _StatScreenState extends State<StatScreen> {
                               Text(
                                 "Ta Progression\n     en photos",
                                 style: GoogleFonts.dMSerifText(
-                                    fontSize: 40, color: Colors.white),
+                                    fontSize: 35, color: Colors.white),
                               ),
                             ],
                           ),

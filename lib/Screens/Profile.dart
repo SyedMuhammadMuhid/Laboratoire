@@ -221,7 +221,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 //     color: Colors.black87),)
                                 Text("Mon Profil", style: GoogleFonts.dMSerifText(
                                     fontSize: 28,
-                                    letterSpacing: 1,
                                     color: Colors.black87),)
                               ],
                             ),

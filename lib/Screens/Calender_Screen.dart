@@ -162,7 +162,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                             DateTime.now().day.toString()+" "+months_full[DateTime.now().month-1]+" "+DateTime.now().year.toString(),
                             style: GoogleFonts.dMSerifText(
                               color: Colors.white,
-                              fontSize: 40,
+                              fontSize: 36,
                             ),
                           )
                         ],
