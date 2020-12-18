@@ -200,13 +200,7 @@ class _StatScreenState extends State<StatScreen> {
                                                   mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                                   children: [
-                                                    Text(
-                                                      '   JOURS\n RESTANTS',
-                                                      style: GoogleFonts.dMSerifText(
-                                                          fontSize: 18,
-                                                          color: Color(
-                                                              0xffF5FBFC)),
-                                                    ),
+
                                                     Text(
                                                       userdata.Total_duration
                                                           .toString(),
@@ -215,14 +209,23 @@ class _StatScreenState extends State<StatScreen> {
                                                           color: Color(
                                                               0xffF5FBFC)),
                                                     ),
-                                                    Center(
-                                                        child: Text(
-                                                            "$percentage",
-                                                            style: GoogleFonts
-                                                                .heebo(
-                                                                fontSize: 15,
-                                                                color: Color(
-                                                                    0xffF5FBFC)))),
+                                                    Text(
+                                                      '   JOURS\n RESTANTS',
+
+                                                      style: GoogleFonts.heebo(
+fontWeight: FontWeight.bold,
+                                                          fontSize: 18,
+                                                          color: Color(
+                                                              0xffF5FBFC)),
+                                                    ),
+//                                                    Center(
+//                                                        child: Text(
+//                                                            "$percentage",
+//                                                            style: GoogleFonts
+//                                                                .heebo(
+//                                                                fontSize: 15,
+//                                                                color: Color(
+//                                                                    0xffF5FBFC)))),
                                                   ],
                                                 ),
                                               ),
@@ -254,17 +257,25 @@ class _StatScreenState extends State<StatScreen> {
                                           left: 0 + (progress * 3.4),
                                           child: Stack(
                                             children: [
-                                              Container(
-                                                height: 100,
-                                                width: 33.3,
-                                                child:
-                                                Image.asset('assets/flag.png'),
+
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    height: 100,
+                                                    width: 33.3,
+                                                    child:
+                                                    Image.asset('assets/flag.png'),
+                                                  ),
+                                                  Text(
+                                                    progress.toString() + " %",
+
+                                                    style: GoogleFonts.heebo(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Color(0xff41B4C7)),
+                                                  ),
+                                                ],
                                               ),
-                                              Text(
-                                                progress.toString() + " %",
-                                                style: GoogleFonts.heebo(
-                                                    color: Colors.red),
-                                              )
+
                                             ],
                                           ))
                                     ],
@@ -277,7 +288,7 @@ class _StatScreenState extends State<StatScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Ta Progression\n     en photos",
+                                "Ta progression\n     en photos",
                                 style: GoogleFonts.dMSerifText(
                                     fontSize: 35, color: Colors.white),
                               ),
